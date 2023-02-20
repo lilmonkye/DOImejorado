@@ -21,18 +21,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             $role = Auth::user()->role;
 
-            switch ($role) {
-                case 'admin':
-                    return redirect('/admin_dashboard');
-                break;
-                case 'other':
-                    return redirect('/otro_dashboard');
-                break;
-
-                default:
-                    return redirect('/home');
-                break;
-            }
+            return redirect('/' . $role . '_dashboard');
         }
         return $next($request);
       }
