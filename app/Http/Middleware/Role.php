@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+
 class Role {
 
   public function handle($request, Closure $next, String $role) {
@@ -17,6 +18,7 @@ class Role {
   }
 
   // Si el usuario no tiene el rol correspondiente, redirigimos al dashboard correspondiente
+
   return redirect('/' . $user->role . '_dashboard');
   }
 }
