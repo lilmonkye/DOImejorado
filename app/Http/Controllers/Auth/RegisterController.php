@@ -85,6 +85,8 @@ class RegisterController extends Controller
             $user->assignRole('admin');
         } elseif ($user->role == 'otro') {
             $user->assignRole('otro');
+        }elseif ($user->role == 'revisor'){
+            $user->assignRole('revisor');
         }
 
         return $user;
