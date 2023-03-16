@@ -16,38 +16,38 @@
             Asegurese de que el nombre de la revista contenga los signos de acentuación y los datos se encuentren en el idioma de publicación
         </div>
     </div>
-    <form>
+    <form action="{{ url('/otro') }}" method="post" >
         @csrf
         <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
 {{-- obligatorios --}}
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label"> + Título de la Revista</label>
-                <input type="text" value="{{ isset($usuario->Titulo)?$usuario->Titulo:old('Titulo')}}" class="form-control" name="Titulo">
+                <label for="titulo" class="form-label"> + Título de la Revista</label>
+                <input type="text" value="{{ isset($revista->titulo)?$revista->titulo:old('titulo')}}" class="form-control" name="titulo">
             </div>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label"> Título abreviado de la revista</label>
-                <input type="text" value="{{ isset($usuario->Abreviatura)?$usuario->Abreviatura:old('Abreviatura')}}" class="form-control" name="Abreviatura">
+                <label for="tituloabr" class="form-label"> Título abreviado de la revista</label>
+                <input type="text" value="{{ isset($revista->tituloabr)?$revista->Abreviatura:old('tituloabr')}}" class="form-control" name="tituloabr">
             </div>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label"> Sufijo DOI de la Revista</label>
-                <input type="text" value="{{ isset($usuario->Abreviatura)?$usuario->Abreviatura:old('Abreviatura')}}" class="form-control" name="Doi">
+                <label for="doi" class="form-label"> DOI de la Revista (en caso de tener)</label>
+                <input type="text" value="{{ isset($revista->doi)?$revista->doi:old('doi')}}" class="form-control" name="doi">
             </div>
 
             <h5>El url debe comenzar con "https:"</h5>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label"> + URL</label>
-                <input type="text" value="{{ isset($usuario->Abreviatura)?$usuario->Abreviatura:old('Abreviatura')}}" class="form-control" name="Url">
+                <label for="url" class="form-label"> + URL</label>
+                <input type="text" value="{{ isset($revista->url)?$revista->url:old('url')}}" class="form-control" name="url">
             </div>
 
             <h5>Según sea el caso de su revista llenar el ISSN impreso o el ISSN electronico</h5>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label"> + ISSN impreso</label>
-                <input type="text" value="{{ isset($usuario->Issn)?$usuario->Issn:old('Issn')}}" class="form-control" name="Issnimp">
+                <label for="issnimp" class="form-label"> + ISSN impreso</label>
+                <input type="text" value="{{ isset($revista->issnimp)?$revista->Issn:old('issnimp')}}" class="form-control" name="issnimp">
             </div>
 
             <div class="mb-3 ">
@@ -58,6 +58,9 @@
 
         </div>
     </form>
+    <div class="d-flex justify-content-center">
+        <input type="submit" name="Registrar" class="btn btn-secondary">
+    </div>
     <a href="{{ route('otro.solicitar') }}" class="btn btn-secondary">Regresar </a>
 </div>
 @endsection

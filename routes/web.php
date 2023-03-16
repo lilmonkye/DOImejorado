@@ -60,8 +60,9 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
 
 Route::middleware(['auth', 'role:otro'])->group(function () {
     // Rutas protegidas para el rol 'otro'
-    Route::get('/otro/revistaform', 'Otro\SolicitarController@revistaform')->name('otro.revistaform');
+    //Route::get('/otro/revistaform', 'Otro\SolicitarController@revistaform')->name('otro.revistaform');
     Route::get('/otro/articuloform', 'Otro\SolicitarController@articuloform')->name('otro.articuloform');
     Route::get('/otro/numeroform', 'Otro\SolicitarController@numeroform')->name('otro.numeroform');
-
+    Route::get('/otro_revistaform', 'Otro\RevistaController@index')->name('otro.revistaform');
 });
+
