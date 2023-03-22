@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Otro\RevistaController as OtroRevistaController;
+use App\Http\Controllers\Otro\SolicitarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Artisan;
 //use App\Http\Controllers\Admin\DashboardController;
 //use App\Http\Controllers\Otro\DashboardController;
+use App\Http\Controllers\RevistaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,23 +25,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-/*
-Route::get('/admin_dashboard', 'Admin\DashboardController@index');
-Route::get('/otro_dashboard', 'Otro\DashboardController@index');
-*/
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-//Vistas ADMIN
-//Route::get('/admin_dashboard', 'Admin\DashboardController@index')->withoutMiddleware('role:admin')->name('admin_dashboard');
-//Route::get('/admin/solicituregist', 'Admin\DashboardController@solicituregist')->middleware('role:admin')->name('admin.solicituregist');
-//Route::get('/admin/solicitudoi', 'Admin\DashboardController@solicitudoi')->middleware('role:admin')->name('admin.solicitudoi');
-//Route::get('/admin/dois', 'Admin\DashboardController@dois')->middleware('role:admin')->name('admin.dois');
-
-//Vistas Usuarios OTRO
-//Route::get('/otro_dashboard', 'Otro\DashboardController@index')->withoutMiddleware('role:otro')->name('otro_dashboard');
-//Route::get('/otro/solicitar', 'Otro\DashboardController@solicitar')->middleware('role:otro')->name('otro.solicitar');
-//Route::get('/otro/tsolicitudes', 'Otro\DashboardController@tsolicitudes')->middleware('role:otro')->name('otro.tsolicitudes');
-//Route::get('/otro/userdoi', 'Otro\DashboardController@userdoi')->middleware('role:otro')->name('otro.userdoi');
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -64,5 +52,9 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
     Route::get('/otro/articuloform', 'Otro\SolicitarController@articuloform')->name('otro.articuloform');
     Route::get('/otro/numeroform', 'Otro\SolicitarController@numeroform')->name('otro.numeroform');
     Route::get('/otro_revistaform', 'Otro\RevistaController@index')->name('otro.revistaform');
+    //Route::post('/otro_revista_prueba', 'Otro\SolicitarController@create')->name('otro.revista_prueba');
+    //Route::post('/otro_solicitar_create', 'Otro\SolicitarController@create')->name('otro.solicitar_create');
+    Route::get('/otro_revista_create', [OtroRevistaController::class,'create']);
+    Route::resource('/otro_revista', OtroRevistaController::class);
 });
 

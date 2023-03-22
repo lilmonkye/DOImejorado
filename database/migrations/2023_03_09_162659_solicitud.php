@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('solicitud', function (Blueprint $table) {
+        Schema::create('solicituds', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->id();
             $table->timestamps();

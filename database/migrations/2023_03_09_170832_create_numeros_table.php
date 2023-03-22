@@ -26,8 +26,8 @@ return new class extends Migration
             $table->date('fechadig');
             $table->integer('numespecial')->nullable();
             $table->integer('volumen');
-            $table->integer('volumendoi')->nullable();
-            $table->integer('volumenurl')->nullable();
+            $table->string('volumendoi')->nullable();
+            $table->string('volumenurl')->nullable();
             $table->foreign('idrevista')->references('id')->on('revistas')->onDelete("cascade");
             $table->foreign('idarticulo')->references('id')->on('articulos')->onDelete("cascade");
         });

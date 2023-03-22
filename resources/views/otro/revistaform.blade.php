@@ -3,6 +3,9 @@
 @section('content')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
 <div class="container" style="background-color: rgb(215, 228, 247)">
     <h2 class="text-center p-3 text-secondary text-dark" style="background-color: rgb(232, 239, 255)">Revista</h2>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -16,7 +19,7 @@
             Asegurese de que el nombre de la revista contenga los signos de acentuación y los datos se encuentren en el idioma de publicación
         </div>
     </div>
-    <form action="{{ url('/otro') }}" method="post" >
+    <form action="{{ url('/otro_revista') }}" method="post" >
         @csrf
         <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
 {{-- obligatorios --}}
@@ -31,11 +34,25 @@
                 <input type="text" value="{{ isset($revista->tituloabr)?$revista->Abreviatura:old('tituloabr')}}" class="form-control" name="tituloabr">
             </div>
 
-            <div class="mb-3 ">
-                <label for="doi" class="form-label"> DOI de la Revista (en caso de tener)</label>
-                <input type="text" value="{{ isset($revista->doi)?$revista->doi:old('doi')}}" class="form-control" name="doi">
-            </div>
+            <div>
 
+                <label for="doi" class="form-label"> ¿Esta revista cuenta con DOI?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bandoi" id="doi_si">
+                    <label class="form-check-label" for="doi_si">Si</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bandoi" id="doi_no">
+                    <label class="form-check-label" for="doi_no">No</label>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="doi">DOI:</label>
+                    <input type="text" value="{{ isset($revista->doi)?$revista->doi:old('doi')}}" class="form-control" name="doi" id="doi" disabled>
+                  </div>
+
+            </div>
+            <br>
             <h5>El url debe comenzar con "https:"</h5>
 
             <div class="mb-3 ">
@@ -43,7 +60,7 @@
                 <input type="text" value="{{ isset($revista->url)?$revista->url:old('url')}}" class="form-control" name="url">
             </div>
 
-            <h5>Según sea el caso de su revista llenar el ISSN impreso o el ISSN electronico</h5>
+            <h5>Según sea el caso de su revista llenar el ISSN impreso o el ISSN electronico (solo usar números)</h5>
 
             <div class="mb-3 ">
                 <label for="issnimp" class="form-label"> + ISSN impreso</label>
@@ -52,15 +69,31 @@
 
             <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">  + ISSN electronico</label>
-                <input type="text" value="{{ isset($usuario->Issn)?$usuario->Issn:old('Issn')}}" class="form-control" name="Issnelec">
+                <input type="text" value="{{ isset($usuario->Issn)?$usuario->Issn:old('Issn')}}" class="form-control" name="issnelec">
             </div>
 
 
         </div>
+        <div class="d-flex justify-content-center">
+            <input type="submit" value="Registrar" class="btn btn-secondary">
+        </div>
     </form>
-    <div class="d-flex justify-content-center">
-        <input type="submit" name="Registrar" class="btn btn-secondary">
-    </div>
+
     <a href="{{ route('otro.solicitar') }}" class="btn btn-secondary">Regresar </a>
 </div>
+
+<script>
+    const radios = document.getElementsByName('bandoi');
+    const input = document.getElementById('doi');
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        if (radio.id === 'doi_no') {
+          input.disabled = true;
+        } else {
+          input.disabled = false;
+        }
+      });
+    });
+  </script>
 @endsection
