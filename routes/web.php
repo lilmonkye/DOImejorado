@@ -54,7 +54,8 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
     Route::get('/otro_revistaform', 'Otro\RevistaController@index')->name('otro.revistaform');
     //Route::post('/otro_revista_prueba', 'Otro\SolicitarController@create')->name('otro.revista_prueba');
     //Route::post('/otro_solicitar_create', 'Otro\SolicitarController@create')->name('otro.solicitar_create');
-    Route::get('/otro_revista_create', [OtroRevistaController::class,'create']);
-    Route::resource('/otro_revista', OtroRevistaController::class);
+
+    Route::post('/otro_revista_create', 'Otro\RevistaController@store')->name('otro.revista_create');
+    Route::post('/otro_revista/{id}/articulo', 'ArticuloController@store')->name('otro.revista_newarticulo');
 });
 

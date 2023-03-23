@@ -39,7 +39,6 @@ class Revista extends Model
             'issnimp' => ['required_without:issnelec','integer'],
             'issnelec' => ['required_without:issnimp','integer'],
             'idioma'=>['nullable','string','max:255',],
-            'bandoi'=>['required','nullable','boolean'],
         ]);
     }
 

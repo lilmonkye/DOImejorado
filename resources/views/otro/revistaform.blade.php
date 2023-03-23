@@ -19,10 +19,9 @@
             Asegurese de que el nombre de la revista contenga los signos de acentuación y los datos se encuentren en el idioma de publicación
         </div>
     </div>
-    <form action="{{ url('/otro_revista') }}" method="post" >
+    <form action="{{ url('/otro_revista_create') }}" method="post" >
         @csrf
         <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
-{{-- obligatorios --}}
 
             <div class="mb-3 ">
                 <label for="titulo" class="form-label"> + Título de la Revista</label>
@@ -72,6 +71,10 @@
                 <input type="text" value="{{ isset($usuario->Issn)?$usuario->Issn:old('Issn')}}" class="form-control" name="issnelec">
             </div>
 
+            <div class="mb-3 ">
+                <label for="exampleInputPassword1" class="form-label">   Idioma</label>
+                <input type="text" value="{{ isset($usuario->idioma)?$usuario->idioma:old('idioma')}}" class="form-control" name="idioma">
+            </div>
 
         </div>
         <div class="d-flex justify-content-center">

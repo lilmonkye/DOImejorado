@@ -23,9 +23,8 @@ return new class extends Migration
             $table->string('doi')->nullable();
             $table->string('url');
             $table->integer('issnimp')->nullable();
-            $table->integer('issnelec');
+            $table->integer('issnelec')->nullable();
             $table->string('idioma')->nullable();
-            $table->boolean('bandoi');
             //relaciones
             $table->foreign('idusuario')->references('id')->on('users')->onDelete("cascade");
 

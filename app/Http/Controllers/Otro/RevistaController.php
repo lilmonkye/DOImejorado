@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Revista;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RevistaController extends Controller
 {
@@ -40,8 +41,19 @@ class RevistaController extends Controller
      */
     public function store(Request $request)
     {
+        $useract = Auth::user();
+        $revista = new Revista();
+        $revista->titulo = $request->titulo;
+        $revista->tituloabr = $request->tituloabr;
+        $revista->doi = $request->doi;
+        $revista->url = $request->url;
+        $revista->issnimp = $request->issnimp;
+        $revista->issnelec = $request->issnelec;
+        $revista->idioma = $request->idioma;
+        $revista['idusuario'] = $useract->id;
         $datosRevista = request()->except('_token','bandoi');
-        Revista::insert($datosRevista);
+
+        $revista->save();
         return response()->json($datosRevista);
 
     }
@@ -90,6 +102,12 @@ class RevistaController extends Controller
     {
         //
     }
+
+    /* Obtener usuario actual
+    function getUsuario(){
+        $useract = Auth::user();
+        return $useract;
+    } */
 
      /* function prueba(Request $request){
         $ticket = new Solicitud();
