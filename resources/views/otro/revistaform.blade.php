@@ -2,7 +2,18 @@
 
 @section('content')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Enlaces a los archivos CSS -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha512-UhKYW4E/L4+mTw/FmBCpr9f6S94W6SvU6icNN0f1gAxuE0Pr71N7OuOUMXsST7bMK/uvrTrT7dQfQOe72JfxdQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
+
+<!-- Enlaces a los archivos JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js" integrity="sha512-pw+QdMj3fUPyAL51XGxJx1CrRt1n+VZgJrvymwLb7+uajP8eV7ocnmXsJxCO7SPHPKr+UnlV7C2kjLwDbl7GjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha512-G/cp61fB0ihHUhkzLvJGATdI49F9OoQ2yxnnlCZIe/mx0K5CG/lRNEgrF99gO8QyD5r5XzG5r5gZf0FZr4Hq3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 
 
 
@@ -19,7 +30,7 @@
             Asegurese de que el nombre de la revista contenga los signos de acentuación y los datos se encuentren en el idioma de publicación
         </div>
     </div>
-    <form action="{{ url('/otro_revista_create') }}" method="post" >
+    <form action="{{ url('/otro_revista_create') }}" id="formulario" method="POST" >
         @csrf
         <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
 
@@ -48,11 +59,11 @@
                 <div class="form-group">
                     <label for="doi">DOI:</label>
                     <input type="text" value="{{ isset($revista->doi)?$revista->doi:old('doi')}}" class="form-control" name="doi" id="doi" disabled>
-                  </div>
+                </div>
 
             </div>
             <br>
-            <h5>El url debe comenzar con "https:"</h5>
+            <h5>El url debe comenzar con "https://"</h5>
 
             <div class="mb-3 ">
                 <label for="url" class="form-label"> + URL</label>
@@ -63,12 +74,12 @@
 
             <div class="mb-3 ">
                 <label for="issnimp" class="form-label"> + ISSN impreso</label>
-                <input type="text" value="{{ isset($revista->issnimp)?$revista->Issn:old('issnimp')}}" class="form-control" name="issnimp">
+                <input type="text" value="{{ isset($revista->issnimp)?$revista->issnimp:old('issnimp')}}" class="form-control" name="issnimp">
             </div>
 
             <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">  + ISSN electronico</label>
-                <input type="text" value="{{ isset($usuario->Issn)?$usuario->Issn:old('Issn')}}" class="form-control" name="issnelec">
+                <input type="text" value="{{ isset($revista->issnelec)?$revista->issnelec:old('issnelec')}}" class="form-control" name="issnelec">
             </div>
 
             <div class="mb-3 ">
@@ -78,11 +89,32 @@
 
         </div>
         <div class="d-flex justify-content-center">
-            <input type="submit" value="Registrar" class="btn btn-secondary">
+            <input type="submit" value="Registrar" id="registro" class="btn btn-secondary btn-submit">
         </div>
-    </form>
+{{--         @if(Session::has('msg'))
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+                    <div class="toast-header">
+                        <strong class="mr-auto">Mensaje</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        {{ Session::get('msg') }}
+                    </div>
+                </div>
 
-    <a href="{{ route('otro.solicitar') }}" class="btn btn-secondary">Regresar </a>
+        @endif --}}
+
+
+    </form>
+    <div class="d-flex justify-content-end">
+        <div class="p-2">
+            <a href="{{ route('otro.solicitar') }}" class="btn btn-dark">Regresar </a>
+        </div>
+
+    </div>
+
 </div>
 
 <script>
@@ -98,5 +130,24 @@
         }
       });
     });
-  </script>
+</script>
+
+<script>
+    @if(Session::has('msg'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000"
+        }
+        toastr.success("{{ Session::get('msg') }}");
+    @endif
+</script>
+
+<script>
+
+
+
+</script>
 @endsection

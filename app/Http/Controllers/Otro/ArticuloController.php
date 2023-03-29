@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Otro;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Revista;
+use App\Models\Articulo;
 
 class ArticuloController extends Controller
 {
@@ -24,7 +26,7 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -33,9 +35,27 @@ class ArticuloController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+
+        // guardar el artículo
+        $revista = Revista::findOrFail($id);
+        $articulo = new Articulo();
+        $articulo->titulo = $request->titulo;
+        $articulo->doi = $request->doi;
+        $articulo->url = $request->url;
+        $articulo->fechaimp = $request->fechaimp;
+        $articulo->fechadig = $request->fechadig;
+        $articulo->primerpag = $request->primerpag;
+        $articulo->ultimapag = $request->ultimapag;
+        $articulo->abstract = $request->abstract;
+        $articulo->idrevista = $revista;
+        $datosArticulo = request()->except('_token','bandoi');
+        $datosArticulo['idrevista'] ;
+        $articulo->save();
+
+        return response()->json(['message' => 'Revista y artículo guardados exitosamente']);
+
     }
 
     /**

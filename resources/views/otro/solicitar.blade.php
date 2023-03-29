@@ -11,7 +11,7 @@
         <div class="btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
 
             <a href="{{ route('otro.revistaform') }}">
-            <button type="button" class="btn btn-outline-primary">  --- Registrar Revista ---    </button>
+                <button type="button" class="btn btn-outline-primary">  --- Registrar Revista ---    </button>
             </a>
             {{-- <a href="{{ route('otro.articuloform') }}">
             <button type="button" class="btn btn-outline-primary">  --- Artículo ---   </button>

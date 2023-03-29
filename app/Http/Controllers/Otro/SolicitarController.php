@@ -40,12 +40,7 @@ class SolicitarController extends Controller
 
     return redirect()->route('solicitudes.index');
 } */
-     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\Solicitud
-     */
+
     protected function create(Request $request)
     {
         $idUsuario = $request->input('idusuario');
@@ -60,25 +55,6 @@ class SolicitarController extends Controller
         $solicitud->save();
         return redirect()->back()->with('success', 'Solicitud creada correctamente');
 
-        /* $idUsuario = $request->input('idusuario');
-        $idRevista = $request->input('idrevista');
-
-        $usuario = User::find($idUsuario);
-        $revista = Revista::find($idRevista);
-
-        if (!$usuario || !$revista) {
-            return redirect()->back()->with('error', 'No se pudo encontrar al usuario o la revista');
-        }
-
-        $solicitud = new Solicitud();
-
-        $solicitud->idusuario = $idUsuario;
-        $solicitud->idrevista = $idRevista;
-        $solicitud->estatus="inicio";
-        $solicitud->save();
-        //$numsolicitud = $solicitud->id;
-
-        return redirect()->back()->with('success', 'Solicitud creada correctamente'); */
 
     }
 

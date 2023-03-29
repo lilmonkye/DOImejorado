@@ -52,6 +52,7 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
     Route::get('/otro/articuloform', 'Otro\SolicitarController@articuloform')->name('otro.articuloform');
     Route::get('/otro/numeroform', 'Otro\SolicitarController@numeroform')->name('otro.numeroform');
     Route::get('/otro_revistaform', 'Otro\RevistaController@index')->name('otro.revistaform');
+    Route::get('/otro_menuseleccion', 'Otro\RevistaController@menuseleccion')->name('otro.menuseleccion');
     //Route::post('/otro_revista_prueba', 'Otro\SolicitarController@create')->name('otro.revista_prueba');
     //Route::post('/otro_solicitar_create', 'Otro\SolicitarController@create')->name('otro.solicitar_create');
 

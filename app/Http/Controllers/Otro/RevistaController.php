@@ -17,9 +17,15 @@ class RevistaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return view('otro.revistaform');
+    }
+
+    public function menuseleccion()
+    {
+        return view('otro.menuseleccion');
     }
 
     /**
@@ -54,7 +60,19 @@ class RevistaController extends Controller
         $datosRevista = request()->except('_token','bandoi');
 
         $revista->save();
-        return response()->json($datosRevista);
+
+        $msg = 'Revista guardada, en espera de revisión';
+        $alertType = 'success';
+        session()->flash('msg', $msg);
+        session()->flash('alert-type', $alertType);
+
+        return redirect()->route('otro.menuseleccion');
+        /*
+            si quiero mostrar en el mismo blade de registro el mensaje
+            $notification = array(
+            'msg' => 'Revista guardada, en espera de revisión',
+            'alert-type' => 'success'
+        ); */
 
     }
 
