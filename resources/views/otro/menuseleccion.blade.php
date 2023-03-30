@@ -39,7 +39,7 @@
                     <button type="button" class="btn btn-outline-primary"> Número </button>
                 </a>
                 <br>
-                <a href="{{ route('otro.articuloform') }}">
+                <a href="{{ route('otro.articulo_create', ['idrevista'=> $idrevista]) }}">
                     <button type="button" class="btn btn-outline-primary"> Artículo </button>
                 </a>
             </div>

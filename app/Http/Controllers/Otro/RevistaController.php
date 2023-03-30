@@ -9,9 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class RevistaController extends Controller
 {
-     public function __construct() {
+    public function __construct() {
         $this->middleware('role:otro');
     }
+    /* public function __construct() {
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+            if ($user->hasRole('administrador') || $user->hasRole('otro') || $user->hasRole('revisor')) {
+                return $next($request);
+            }
+            abort(403, 'No tiene permiso para acceder a esta página.');
+        });
+    } */
     /**
      * Display a listing of the resource.
      *
@@ -66,7 +75,7 @@ class RevistaController extends Controller
         session()->flash('msg', $msg);
         session()->flash('alert-type', $alertType);
 
-        return redirect()->route('otro.menuseleccion');
+        return redirect()->route('otro.menuseleccion',['idrevista'=> $revista->id]);
         /*
             si quiero mostrar en el mismo blade de registro el mensaje
             $notification = array(

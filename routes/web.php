@@ -52,11 +52,11 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
     Route::get('/otro/articuloform', 'Otro\SolicitarController@articuloform')->name('otro.articuloform');
     Route::get('/otro/numeroform', 'Otro\SolicitarController@numeroform')->name('otro.numeroform');
     Route::get('/otro_revistaform', 'Otro\RevistaController@index')->name('otro.revistaform');
-    Route::get('/otro_menuseleccion', 'Otro\RevistaController@menuseleccion')->name('otro.menuseleccion');
+    //Route::get('/otro_menuseleccion', 'Otro\RevistaController@menuseleccion')->name('otro.menuseleccion');
     //Route::post('/otro_revista_prueba', 'Otro\SolicitarController@create')->name('otro.revista_prueba');
     //Route::post('/otro_solicitar_create', 'Otro\SolicitarController@create')->name('otro.solicitar_create');
-
+    Route::get('/otro_menuseleccion/{idrevista}', 'Otro\MenuSeleccionController@index')->name('otro.menuseleccion');
     Route::post('/otro_revista_create', 'Otro\RevistaController@store')->name('otro.revista_create');
-    Route::post('/otro_revista/{id}/articulo', 'ArticuloController@store')->name('otro.revista_newarticulo');
+    Route::get('/otro/articulo/create/{idrevista}','Otro\ArticuloController@create')->name('otro.articulo_create');
 });
 

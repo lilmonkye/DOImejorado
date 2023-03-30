@@ -36,12 +36,11 @@ class Articulo extends Model
             'titulo' => ['required', 'string', 'min:8','max:255'],
             'doi' => ['nullable','string','max:255',],
             'url' => ['required','string','max:255'],
-            'fechaimpr' => ['required|date_format:Y-m-d'],
-            'fechadig' => ['required|date_format:Y-m-d'],
-            'primerpag' => ['required','integer'],
-            'ultimapag' => ['required','integer'],
+            'fechaimpr' => ['required_without:fechadig|date_format:Y-m-d'],
+            'fechadig' => ['required_without:fechaimpr|date_format:Y-m-d'],
+            'primerpag' => ['nullable','integer'],
+            'ultimapag' => ['nullable','integer'],
             'abstract'=>['nullable','string','max:255',],
-            'bandoi'=>['required','nullable','boolean'],
         ]);
     }
 

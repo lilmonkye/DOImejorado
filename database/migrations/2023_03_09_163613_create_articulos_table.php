@@ -24,8 +24,7 @@ return new class extends Migration
             $table->date('fechadig');
             $table->integer('primerpag')->nullable();
             $table->integer('ultimapag')->nullable();
-            $table->string('abstract')->nullable();
-            $table->boolean('banddoi');
+            $table->text('abstract')->nullable();
             $table->foreign('idrevista')->references('id')->on('revistas');
         });
     }

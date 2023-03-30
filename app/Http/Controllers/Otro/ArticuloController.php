@@ -9,6 +9,9 @@ use App\Models\Articulo;
 
 class ArticuloController extends Controller
 {
+    public function __construct() {
+        $this->middleware('role:otro');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +27,10 @@ class ArticuloController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idrevista)
     {
-
+        $revista = Revista::findOrFail($idrevista);
+        return view('otro.articuloform', compact('revista'));
     }
 
     /**
@@ -35,11 +39,10 @@ class ArticuloController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request,$idrevista)
     {
 
-        // guardar el artículo
-        $revista = Revista::findOrFail($id);
+        // guardar el artículo falta pasar el id de la revista
         $articulo = new Articulo();
         $articulo->titulo = $request->titulo;
         $articulo->doi = $request->doi;
@@ -49,12 +52,17 @@ class ArticuloController extends Controller
         $articulo->primerpag = $request->primerpag;
         $articulo->ultimapag = $request->ultimapag;
         $articulo->abstract = $request->abstract;
-        $articulo->idrevista = $revista;
+        $articulo->idrevista = $idrevista;
         $datosArticulo = request()->except('_token','bandoi');
         $datosArticulo['idrevista'] ;
         $articulo->save();
 
-        return response()->json(['message' => 'Revista y artículo guardados exitosamente']);
+        $msg = 'Articulo guardado, en espera de revisión';
+        $alertType = 'success';
+        session()->flash('msg', $msg);
+        session()->flash('alert-type', $alertType);
+
+        return redirect()->route('otro.menuseleccion');
 
     }
 
