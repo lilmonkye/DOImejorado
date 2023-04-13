@@ -16,6 +16,7 @@ class SolicitarController extends Controller
         $this->middleware('role:otro');
     }
 
+
     public function articuloform()
     {
         return view('otro.articuloform');
@@ -29,27 +30,18 @@ class SolicitarController extends Controller
 
     protected $primaryKey = 'id';
 
-    /* public function store(Request $request)
-{
-    $solicitud = new Solicitud;
-    $solicitud->user_id = auth()->user()->id;
-    //$solicitud->campo1 = $request->input('campo1');
-    //h$solicitud->campo2 = $request->input('campo2');
-    // ...
-    $solicitud->save();
 
-    return redirect()->route('solicitudes.index');
-} */
 
     protected function create(Request $request)
     {
-        $idUsuario = $request->input('idusuario');
+        $useract = Auth::user();
+
         $idRevista = $request->input('idrevista');
-        $user = User::findOrFail($idUsuario);
+
         $revista = Revista::findOrFail($idRevista);
 
         $solicitud = new Solicitud();
-        $solicitud->idusuario = $user->id;
+        $solicitud->idusuario = $useract;
         $solicitud->idrevista = $revista->id;
         $solicitud->estatus="inicio";
         $solicitud->save();

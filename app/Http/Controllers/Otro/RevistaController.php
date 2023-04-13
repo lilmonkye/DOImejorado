@@ -56,26 +56,33 @@ class RevistaController extends Controller
      */
     public function store(Request $request)
     {
-        $useract = Auth::user();
-        $revista = new Revista();
-        $revista->titulo = $request->titulo;
-        $revista->tituloabr = $request->tituloabr;
-        $revista->doi = $request->doi;
-        $revista->url = $request->url;
-        $revista->issnimp = $request->issnimp;
-        $revista->issnelec = $request->issnelec;
-        $revista->idioma = $request->idioma;
-        $revista['idusuario'] = $useract->id;
-        $datosRevista = request()->except('_token','bandoi');
+        $validator = Revista::validator($request->all());
 
-        $revista->save();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
 
-        $msg = 'Revista guardada, en espera de revisión';
-        $alertType = 'success';
-        session()->flash('msg', $msg);
-        session()->flash('alert-type', $alertType);
+            $useract = Auth::user();
+            $revista = new Revista();
+            $revista->titulo = $request->titulo;
+            $revista->tituloabr = $request->tituloabr;
+            $revista->doi = $request->doi;
+            $revista->url = $request->url;
+            $revista->issnimp = $request->issnimp;
+            $revista->issnelec = $request->issnelec;
+            $revista->idioma = $request->idioma;
+            $revista['idusuario'] = $useract->id;
+            $datosRevista = request()->except('_token','bandoi');
 
-        return redirect()->route('otro.menuseleccion',['idrevista'=> $revista->id]);
+            $revista->save();
+
+            $msg = 'Revista guardada, en espera de revisión';
+            $alertType = 'success';
+            session()->flash('msg', $msg);
+            session()->flash('alert-type', $alertType);
+
+            return redirect()->route('otro.menuseleccion',['idrevista'=> $revista->id]);
+        }
         /*
             si quiero mostrar en el mismo blade de registro el mensaje
             $notification = array(
@@ -91,9 +98,12 @@ class RevistaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $useract = Auth::user();
+        $revistas = Revista::where('idusuario', $useract->id)->get();
+        $url = route('otro.tablarevista', ['id' => $useract->id]);
+        return view('otro.tablarevista',['revistas'=>$revistas,'url'=>$url]);
     }
 
     /**

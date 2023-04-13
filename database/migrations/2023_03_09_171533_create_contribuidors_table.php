@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('sufijo')->nullable();
             $table->string('afiliacion')->nullable();
-            $table->string('orcidid')->nullable();
+            $table->string('orcidid')->unique()->nullable();
             $table->string('nomalternativo')->nullable();
             $table->string('rol')->nullable();
             $table->foreign('idarticulo')->references('id')->on('articulos')->onDelete("cascade");

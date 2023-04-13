@@ -28,17 +28,24 @@ class Revista extends Model
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    public static function validator(array $data)
     {
         return Validator::make($data, [
             'idusuario' => ['nullable', 'unsignedBigInteger',],
-            'titulo' => ['required', 'string', 'min:8','max:255'],
-            'tituloabr' => ['required', 'string', 'min:3', 'max:255'],
+            'titulo' => ['required', 'string', 'min:4','max:255'],
+            'tituloabr' => ['nullable', 'string', 'min:2', 'max:255'],
             'doi' => ['nullable','string','max:255',],
             'url' => ['required','string','max:255'],
-            'issnimp' => ['required_without:issnelec','integer'],
-            'issnelec' => ['required_without:issnimp','integer'],
+            'issnimp' => ['required_without:issnelec'],
+            'issnelec' => ['required_without:issnimp'],
             'idioma'=>['nullable','string','max:255',],
+        ],[
+            'titulo.required'=>'El título se encuentra vacío.',
+            'url.required'=>'El url se encuentra vacío',
+            'issnimp.required_without'=>'Se requiere el Issn impreso si no ha ingresado el Issn digital',
+            'issnelec.required_without'=>'Se requiere el Issn digital si no ha ingresado el Issn impreso',
+
+
         ]);
     }
 

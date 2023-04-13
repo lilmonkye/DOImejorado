@@ -20,10 +20,10 @@ return new class extends Migration
             $table->unsignedBigInteger('idusuario')->nullable();
             $table->string('titulo');
             $table->string('tituloabr')->nullable();
-            $table->string('doi')->nullable();
+            $table->string('doi')->unique()->nullable();
             $table->string('url');
-            $table->integer('issnimp')->nullable();
-            $table->integer('issnelec')->nullable();
+            $table->integer('issnimp')->unique()->nullable();
+            $table->integer('issnelec')->unique()->nullable();
             $table->string('idioma')->nullable();
             //relaciones
             $table->foreign('idusuario')->references('id')->on('users')->onDelete("cascade");

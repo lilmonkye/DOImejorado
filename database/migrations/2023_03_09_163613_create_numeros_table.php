@@ -17,19 +17,17 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('idrevista');
-            $table->unsignedBigInteger('idarticulo');
             $table->string('numero');
             $table->string('titulo')->nullable();
-            $table->string('doi')->nullable();
+            $table->string('doi')->unique()->nullable();
             $table->string('url')->nullable();
             $table->date('fechaimpr');
             $table->date('fechadig');
             $table->integer('numespecial')->nullable();
             $table->integer('volumen');
-            $table->string('volumendoi')->nullable();
+            $table->string('volumendoi')->unique()->nullable();
             $table->string('volumenurl')->nullable();
             $table->foreign('idrevista')->references('id')->on('revistas')->onDelete("cascade");
-            $table->foreign('idarticulo')->references('id')->on('articulos')->onDelete("cascade");
         });
     }
 

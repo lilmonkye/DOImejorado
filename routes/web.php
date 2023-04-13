@@ -48,15 +48,24 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
 
 Route::middleware(['auth', 'role:otro'])->group(function () {
     // Rutas protegidas para el rol 'otro'
-    //Route::get('/otro/revistaform', 'Otro\SolicitarController@revistaform')->name('otro.revistaform');
-    Route::get('/otro/articuloform', 'Otro\SolicitarController@articuloform')->name('otro.articuloform');
+    //Route::get('/otro/articuloform', 'Otro\SolicitarController@articuloform')->name('otro.articuloform');
     Route::get('/otro/numeroform', 'Otro\SolicitarController@numeroform')->name('otro.numeroform');
     Route::get('/otro_revistaform', 'Otro\RevistaController@index')->name('otro.revistaform');
-    //Route::get('/otro_menuseleccion', 'Otro\RevistaController@menuseleccion')->name('otro.menuseleccion');
     //Route::post('/otro_revista_prueba', 'Otro\SolicitarController@create')->name('otro.revista_prueba');
     //Route::post('/otro_solicitar_create', 'Otro\SolicitarController@create')->name('otro.solicitar_create');
     Route::get('/otro_menuseleccion/{idrevista}', 'Otro\MenuSeleccionController@index')->name('otro.menuseleccion');
     Route::post('/otro_revista_create', 'Otro\RevistaController@store')->name('otro.revista_create');
     Route::get('/otro/articulo/create/{idrevista}','Otro\ArticuloController@create')->name('otro.articulo_create');
+    Route::post('/otro/articulo/store/{idrevista}','Otro\ArticuloController@store')->name('otro.articulo_store');
+
+
+    Route::get('/otro/numero/create/{idrevista}','Otro\NumeroController@create')->name('otro.numero_create');
+    Route::post('/otro/numero/store/{idrevista}','Otro\NumeroController@store')->name('otro.numero_store');
+    Route::get('/otro/articulo/createconnumero/{idnumero}','Otro\ArticuloController@create')->name('otro.articulo_createconnumero');
+    Route::post('/otro/articulo/storeconnumero/{idnumero}','Otro\ArticuloController@storeconnumeroconnumero')->name('otro.articulo_storeconnumero');
+    Route::get('otro/contribuidor','Otro\ContribuidorController@index')->name('otro.contribuidorform');
+
+    Route::get('otro/tablaarticulo/{idrevista}','Otro\ArticuloController@show')->name('otro.tablaarticulo');
+    Route::get('otro/tablarevista/{id}','Otro\RevistaController@show')->name('otro.tablarevista');
 });
 

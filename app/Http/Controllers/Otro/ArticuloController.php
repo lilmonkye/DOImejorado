@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Revista;
 use App\Models\Articulo;
+use App\Models\Numero;
 
 class ArticuloController extends Controller
 {
@@ -30,9 +31,14 @@ class ArticuloController extends Controller
     public function create($idrevista)
     {
         $revista = Revista::findOrFail($idrevista);
-        return view('otro.articuloform', compact('revista'));
+        return view('otro.articuloform', compact('revista','idrevista'));
     }
 
+    public function createconnumero($idnumero)
+    {
+        $numero = Numero::findOrFail($idnumero);
+        return view('otro.articuloform',compact('numero','idnumero'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -41,28 +47,69 @@ class ArticuloController extends Controller
      */
     public function store(Request $request,$idrevista)
     {
+        $validator = Articulo::validator($request->all());
 
-        // guardar el artículo falta pasar el id de la revista
-        $articulo = new Articulo();
-        $articulo->titulo = $request->titulo;
-        $articulo->doi = $request->doi;
-        $articulo->url = $request->url;
-        $articulo->fechaimp = $request->fechaimp;
-        $articulo->fechadig = $request->fechadig;
-        $articulo->primerpag = $request->primerpag;
-        $articulo->ultimapag = $request->ultimapag;
-        $articulo->abstract = $request->abstract;
-        $articulo->idrevista = $idrevista;
-        $datosArticulo = request()->except('_token','bandoi');
-        $datosArticulo['idrevista'] ;
-        $articulo->save();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
 
-        $msg = 'Articulo guardado, en espera de revisión';
-        $alertType = 'success';
-        session()->flash('msg', $msg);
-        session()->flash('alert-type', $alertType);
+            $revista = Revista::findOrFail($idrevista);
+            // guardar el artículo falta pasar el id de la revista
+            $articulo = new Articulo();
+            $articulo->titulo = $request->titulo;
+            $articulo->doi = $request->doi;
+            $articulo->url = $request->url;
+            $articulo->fechaimpr = $request->fechaimpr;
+            $articulo->fechadig = $request->fechadig;
+            $articulo->primerpag = $request->primerpag;
+            $articulo->ultimapag = $request->ultimapag;
+            $articulo->abstract = $request->abstract;
+            $articulo->idrevista = $idrevista;
+            $datosArticulo = request()->except('_token','bandoi');
+            $datosArticulo['idrevista'] ;
+            $articulo->save();
 
-        return redirect()->route('otro.menuseleccion');
+            $msg = 'Articulo guardado, en espera de revisión';
+            $alertType = 'success';
+            session()->flash('msg', $msg);
+            session()->flash('alert-type', $alertType);
+
+            return redirect()->route('otro.contribuidorform');
+        }
+
+    }
+
+    public function storeconnumero(Request $request,$idnumero)
+    {
+        $validator = Articulo::validator($request->all());
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+
+            $revista = Revista::findOrFail($idnumero);
+            // guardar el artículo falta pasar el id de la revista
+            $articulo = new Articulo();
+            $articulo->titulo = $request->titulo;
+            $articulo->doi = $request->doi;
+            $articulo->url = $request->url;
+            $articulo->fechaimpr = $request->fechaimpr;
+            $articulo->fechadig = $request->fechadig;
+            $articulo->primerpag = $request->primerpag;
+            $articulo->ultimapag = $request->ultimapag;
+            $articulo->abstract = $request->abstract;
+            $articulo->idnumero = $idnumero;
+            $datosArticulo = request()->except('_token','bandoi');
+            $datosArticulo['idnumero'] ;
+            $articulo->save();
+
+            $msg = 'Articulo guardado, en espera de revisión';
+            $alertType = 'success';
+            session()->flash('msg', $msg);
+            session()->flash('alert-type', $alertType);
+
+            return redirect()->route('otro.contribuidorform');
+        }
 
     }
 
@@ -72,9 +119,11 @@ class ArticuloController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idrevista)
     {
         //
+        $articulos = Articulo::where('idrevista',$idrevista)->get();
+        return view('otro.tablaarticulo',['articulos'=> $articulos,'idrevista'=>$idrevista]);
     }
 
     /**

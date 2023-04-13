@@ -16,16 +16,19 @@ return new class extends Migration
         Schema::create('articulos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('idrevista');
+            $table->unsignedBigInteger('idrevista')->nullable();
+            $table->unsignedBigInteger('idnumero')->nullable();
             $table->string('titulo');
-            $table->string('doi')->nullable();
+            $table->string('doi')->unique()->nullable();
             $table->string('url');
-            $table->date('fechaimpr');
-            $table->date('fechadig');
+            $table->date('fechaimpr')->nullable();
+            $table->date('fechadig')->nullable();
             $table->integer('primerpag')->nullable();
             $table->integer('ultimapag')->nullable();
             $table->text('abstract')->nullable();
+            //relaciones
             $table->foreign('idrevista')->references('id')->on('revistas');
+            $table->foreign('idnumero')->references('id')->on('numeros')->onDelete("cascade");
         });
     }
 

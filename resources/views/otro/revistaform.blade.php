@@ -33,6 +33,17 @@
                 Asegurese de que el nombre de la revista contenga los signos de acentuación y los datos se encuentren en el idioma de publicación
             </div>
         </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
         <form action="{{ url('/otro_revista_create') }}" id="formulario" method="POST" >
             @csrf
             <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
@@ -77,12 +88,12 @@
 
                 <div class="mb-3 ">
                     <label for="issnimp" class="form-label"> + ISSN impreso</label>
-                    <input type="text" value="{{ isset($revista->issnimp)?$revista->issnimp:old('issnimp')}}" class="form-control" name="issnimp">
+                    <input type="number" value="{{ isset($revista->issnimp)?$revista->issnimp:old('issnimp')}}" class="form-control" name="issnimp">
                 </div>
 
                 <div class="mb-3 ">
                     <label for="exampleInputPassword1" class="form-label">  + ISSN electronico</label>
-                    <input type="text" value="{{ isset($revista->issnelec)?$revista->issnelec:old('issnelec')}}" class="form-control" name="issnelec">
+                    <input type="number" value="{{ isset($revista->issnelec)?$revista->issnelec:old('issnelec')}}" class="form-control" name="issnelec">
                 </div>
 
                 <div class="mb-3 ">

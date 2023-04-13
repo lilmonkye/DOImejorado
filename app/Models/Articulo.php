@@ -29,18 +29,23 @@ class Articulo extends Model
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    public static function validator(array $data)
     {
         return Validator::make($data, [
-            'idrevista' => ['required', 'unsignedBigInteger',],
             'titulo' => ['required', 'string', 'min:8','max:255'],
             'doi' => ['nullable','string','max:255',],
             'url' => ['required','string','max:255'],
-            'fechaimpr' => ['required_without:fechadig|date_format:Y-m-d'],
-            'fechadig' => ['required_without:fechaimpr|date_format:Y-m-d'],
+            'fechaimpr' => ['required_without:fechadig|date_format:d-m-Y'],
+            'fechadig' => ['required_without:fechaimpr|date_format:d-m-Y'],
             'primerpag' => ['nullable','integer'],
             'ultimapag' => ['nullable','integer'],
             'abstract'=>['nullable','string','max:255',],
+        ],[
+            'titulo.required'=>'El título se encuentra vacío',
+            'url.required'=>'El url se encuentra vacío.',
+            'fechaimpr.required_without'=>'Se requiere la fecha de publicación impresa si no ha ingresado fecha de publicación digital',
+            'fechadig.required_without'=>'Se requiere la fecha de publicación digital si no ha ingresado fecha de publicación impresa',
+
         ]);
     }
 
@@ -50,24 +55,6 @@ class Articulo extends Model
      * @param  array  $data
      * @return \App\Models\Articulo
      */
-    protected function create(array $data)
-    {
-        $articuloFields = [
-            'titulo' => $data['titulo'],
-            'tituloabr' => $data['tituloabr'],
-            'doi' => $data['doi'],
-            'url' => $data['url'],
-            'issnimp' => $data['issnimp'],
-            'issnelec' => $data['issnelec'],
-            'idioma' => $data['idioma'],
-            'bandoi' => $data['bandoi'],
-        ];
-
-
-        $articulo = Articulo::create($articuloFields);
-
-        return $articulo;
-    }
 
     public function revista()
     {

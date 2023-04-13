@@ -147,8 +147,8 @@
             @yield('content')
         </main>
     </div>
-    <div class="conteiner" style="d-flex justify-content-end">
-        <footer class="d-flex flex-wrap justify-content-between  aline-items-center py-3 my-4 border-top">
+    <div class="conteiner" style="d-flex justify-content-end ">
+        <footer class="d-flex flex-wrap justify-content-between  aline-items-center py-3 my-4 border-top" style="margin-bottom:0">
             <div class="col-md-4 d-flex aling-items-center">
                 <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Laboratorio Nacional de Supercómputo del Sureste de México</span>
 

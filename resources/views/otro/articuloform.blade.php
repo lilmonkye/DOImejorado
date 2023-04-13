@@ -25,7 +25,18 @@
                 Asegurese de que la información del artículo contenga los signos de acentuación y los datos se encuentren en el idioma de publicación
             </div>
         </div>
-        <form action="#{{-- {{ url('/otro_revista_create') }} --}}" id="formulario" method="POST" >
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('otro.articulo_store', $idrevista) }}" id="formulario" method="POST" >
             @csrf
             <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
 
@@ -69,6 +80,16 @@
                 <div class="mb-3 ">
                     <label for="fechadig" class="form-label">  + Fecha de Publicación Digital</label>
                     <input class="form-control" type="date" value="{{ old('fechadig')}}" id="fechadig" name="fechadig">
+                </div>
+
+                <div class="mb-3 ">
+                    <label for="primerpag" class="form-label"> Primera página</label>
+                    <input type="text" value="{{ isset($articulo->primerpag)?$articulo->primerpag:old('primerpag')}}" class="form-control" name="primerpag">
+                </div>
+
+                <div class="mb-3 ">
+                    <label for="ultimapag" class="form-label"> Última página</label>
+                    <input type="text" value="{{ isset($articulo->ultimapag)?$articulo->ultimapag:old('ultimapag')}}" class="form-control" name="ultimapag">
                 </div>
 
                 <div class="d-flex justify-content-center">

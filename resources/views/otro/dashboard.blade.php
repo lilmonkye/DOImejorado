@@ -13,6 +13,9 @@
     <br>
     <ul class="nav nav-pills nav-justified margin-top">
         <li class="nav-item">
+            <a class="nav-link" href="#">Mis Registros</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link active" href="{{ route('otro.solicitar') }}">Solicitar</a>
         </li>
         <li class="nav-item">
@@ -21,6 +24,7 @@
         <li class="nav-item">
           <a class="nav-link active" href="{{ route('otro.userdoi') }}">Mis DOIs</a>
         </li>
+
     </ul>
     <br>
     <div class="row justify-content-center">
@@ -36,7 +40,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {{ __('Hola USUARIO, You are logged in!') }}
+                    {{ __('Hola USUARIO, ¡Bienvenido a tu inicio de sesión!') }}
                 </div>
             </div>
         </div>

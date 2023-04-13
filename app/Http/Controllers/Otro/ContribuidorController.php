@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Otro;
 
 use App\Http\Controllers\Controller;
-use App\Models\Revista;
-use App\Models\Numero;
-use Illuminate\Support\Facades\Auth;
-
-
+use App\Models\Articulo;
 use Illuminate\Http\Request;
 
-class NumeroController extends Controller
+class ContribuidorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +15,7 @@ class NumeroController extends Controller
      */
     public function index()
     {
-        //
+        return view ('otro.contribuidorform');
     }
 
     /**
@@ -27,12 +23,9 @@ class NumeroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($idrevista)
+    public function create()
     {
-
-        $revista = Revista::findOrFail($idrevista);
-        return view('otro.numeroform',compact('revista','idrevista'));
-
+        //
     }
 
     /**
@@ -41,32 +34,9 @@ class NumeroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$idrevista)
+    public function store(Request $request)
     {
-
-        $revista = Revista::findOrFail($idrevista);
-        // guardar el artículo falta pasar el id de la revista
-        $numero = new Numero();
-        $numero->numero = $request->numero;
-        $numero->titulo = $request->titulo;
-        $numero->doi = $request->doi;
-        $numero->url = $request->url;
-        $numero->fechaimpr = $request->fechaimpr;
-        $numero->fechadig = $request->fechadig;
-        $numero->numespecial = $request->numespecial;
-        $numero->volumen = $request->volumen;
-        $numero->volumendoi = $request->volumendoi;
-        $numero->volumenurl = $request->volumenurl;
-
-        $msg = 'Articulo guardado, en espera de revisión';
-        $alertType = 'success';
-        session()->flash('msg', $msg);
-        session()->flash('alert-type', $alertType);
-
-        //$useract = Auth::user();
-        //$numero = Numero::where('idrevista', $idrevista->id)->orderBy('created_at', 'desc')->first();
-
-        return redirect()->route('otro.articulo_createconnumero',['idnumero'=> $numero->id]);
+        //
     }
 
     /**
