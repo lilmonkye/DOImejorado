@@ -37,7 +37,7 @@ class ArticuloController extends Controller
     public function createconnumero($idnumero)
     {
         $numero = Numero::findOrFail($idnumero);
-        return view('otro.articuloform',compact('numero','idnumero'));
+        return view('otro.articuloformconnum',compact('numero','idnumero'));
     }
     /**
      * Store a newly created resource in storage.
@@ -87,7 +87,6 @@ class ArticuloController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }else{
 
-            $revista = Revista::findOrFail($idnumero);
             // guardar el artículo falta pasar el id de la revista
             $articulo = new Articulo();
             $articulo->titulo = $request->titulo;
@@ -124,6 +123,13 @@ class ArticuloController extends Controller
         //
         $articulos = Articulo::where('idrevista',$idrevista)->get();
         return view('otro.tablaarticulo',['articulos'=> $articulos,'idrevista'=>$idrevista]);
+    }
+
+    public function showconnumero($idnumero)
+    {
+
+        $articulos = Articulo::where('idnumero',$idnumero)->get();
+        return view('otro.tablaarticuloconnum',['articulos'=>$articulos, 'idnumero'=>$idnumero]);
     }
 
     /**

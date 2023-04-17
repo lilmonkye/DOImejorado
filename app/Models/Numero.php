@@ -26,12 +26,12 @@ class Numero extends Model
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'numero' => ['required', 'string', 'min:3', 'max:255'],//
+            'numero' => ['required', 'string', 'min:1', 'max:255'],//
             'titulo' => ['nullable','string','min:4','max:255',],
             'doi' => ['nullable','string','min:4','max:255'],
             'url' => ['nullable','string','min:4','max:255'],
-            'fechaimpr' => ['required_without:fechadig|date_format:d-m-Y'],
-            'fechadig'=>['required_without:fechaimpr|date_format:d-m-Y'],
+            'fechaimpr' => ['required_without:fechadig'],
+            'fechadig'=>['required_without:fechaimpr'],
             'numespecial'=>['nullable','integer'],
             'volumen' => ['nullable','string'],
             'volumendoi' => ['nullable','integer'],
@@ -39,7 +39,7 @@ class Numero extends Model
         ],[
             'numero.required'=>'El número se encuentra vacío',
             'fechaimpr.required_without'=>'Se requiere la fecha de publicación impresa si no ha ingresado la fecha de publicación digital',
-            'fechadig'=>'Se requiere la fecha de publicación impresa si no ha ingresado la fecha de publicación digital',
+            'fechadig.required_without'=>'Se requiere la fecha de publicación digital si no ha ingresado la fecha de publicación impresa',
         ]);
     }
 

@@ -4,10 +4,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="container" style="background-color: rgb(240, 247, 255)">
+<div class="container" style="background-color: rgba(215, 228, 247, 0.918)">
 
-    <h2 class="text-center p-3 text-secondary" style="background-color: rgba(228, 235, 252, 0.932); text-color:rgb(0, 0, 0)">Solicitar Nuevo DOI</h2>
-    <div class="d-flex justify-content-around p2">
+    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(32, 66, 146)">Solicitar Nuevo DOI</h2>
+    <div class="d-flex justify-content-around p2 m-4">
         <div class="card" style="width: 20rem;">
             <div class="card-body">
                 <h5 class="card-title">Nuevo Registro</h5>

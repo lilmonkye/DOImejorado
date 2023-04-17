@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="mb-3 ">
-                    <label for="titulo" class="form-label"> Título del Artículo</label>
+                    <label for="titulo" class="form-label"> Título del Número</label>
                     <input type="text" value="{{ isset($numero->titulo)?$articulo->titulo:old('titulo')}}" class="form-control" name="titulo">
                 </div>
 

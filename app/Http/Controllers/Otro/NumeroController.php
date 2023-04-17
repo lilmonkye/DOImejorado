@@ -44,29 +44,37 @@ class NumeroController extends Controller
     public function store(Request $request,$idrevista)
     {
 
-        $revista = Revista::findOrFail($idrevista);
-        // guardar el artículo falta pasar el id de la revista
-        $numero = new Numero();
-        $numero->numero = $request->numero;
-        $numero->titulo = $request->titulo;
-        $numero->doi = $request->doi;
-        $numero->url = $request->url;
-        $numero->fechaimpr = $request->fechaimpr;
-        $numero->fechadig = $request->fechadig;
-        $numero->numespecial = $request->numespecial;
-        $numero->volumen = $request->volumen;
-        $numero->volumendoi = $request->volumendoi;
-        $numero->volumenurl = $request->volumenurl;
+        $validator = Numero::validator($request->all());
 
-        $msg = 'Articulo guardado, en espera de revisión';
-        $alertType = 'success';
-        session()->flash('msg', $msg);
-        session()->flash('alert-type', $alertType);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
 
-        //$useract = Auth::user();
-        //$numero = Numero::where('idrevista', $idrevista->id)->orderBy('created_at', 'desc')->first();
+            $revista = Revista::findOrFail($idrevista);
+            // guardar el artículo falta pasar el id de la revista
+            $numero = new Numero();
+            $numero->numero = $request->numero;
+            $numero->titulo = $request->titulo;
+            $numero->doi = $request->doi;
+            $numero->url = $request->url;
+            $numero->fechaimpr = $request->fechaimpr;
+            $numero->fechadig = $request->fechadig;
+            $numero->numespecial = $request->numespecial;
+            $numero->volumen = $request->volumen;
+            $numero->volumendoi = $request->volumendoi;
+            $numero->volumenurl = $request->volumenurl;
+            $numero->idrevista = $idrevista;
 
-        return redirect()->route('otro.articulo_createconnumero',['idnumero'=> $numero->id]);
+            $numero->save();
+
+            $msg = 'Numero guardado, en espera de revisión';
+            $alertType = 'success';
+            session()->flash('msg', $msg);
+            session()->flash('alert-type', $alertType);
+
+
+            return redirect()->route('otro.menuselecnumero',['idrevista'=> $idrevista]);
+        }
     }
 
     /**
@@ -75,9 +83,11 @@ class NumeroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idrevista)
     {
         //
+        $numeros = Numero::where('idrevista',$idrevista)->get();
+        return view('otro.tablanumero',['numeros'=>$numeros,'idrevista'=>$idrevista]);
     }
 
     /**

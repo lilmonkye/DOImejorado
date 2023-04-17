@@ -35,12 +35,12 @@
         <div class="d-flex justify-content-center p2">
             <div class="btn-group btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
                 <br>
-                <a href="{{ route('otro.tablanumero', ['idrevista'=> $idrevista]) }}">
-                    <button type="button" class="btn btn-outline-primary"> Número </button>
+                <a href="{{ route('otro.tablaarticuloconnum', ['idnumero'=> $idnumero]) }}">
+                    <button type="button" class="btn btn-outline-primary"> Articulo </button>
                 </a>
                 <br>
-                <a href="{{ route('otro.tablaarticulo',['idrevista'=> $idrevista]) }}">
-                    <button type="button" class="btn btn-outline-primary"> Artículo </button>
+                <a href="{{-- {{ route('otro.tablaarticulo',['idnumero'=> $idnumero]) }} --}}">
+                    <button type="button" class="btn btn-outline-primary"> Contribuidor </button>
                 </a>
             </div>
         </div>

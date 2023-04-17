@@ -38,6 +38,6 @@
 
     </div>
 
-    <a href="{{ route('otro_dashboard') }}" class="btn btn-secondary" style="margin-left: 40px">Regresar </a>
+    <a href="{{ route('otro.solicitar') }}" class="btn btn-secondary" style="margin-left: 40px">Regresar </a>
 </div>
 @endsection

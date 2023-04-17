@@ -3,19 +3,22 @@
 namespace App\Http\Controllers\Otro;
 
 use App\Http\Controllers\Controller;
-use App\Models\Articulo;
 use Illuminate\Http\Request;
+use App\Models\Revista;
+use App\Models\Numero;
+use Illuminate\Support\Facades\Auth;
 
-class ContribuidorController extends Controller
+class MenuselecNumeroController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idrevista)
     {
-        return view ('otro.contribuidorform');
+        $numero = Numero::where('idrevista',$idrevista)->orderBy('created_at', 'desc')->first();
+        return view('otro.menuselecnumero',['idnumero'=>$numero->id]);
     }
 
     /**
@@ -25,7 +28,7 @@ class ContribuidorController extends Controller
      */
     public function create()
     {
-        //contribuidor de articulo
+        //
     }
 
     /**
@@ -36,7 +39,7 @@ class ContribuidorController extends Controller
      */
     public function store(Request $request)
     {
-        //contribuidor de articulo
+        //
     }
 
     /**
@@ -47,7 +50,7 @@ class ContribuidorController extends Controller
      */
     public function show($id)
     {
-        //contribuidor de articulo
+        //
     }
 
     /**
