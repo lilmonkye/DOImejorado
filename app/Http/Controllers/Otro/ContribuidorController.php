@@ -23,9 +23,14 @@ class ContribuidorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idarticulo)
     {
         //contribuidor de articulo
+    }
+
+    public function createconnumero($idnumero)
+    {
+        //contribuidor de numero
     }
 
     /**

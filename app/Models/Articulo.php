@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use App\Casts\HtmlPurifier;
+use Mews\Purifier\Casts\CleanHtml;
 
 class Articulo extends Model
 {
@@ -14,13 +16,25 @@ class Articulo extends Model
 
     protected $primaryKey = 'id';
 
+    //CAMPOS OBLIGATORIOS DEL FORMULARIO
     protected $fillable = [
         'idrevista',
         'titulo',
         'url',
         'fechaimpr',
         'fechadig',
-        'banddoi',
+    ];
+
+    //SEGURIDAD ANTISCRIPTS
+    protected $cast =   [
+        'titulo'    =>  HTMLPurifier::class,
+        'doi'       =>  HTMLPurifier::class,
+        'url'       =>  HTMLPurifier::class,
+        'fechaimpr' =>  HTMLPurifier::class,
+        'fechadig'  =>  HTMLPurifier::class,
+        'primerpag' =>  HTMLPurifier::class,
+        'ultimapag' =>  HTMLPurifier::class,
+        'abstract'  =>  HTMLPurifier::class,
     ];
 
     /**
@@ -29,20 +43,23 @@ class Articulo extends Model
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+     //VALIDACION DE CAMPOS DEL FORMULARIO Y MENSAJES DE ERROR
     public static function validator(array $data)
     {
         return Validator::make($data, [
             'titulo' => ['required', 'string', 'min:8','max:255'],
             'doi' => ['nullable','string','max:255',],
-            'url' => ['required','string','max:255'],
+            'url' => ['required','active_url','max:255'],
             'fechaimpr' => ['required_without:fechadig'],
             'fechadig' => ['required_without:fechaimpr'],
             'primerpag' => ['nullable','integer'],
             'ultimapag' => ['nullable','integer'],
-            'abstract'=>['nullable','string','max:255',],
+            'abstract'=>['nullable','text'],
         ],[
             'titulo.required'=>'El título se encuentra vacío',
             'url.required'=>'El url se encuentra vacío.',
+            'url.active_url'=>'El url no es válido',
             'fechaimpr.required_without'=>'Se requiere la fecha de publicación impresa si no ha ingresado fecha de publicación digital',
             'fechadig.required_without'=>'Se requiere la fecha de publicación digital si no ha ingresado fecha de publicación impresa',
 
@@ -56,6 +73,7 @@ class Articulo extends Model
      * @return \App\Models\Articulo
      */
 
+    //RELACIONES
     public function revista()
     {
         return $this->belongsTo(Revista::class);

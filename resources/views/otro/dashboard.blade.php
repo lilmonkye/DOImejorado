@@ -19,7 +19,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {{ __('Hola USUARIO, ¡Bienvenido a tu inicio de sesión!') }}
+                    Hola {{ Auth::user()->name }}, ¡Bienvenido a tu inicio de sesión!
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">Mis Solicitudes</h5>
-                    <p class="card-text">Aquí ver el estatus de tus solicitudes y correcciones que debas realizar.</p>
+                    <p class="card-text">Aquí podrás ver el estatus de tus solicitudes y correcciones que debas realizar.</p>
                     <a href="{{ route('otro.tsolicitudes') }}" class="btn btn-primary">Ver</a>
                 </div>
             </div>

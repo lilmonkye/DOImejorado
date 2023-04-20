@@ -6,6 +6,8 @@ use App\Models\Revista;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Casts\CleanHtml;
+
 
 class RevistaController extends Controller
 {
@@ -64,9 +66,9 @@ class RevistaController extends Controller
 
             $useract = Auth::user();
             $revista = new Revista();
-            $revista->titulo = $request->titulo;
-            $revista->tituloabr = $request->tituloabr;
-            $revista->doi = $request->doi;
+            $revista->titulo = $request->input('titulo');
+            $revista->tituloabr = $request->input('tituloabr');
+            $revista->doi = $request->input('doi');
             $revista->url = $request->url;
             $revista->issnimp = $request->issnimp;
             $revista->issnelec = $request->issnelec;

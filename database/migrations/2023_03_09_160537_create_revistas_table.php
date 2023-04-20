@@ -18,12 +18,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('idusuario')->nullable();
+            //campos de la base de datos
             $table->string('titulo');
             $table->string('tituloabr')->nullable();
             $table->string('doi')->unique()->nullable();
             $table->string('url');
-            $table->integer('issnimp')->unique()->nullable();
-            $table->integer('issnelec')->unique()->nullable();
+            $table->string('issnimp')->unique()->nullable();
+            $table->string('issnelec')->unique()->nullable();
             $table->string('idioma')->nullable();
             //relaciones
             $table->foreign('idusuario')->references('id')->on('users')->onDelete("cascade");

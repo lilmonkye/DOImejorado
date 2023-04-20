@@ -6,7 +6,7 @@
 
 <div class="container" style="background-color: rgba(215, 228, 247, 0.918)">
 
-    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(32, 66, 146)">Solicitar Nuevo DOI</h2>
+    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Solicitar Nuevo DOI</h2>
     <div class="d-flex justify-content-around p2 m-4">
         <div class="card" style="width: 20rem;">
             <div class="card-body">

@@ -23,10 +23,11 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->date('fechaimpr')->nullable();
             $table->date('fechadig')->nullable();
-            $table->integer('numespecial')->nullable();
+            $table->string('numespecial')->nullable();
             $table->integer('volumen')->nullable();
             $table->string('volumendoi')->unique()->nullable();
             $table->string('volumenurl')->nullable();
+            //relaciones
             $table->foreign('idrevista')->references('id')->on('revistas')->onDelete("cascade");
         });
     }

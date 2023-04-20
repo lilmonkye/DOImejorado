@@ -52,18 +52,18 @@
                 </div>
 
                 <div class="p-2">
-                    <label for="nombre" class="form-lablel">Rol</label>
+                    <label for="nombre" class="form-lablel">Seleccione rol</label>
                     <select class="form-select" name="rol" aria-label="Default select example">
                         <option selected>Seleccione su rol</option>
-                        <option value="1">Autor</option>
-                        <option value="2">Editor</option>
-                        <option value="3">Chair</option>
-                        <option value="4">Revisor</option>
-                        <option value="5">Asistente de Revisor</option>
-                        <option value="6">Revisor de Estadísticas</option>
-                        <option value="7">Revisor Externo</option>
-                        <option value="8">Lector</option>
-                        <option value="9">Traductor</option>
+                        <option value="autor">Autor</option>
+                        <option value="editor">Editor</option>
+                        <option value="chair">Chair</option>
+                        <option value="revisor">Revisor</option>
+                        <option value="asistente de revisor">Asistente de Revisor</option>
+                        <option value="revisor de estadisticas">Revisor de Estadísticas</option>
+                        <option value="revisor externo">Revisor Externo</option>
+                        <option value="lector">Lector</option>
+                        <option value="traductor">Traductor</option>
                     </select>
                 </div>
 

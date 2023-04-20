@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('orcidid')->unique()->nullable();
             $table->string('nomalternativo')->nullable();
             $table->string('rol')->nullable();
+            //relaciones
             $table->foreign('idarticulo')->references('id')->on('articulos')->onDelete("cascade");
             $table->foreign('idnumero')->references('id')->on('numeros')->onDelete("cascade");
         });

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use Mews\Purifier\Casts\CleanHtml;
 
 class Numero extends Model
 {
@@ -12,37 +13,56 @@ class Numero extends Model
 
     protected $table = 'numeros';
 
+    //CAMPOS OBLIGATORIOS UNA DE LAS FECHAS ES OBLIGATORIO PERO ESTO SE REALIZA EN LA VALIDACION
     protected $fillable = [
         'numero',
     ];
 
-//numero ia
+    //SEGURIDAD ANTI SCRIPTS
+    protected $cast = [
+        'numero'        =>  CleanHtml::class,
+        'titulo'        =>  CleanHtml::class,
+        'doi'           =>  CleanHtml::class,
+        'url'           =>  CleanHtml::class,
+        'fechaimpr'     =>  CleanHtml::class,
+        'fechadig'      =>  CleanHtml::class,
+        'numespecial'   =>  CleanHtml::class,
+        'volumen'       =>  CleanHtml::class,
+        'volumendoi'    =>  CleanHtml::class,
+        'volumenurl'    =>  CleanHtml::class,
+    ];
+
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+     //VALIDACIÓN Y MENSAJES DE ERROR
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'numero' => ['required', 'string', 'min:1', 'max:255'],//
+            'numero' => ['required', 'integer', 'min:1', 'max:255'],//
             'titulo' => ['nullable','string','min:4','max:255',],
             'doi' => ['nullable','string','min:4','max:255'],
-            'url' => ['nullable','string','min:4','max:255'],
+            'url' => ['nullable','active_url','min:4','max:255'],
             'fechaimpr' => ['required_without:fechadig'],
             'fechadig'=>['required_without:fechaimpr'],
-            'numespecial'=>['nullable','integer'],
-            'volumen' => ['nullable','string'],
-            'volumendoi' => ['nullable','integer'],
-            'volumenurl'=>['nullable','string','max:255',],
+            'numespecial'=>['nullable','string'],
+            'volumen' => ['nullable','integer'],
+            'volumendoi' => ['nullable','string'],
+            'volumenurl'=>['nullable','active_url','max:255',],
         ],[
             'numero.required'=>'El número se encuentra vacío',
+            'url.active_url'=>'El url no es válido',
             'fechaimpr.required_without'=>'Se requiere la fecha de publicación impresa si no ha ingresado la fecha de publicación digital',
             'fechadig.required_without'=>'Se requiere la fecha de publicación digital si no ha ingresado la fecha de publicación impresa',
+            'volumenurl.active_url'=>'La url del volumen no es valida'
         ]);
     }
 
+    //RELACIONES
     public function revista()
     {
         return $this->belongsTo(Revista::class);
