@@ -40,16 +40,16 @@
             @csrf
             <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
 
-                <input type="hidden" name="idrevista" value="{{ $revista->id }}" class="form-control">
+                <input type="hidden" name="idrevista" value="{!! $revista->id !!}" class="form-control">
 
                 <div class="mb-3 ">
                     <label for="numero" class="form-label"> + Número</label>
-                    <input type="number" value="{{ isset($numero->numero)?$articulo->numero:old('numero')}}" class="form-control" name="numero">
+                    <input type="number" value="{!! isset($numero->numero)?$articulo->numero:old('numero')!!}" class="form-control" name="numero">
                 </div>
 
                 <div class="mb-3 ">
                     <label for="titulo" class="form-label"> Título del Número</label>
-                    <input type="text" value="{{ isset($numero->titulo)?$articulo->titulo:old('titulo')}}" class="form-control" name="titulo">
+                    <input type="text" value="{!! isset($numero->titulo)?$articulo->titulo:old('titulo')!!}" class="form-control" name="titulo">
                 </div>
 
                 <label for="doi" class="form-label"> ¿Este número cuenta con DOI?</label>
@@ -65,49 +65,49 @@
 
                 <div class="form-group mb-3">
                     <label for="doi">DOI:</label>
-                    <input type="text" value="{{ isset($numero->doi)?$numero->doi:old('doi')}}" class="form-control" name="doi" id="doi" disabled>
+                    <input type="text" value="{!! isset($numero->doi)?$numero->doi:old('doi')!!}" class="form-control" name="doi" id="doi" disabled>
                 </div>
 
                 <div class="mb-3 ">
                     <label for="url" class="form-label">  URL</label>
-                    <input type="url" placeholder="https://ejemplo.com" value="{{ isset($numero->url)?$numero->url:old('url')}}" class="form-control" name="url">
+                    <input type="url" placeholder="https://ejemplo.com" value="{!! isset($numero->url)?$numero->url:old('url')!!}" class="form-control" name="url">
                 </div>
 
                 <h5>Según sea el caso de su revista llenar la fecha de publicación impresa, digital o ambas (Dd-Mm-Aa).</h5>
                 <div class="row">
                     <div class="col mb-3 ">
                         <label for="fechaimpr" class="form-label"> + Fecha de Publicación Impresa</label>
-                        <input class="form-control"  type="date" value="{{ old('fechaimpr')}}" id="fechaimpr" name="fechaimpr">
+                        <input class="form-control"  type="date" value="{!! old('fechaimpr')!!}" id="fechaimpr" name="fechaimpr">
                     </div>
 
                     <div class="col mb-3">
                         <label for="fechadig" class="form-label">  + Fecha de Publicación Digital</label>
-                        <input class="form-control" type="date" value="{{ old('fechadig')}}" id="fechadig" name="fechadig">
+                        <input class="form-control" type="date" value="{!! old('fechadig')!!}" id="fechadig" name="fechadig">
                     </div>
                 </div>
 
                 <div class="mb-3 ">
                     <label for="numespecial" class="form-label"> Número especial</label>
-                    <input type="text" value="{{ isset($numero->numespecial)?$numero->numespecial:old('primerpag')}}" class="form-control" name="numespecial">
+                    <input type="text" value="{!! isset($numero->numespecial)?$numero->numespecial:old('primerpag')!!}" class="form-control" name="numespecial">
                 </div>
 
-                <div class="mb-3 ">
-                    <label for="volumen" class="form-label"> Volumen</label>
-                    <input type="number" value="{{ isset($numero->volumen)?$numero->volumen:old('volumen')}}" class="form-control" name="ultimapag">
-                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="volumen" class="form-label"> Volumen</label>
+                        <input type="number" value="{!! isset($numero->volumen)?$numero->volumen:old('volumen')!!}" class="form-control" name="ultimapag">
+                    </div>
 
-                <div class="form-group">
-                    <label for="volumendoi">DOI del volumen</label>
-                    <input type="text" value="{{ isset($numero->volumendoi)?$numero->volumendoi:old('volumendoi')}}" class="form-control" name="doi" id="doi" disabled>
-                </div>
-                <br>
+                    <div class="col mb-3">
+                        <label for="volumendoi" class="form-label"> DOI del volumen</label>
+                        <input type="text" value="{!! isset($numero->volumendoi)?$numero->volumendoi:old('volumendoi')!!}" class="form-control" name="doi" id="doi">
+                    </div>
 
-                <div class="mb-3 ">
-                    <label for="volumenurl" class="form-label">  URL del volumen</label>
-                    <input type="url" placeholder="https://ejemplo.com" value="{{ isset($numero->volumenurl)?$numero->volumenurl:old('volumenurl')}}" class="form-control" name="volumenurl">
+                    <div class="col mb-3">
+                        <label for="volumenurl" class="form-label">  URL del volumen</label>
+                        <input type="url" placeholder="https://ejemplo.com" value="{!! isset($numero->volumenurl)?$numero->volumenurl:old('volumenurl')!!}" class="form-control" name="volumenurl">
+                    </div>
                 </div>
-
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center p-3">
                     <input type="submit" value="Registrar" id="registro" class="btn btn-secondary btn-submit">
                 </div>
             </div>

@@ -62,9 +62,11 @@
         </div>
 
     </div>
-    <div class="d-flex justify-content-center">
-        <a href="{{ route('otro.numero_create',['idrevista'=>$idrevista]) }} " class="btn btn-secondary" style="margin-left: 40px">Nuevo Número </a>
+    {{-- <div class="d-flex justify-content-center">
+        <a href="# " class="btn btn-secondary" style="margin-left: 40px">Nuevo Número </a>
+    </div> --}}
+    <div class="p-2 mb-3">
+        <a href="{{ route('otro.solicitar') }}" class="btn btn-secondary" style="margin-left: 40px">Regresar </a>
     </div>
-    <a href="{{ route('otro_dashboard') }}" class="btn btn-secondary" style="margin-left: 40px">Regresar </a>
 </div>
 @endsection

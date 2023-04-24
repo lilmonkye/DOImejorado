@@ -100,7 +100,7 @@
                 <div class="mb-3">
                     <label for="nombre" class="form-lablel mb-3">Idioma de Publicación</label>
                     <select class="form-select" name="idioma" aria-label="Default select example">
-                        <option selected>Seleccione Idioma</option>
+                        <option selected></option>
                         <option value="espaniol">Español</option>
                         <option value="ingles">Inglés</option>
                         <option value="chino">Chino Mandarín</option>

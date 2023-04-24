@@ -50,17 +50,15 @@ class NumeroController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }else{
 
-            $revista = Revista::findOrFail($idrevista);
-            // guardar el artículo falta pasar el id de la revista
             $numero = new Numero();
             $numero->numero = $request->numero;
             $numero->titulo = $request->titulo;
             $numero->doi = $request->doi;
             $numero->url = $request->url;
-            $numero->fechaimpr = $request->fechaimpr;
-            $numero->fechadig = $request->fechadig;
+            $numero->fechaimpr = $request->input('fechaimpr');
+            $numero->fechadig = $request->input('fechadig');
             $numero->numespecial = $request->numespecial;
-            $numero->volumen = $request->volumen;
+            $numero->volumen = $request->input('volumen');
             $numero->volumendoi = $request->volumendoi;
             $numero->volumenurl = $request->volumenurl;
             $numero->idrevista = $idrevista;
@@ -88,6 +86,21 @@ class NumeroController extends Controller
         //
         $numeros = Numero::where('idrevista',$idrevista)->get();
         return view('otro.tablanumero',['numeros'=>$numeros,'idrevista'=>$idrevista]);
+    }
+
+    public function showall()
+    {
+        $idusuario = Auth::user();
+        $revistas = Revista::where('idusuario', $idusuario->id)->get();
+
+        $todoslosnum = collect();
+        foreach($revistas as $revista)
+        {
+            $numeros = Numero::where('idrevista',$revista->id)->get();
+            $todoslosnum = $todoslosnum->concat($numeros);
+        }
+        return view('otro.tablanumeroall',['numeros'=>$todoslosnum]);
+
     }
 
     /**

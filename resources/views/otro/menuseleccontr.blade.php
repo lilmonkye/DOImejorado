@@ -32,16 +32,13 @@
                     </div>
                 </div>
         @endif
-        <div class="d-flex justify-content-center p2">
+        <div class="d-flex justify-content-center p-2">
             <div class="btn-group btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
                 <br>
-                <a href="{{ route('otro.tablanumero', ['idrevista'=> $idrevista]) }}">
-                    <button type="button" class="btn btn-outline-primary"> Número </button>
+                <a href="{{ route('otro.tablacontribuidor', ['idarticulo'=> $idarticulo]) }}">
+                    <button type="button" class="btn btn-outline-primary"> Contribuidor </button>
                 </a>
                 <br>
-                <a href="{{ route('otro.tablaarticulo',['idrevista'=> $idrevista]) }}">
-                    <button type="button" class="btn btn-outline-primary"> Artículo </button>
-                </a>
             </div>
         </div>
         <div class="d-flex justify-content-end" aria-label="Basic radio toggle button group">

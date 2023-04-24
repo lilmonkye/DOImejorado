@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Casts\CleanHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
-use Mews\Purifier\Casts\CleanHtml;
+
 
 class Numero extends Model
 {
@@ -19,7 +20,7 @@ class Numero extends Model
     ];
 
     //SEGURIDAD ANTI SCRIPTS
-    protected $cast = [
+    protected $casts = [
         'numero'        =>  CleanHtml::class,
         'titulo'        =>  CleanHtml::class,
         'doi'           =>  CleanHtml::class,
@@ -40,15 +41,15 @@ class Numero extends Model
      */
 
      //VALIDACIÓN Y MENSAJES DE ERROR
-    protected function validator(array $data)
+    protected static function validator(array $data)
     {
         return Validator::make($data, [
             'numero' => ['required', 'integer', 'min:1', 'max:255'],//
             'titulo' => ['nullable','string','min:4','max:255',],
             'doi' => ['nullable','string','min:4','max:255'],
             'url' => ['nullable','active_url','min:4','max:255'],
-            'fechaimpr' => ['required_without:fechadig'],
-            'fechadig'=>['required_without:fechaimpr'],
+            'fechaimpr' => ['nullable','required_without_all:fechadig'],
+            'fechadig'=>['nullable','required_without_all:fechaimpr'],
             'numespecial'=>['nullable','string'],
             'volumen' => ['nullable','integer'],
             'volumendoi' => ['nullable','string'],
@@ -56,8 +57,8 @@ class Numero extends Model
         ],[
             'numero.required'=>'El número se encuentra vacío',
             'url.active_url'=>'El url no es válido',
-            'fechaimpr.required_without'=>'Se requiere la fecha de publicación impresa si no ha ingresado la fecha de publicación digital',
-            'fechadig.required_without'=>'Se requiere la fecha de publicación digital si no ha ingresado la fecha de publicación impresa',
+            'fechaimpr.required_without_all'=>'Se requiere la fecha de publicación impresa si no ha ingresado la fecha de publicación digital',
+            'fechadig.required_without_all'=>'Se requiere la fecha de publicación digital si no ha ingresado la fecha de publicación impresa',
             'volumenurl.active_url'=>'La url del volumen no es valida'
         ]);
     }

@@ -68,7 +68,14 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
     Route::get('otro/tablaarticulo/{idrevista}','Otro\ArticuloController@show')->name('otro.tablaarticulo');
     Route::get('otro/tablaarticuloconnum/{idnumero}','Otro\ArticuloController@showconnumero')->name('otro.tablaarticuloconnum');
     Route::get('otro/tablanumero/{idrevista}','Otro\NumeroController@show')->name('otro.tablanumero');
+    Route::get('otro/tablanumeroall','Otro\NumeroController@showall')->name('otro.tablanumeroall');
     Route::get('otro/tablarevista/{id}','Otro\RevistaController@show')->name('otro.tablarevista');
     Route::get('/otro_menuselecnumero/{idrevista}', 'Otro\MenuselecNumeroController@index')->name('otro.menuselecnumero');
+
+    Route::get('/otro_menuseleccontr/{idrevista}', 'Otro\MenuselecContrController@index')->name('otro.menuseleccontr');
+    Route::get('otro/tablacontribuidor/{idarticulo}', 'Otro\ContribuidorController@show')->name('otro.tablacontribuidor');
+    Route::get('/otro/contribuidor/create/{idarticulo}','Otro\ContribuidorController@create')->name('otro.contribuidor_create');
+    Route::post('/otro/contribuidor/store/{idarticulo}','Otro\ContribuidorController@store')->name('otro.contribuidor_store');
+
 });
 

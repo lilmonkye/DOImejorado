@@ -56,11 +56,11 @@ class ArticuloController extends Controller
             $revista = Revista::findOrFail($idrevista);
             // guardar el artículo falta pasar el id de la revista
             $articulo = new Articulo();
-            $articulo->titulo = $request->titulo;
-            $articulo->doi = $request->doi;
+            $articulo->titulo = $request->input('titulo');
+            $articulo->doi = $request->input('doi');
             $articulo->url = $request->url;
-            $articulo->fechaimpr = $request->fechaimpr;
-            $articulo->fechadig = $request->fechadig;
+            $articulo->fechaimpr = $request->input('fechaimpr');
+            $articulo->fechadig = $request->input('fechadig');
             $articulo->primerpag = $request->primerpag;
             $articulo->ultimapag = $request->ultimapag;
             $articulo->abstract = $request->abstract;
@@ -74,7 +74,7 @@ class ArticuloController extends Controller
             session()->flash('msg', $msg);
             session()->flash('alert-type', $alertType);
 
-            return redirect()->route('otro.contribuidorform');
+            return redirect()->route('otro.menuseleccontr',['idrevista'=> $idrevista]);
         }
 
     }
@@ -89,8 +89,8 @@ class ArticuloController extends Controller
 
             // guardar el artículo falta pasar el id de la revista
             $articulo = new Articulo();
-            $articulo->titulo = $request->titulo;
-            $articulo->doi = $request->doi;
+            $articulo->titulo = $request->input('titulo');
+            $articulo->doi = $request->input('doi');
             $articulo->url = $request->url;
             $articulo->fechaimpr = $request->fechaimpr;
             $articulo->fechadig = $request->fechadig;

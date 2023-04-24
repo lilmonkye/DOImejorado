@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Otro;
 
 use App\Http\Controllers\Controller;
 use App\Models\Articulo;
+use App\Models\Contribuidor;
+use App\Models\Numero;
 use Illuminate\Http\Request;
 
 class ContribuidorController extends Controller
@@ -26,11 +28,15 @@ class ContribuidorController extends Controller
     public function create($idarticulo)
     {
         //contribuidor de articulo
+        $articulo = Articulo::findOrFail($idarticulo);
+        return view('otro.contribuidorform', compact('articulo','idarticulo'));
     }
 
     public function createconnumero($idnumero)
     {
         //contribuidor de numero
+        $numero = Numero::findOrFail($idnumero);
+        return view('otro.articuloformconnum',compact('numero','idnumero'));
     }
 
     /**
@@ -39,9 +45,33 @@ class ContribuidorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$idarticulo)
     {
         //contribuidor de articulo
+        $validator = Contribuidor::validator($request->all());
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+            $contribuidor = new Contribuidor();
+            $contribuidor->idarticulo = $idarticulo;
+            $contribuidor->nombre = $request->input('nombre');
+            $contribuidor->apellido = $request->input('apellido');
+            $contribuidor->afiliacion = $request->input('afiliacion');
+            $contribuidor->orcidid = $request->input('orcidid');
+            $contribuidor->nomalternativo = $request->input('nomalternativo');
+            $contribuidor->rol = $request->rol;
+
+            $contribuidor->save();
+
+            $msg = 'Contribuidor guardado correctamente';
+            $alertType = 'success';
+            session()->flash('msg',$msg);
+            session()->flash('alert-type',$alertType);
+
+            return redirect()->route('otro.tablacontribuidor', ['idarticulo'=> $idarticulo]);
+        }
+
     }
 
     /**
@@ -50,9 +80,11 @@ class ContribuidorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idarticulo)
     {
         //contribuidor de articulo
+        $contribuidors = contribuidor::where('idarticulo',$idarticulo)->get();
+        return view('otro.tablacontribuidor',['contribuidors'=>$contribuidors,'idarticulo'=>$idarticulo]);
     }
 
     /**

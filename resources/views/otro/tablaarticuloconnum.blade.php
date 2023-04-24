@@ -3,13 +3,13 @@
 @section('content')
 <h5>con numero x</h5>
 
-<div class="conteiner justify-content-md-center" style="background-color: rgb(215, 228, 247)">
-    <h2 class="text-center p-3 text-secondary text-dark" style="background-color: rgb(232, 239, 255)">Artículos Registrados</h2>
+<div class="container justify-content-md-center" style="background-color: rgb(215, 228, 247)">
+    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Artículos Registrados</h2>
     <div style="d-flex justify-content-around; flex-direction:column; justify-content:center; align-items:center" class="col-12 p-3">
         {{-- <input type="hidden" name="idrevista" value="{{ $revista->id }}" class="form-control"> --}}
-        <div class="table-responsive d-flex justify-content-between">
-            <table class="table table-hover">
-                <thead class="thead-dark">
+        <div class="d-flex justify-content-between table-responsive">
+            <table class="table table-hover table-light">
+                <thead class="table-active">
                     <th scope="col"></th>
                     <th scope="col">Título</th>
                     <th scope="col">DOI</th>

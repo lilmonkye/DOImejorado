@@ -19,12 +19,12 @@ return new class extends Migration
             $table->unsignedBigInteger('idrevista')->nullable();
             $table->unsignedBigInteger('idnumero')->nullable();
             $table->string('titulo');
-            $table->string('doi')->unique()->nullable();
+            $table->string('doi')->nullable();
             $table->string('url');
-            $table->date('fechaimpr')->nullable();
-            $table->date('fechadig')->nullable();
-            $table->integer('primerpag')->nullable();
-            $table->integer('ultimapag')->nullable();
+            $table->string('fechaimpr')->nullable();
+            $table->string('fechadig')->nullable();
+            $table->string('primerpag')->nullable();
+            $table->string('ultimapag')->nullable();
             $table->text('abstract')->nullable();
             //relaciones
             $table->foreign('idrevista')->references('id')->on('revistas');

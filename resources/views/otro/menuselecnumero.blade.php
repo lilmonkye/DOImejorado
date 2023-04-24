@@ -17,7 +17,7 @@
 
 
 <div class="container" style="background-color: rgb(215, 228, 247)">
-    <h2 class="text-center p-3 text-secondary text-dark" style="background-color: rgb(232, 239, 255)">Continuar Registro</h2>
+    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Continuar Registro</h2>
     <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
         @if(Session::has('msg'))
                 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">

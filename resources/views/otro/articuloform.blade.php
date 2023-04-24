@@ -44,7 +44,7 @@
 
                 <div class="mb-3 ">
                     <label for="titulo" class="form-label"> + Título del Artículo</label>
-                    <input type="text" value="{{ isset($articulo->titulo)?$articulo->titulo:old('titulo')}}" class="form-control" name="titulo">
+                    <input type="text" value="{!! isset($articulo->titulo)?$articulo->titulo:old('titulo') !!}" class="form-control" name="titulo">
                 </div>
 
                 <label for="doi" class="form-label"> ¿Este artículo cuenta con DOI?</label>
@@ -59,38 +59,40 @@
 
                 <div class="mb-3 form-group">
                     <label for="doi">DOI:</label>
-                    <input type="text" value="{{ isset($articulo->doi)?$articulo->doi:old('doi')}}" class="form-control" name="doi" id="doi" disabled>
+                    <input type="text" value="{!! isset($articulo->doi)?$articulo->doi:old('doi') !!}" class="form-control" name="doi" id="doi" disabled>
                 </div>
 
                 <div class="mb-3 ">
                     <label for="url" class="form-label"> + URL</label>
-                    <input type="url" placeholder="https://ejemplo.com" value="{{ isset($articulo->url)?$articulo->url:old('url')}}" class="form-control" name="url">
+                    <input type="url" placeholder="https://ejemplo.com" value="{!! isset($articulo->url)?$articulo->url:old('url') !!}" class="form-control" name="url">
                 </div>
 
                 <h5>Según sea el caso de su revista llenar la fecha de publicación impresa, digital o ambas (Aa-Mm-Dd).</h5>
                 <div class="row">
                     <div class="mb-3 col">
                         <label for="fechaimpr" class="form-label"> + Fecha de Publicación Impresa</label>
-                        <input class="form-control"  type="date" value="{{ old('fechaimpr')}}" id="fechaimpr" name="fechaimpr">
+                        <input class="form-control"  type="date" value="{!! old('fechaimpr') !!}" id="fechaimpr" name="fechaimpr">
                     </div>
 
                     <div class="mb-3 col">
                         <label for="fechadig" class="form-label">  + Fecha de Publicación Digital</label>
-                        <input class="form-control" type="date" value="{{ old('fechadig')}}" id="fechadig" name="fechadig">
+                        <input class="form-control" type="date" value="{!! old('fechadig') !!}" id="fechadig" name="fechadig">
                     </div>
                 </div>
 
-                <div class="mb-3 ">
-                    <label for="primerpag" class="form-label"> Primera página</label>
-                    <input type="number" value="{{ isset($articulo->primerpag)?$articulo->primerpag:old('primerpag')}}" class="form-control" name="primerpag">
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="primerpag" class="form-label"> Primera página</label>
+                        <input type="number" value="{!! isset($articulo->primerpag)?$articulo->primerpag:old('primerpag') !!}" class="form-control" name="primerpag">
+                    </div>
+
+                    <div class="col mb-3">
+                        <label for="ultimapag" class="form-label"> Última página</label>
+                        <input type="number" value="{!! isset($articulo->ultimapag)?$articulo->ultimapag:old('ultimapag') !!}" class="form-control" name="ultimapag">
+                    </div>
                 </div>
 
-                <div class="mb-3 ">
-                    <label for="ultimapag" class="form-label"> Última página</label>
-                    <input type="number" value="{{ isset($articulo->ultimapag)?$articulo->ultimapag:old('ultimapag')}}" class="form-control" name="ultimapag">
-                </div>
-
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center mb-3 p-3">
                     <input type="submit" value="Registrar" id="registro" class="btn btn-secondary btn-submit">
                 </div>
             </div>

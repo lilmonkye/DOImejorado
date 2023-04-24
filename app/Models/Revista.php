@@ -6,7 +6,7 @@ use App\Casts\CleanHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Casts\StripTags;
+
 
 
 class Revista extends Model

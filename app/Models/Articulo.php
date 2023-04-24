@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Casts\CleanHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
-use App\Casts\HtmlPurifier;
-use Mews\Purifier\Casts\CleanHtml;
+
+
 
 class Articulo extends Model
 {
@@ -26,15 +27,15 @@ class Articulo extends Model
     ];
 
     //SEGURIDAD ANTISCRIPTS
-    protected $cast =   [
-        'titulo'    =>  HTMLPurifier::class,
-        'doi'       =>  HTMLPurifier::class,
-        'url'       =>  HTMLPurifier::class,
-        'fechaimpr' =>  HTMLPurifier::class,
-        'fechadig'  =>  HTMLPurifier::class,
-        'primerpag' =>  HTMLPurifier::class,
-        'ultimapag' =>  HTMLPurifier::class,
-        'abstract'  =>  HTMLPurifier::class,
+    protected $casts =   [
+        'titulo'    =>  CleanHTML::class,
+        'doi'       =>  CleanHTML::class,
+        'url'       =>  CleanHTML::class,
+        'fechaimpr' =>  CleanHTML::class,
+        'fechadig'  =>  CleanHTML::class,
+        'primerpag' =>  CleanHTML::class,
+        'ultimapag' =>  CleanHTML::class,
+        'abstract'  =>  CleanHTML::class,
     ];
 
     /**

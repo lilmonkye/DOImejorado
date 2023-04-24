@@ -90,7 +90,7 @@
                     <input type="number" value="{{ isset($articulo->ultimapag)?$articulo->ultimapag:old('ultimapag')}}" class="form-control" name="ultimapag">
                 </div>
 
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center p-3">
                     <input type="submit" value="Registrar" id="registro" class="btn btn-secondary btn-submit">
                 </div>
             </div>

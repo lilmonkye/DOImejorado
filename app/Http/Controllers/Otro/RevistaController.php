@@ -5,8 +5,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Revista;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use App\Casts\CleanHtml;
+
 
 
 class RevistaController extends Controller
@@ -107,6 +108,7 @@ class RevistaController extends Controller
         $url = route('otro.tablarevista', ['id' => $useract->id]);
         return view('otro.tablarevista',['revistas'=>$revistas,'url'=>$url]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -26,11 +26,13 @@
             <div class="card-body">
                 <h5 class="card-title">Mis Números</h5>
                 <p class="card-text">Registra un DOI para articulos de un número ya registrado.</p>
-                <a href="{{ route('otro.revistaform') }}" class="btn btn-primary">Registrar</a>
+                <a href="{{ route('otro.tablanumeroall') }}" class="btn btn-primary">Registrar</a>
             </div>
         </div>
     </div>
-    <br>
-    <a href="{{ route('otro_dashboard') }}" class="btn btn-secondary">Regresar </a>
+
+    <div class="p-2 mb-3">
+        <a href="{{ route('otro_dashboard') }}" class="btn btn-secondary">Regresar </a>
+    </div>
 </div>
 @endsection
