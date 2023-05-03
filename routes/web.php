@@ -1,13 +1,9 @@
 <?php
 
-use App\Http\Controllers\Otro\RevistaController as OtroRevistaController;
-use App\Http\Controllers\Otro\SolicitarController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Artisan;
-//use App\Http\Controllers\Admin\DashboardController;
-//use App\Http\Controllers\Otro\DashboardController;
-use App\Http\Controllers\RevistaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,21 +34,29 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:otro'])->group(function () {
-    // Rutas protegidas para el rol 'otro'
+    // Rutas protegidas para el rol 'otro' SOLO DASHBOARD
     Route::get('/otro_dashboard', 'Otro\DashboardController@index')->name('otro_dashboard');
     Route::get('/otro/solicitar', 'Otro\DashboardController@solicitar')->name('otro.solicitar');
     Route::get('/otro/tsolicitudes', 'Otro\DashboardController@tsolicitudes')->name('otro.tsolicitudes');
     Route::get('/otro/userdoi', 'Otro\DashboardController@userdoi')->name('otro.userdoi');
+    Route::get('/otro/registros', 'Otro\DashboardController@registros')->name('otro.registros');
+
+});
+
+Route::middleware(['auth', 'role:otro'])->group(function () {
+    Route::get('/otro/trevistastodas', 'Otro\RevistaController@showregistro')->name('otro.trevistasedit');
+    Route::get('/otro/tarticulostodos', 'Otro\ArticuloController@showregistro')->name('otro.tarticulosedit');
+    Route::get('/otro/tnumerostodos', 'Otro\NumeroController@showregistro')->name('otro.tnumerosedit');
+    Route::get('/otro/tcontribuidorstodos', 'Otro\ContribuidorController@showregistro')->name('otro.tcontribuidorsedit');
 
 });
 
 Route::middleware(['auth', 'role:otro'])->group(function () {
     // Rutas protegidas para el rol 'otro'
-    //Route::get('/otro/articuloform', 'Otro\SolicitarController@articuloform')->name('otro.articuloform');
+
     Route::get('/otro/numeroform', 'Otro\SolicitarController@numeroform')->name('otro.numeroform');
     Route::get('/otro_revistaform', 'Otro\RevistaController@index')->name('otro.revistaform');
-    //Route::post('/otro_revista_prueba', 'Otro\SolicitarController@create')->name('otro.revista_prueba');
-    //Route::post('/otro_solicitar_create', 'Otro\SolicitarController@create')->name('otro.solicitar_create');
+
     Route::get('/otro_menuseleccion/{idrevista}', 'Otro\MenuSeleccionController@index')->name('otro.menuseleccion');
     Route::post('/otro_revista_create', 'Otro\RevistaController@store')->name('otro.revista_create');
     Route::get('/otro/articulo/create/{idrevista}','Otro\ArticuloController@create')->name('otro.articulo_create');
@@ -72,10 +76,14 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
     Route::get('otro/tablarevista/{id}','Otro\RevistaController@show')->name('otro.tablarevista');
     Route::get('/otro_menuselecnumero/{idrevista}', 'Otro\MenuselecNumeroController@index')->name('otro.menuselecnumero');
 
-    Route::get('/otro_menuseleccontr/{idrevista}', 'Otro\MenuselecContrController@index')->name('otro.menuseleccontr');
+    Route::get('/otro_menuseleccontr/{idrevista}', 'Otro\MenuSeleccionController@menuseleccontr')->name('otro.menuseleccontr');
     Route::get('otro/tablacontribuidor/{idarticulo}', 'Otro\ContribuidorController@show')->name('otro.tablacontribuidor');
     Route::get('/otro/contribuidor/create/{idarticulo}','Otro\ContribuidorController@create')->name('otro.contribuidor_create');
     Route::post('/otro/contribuidor/store/{idarticulo}','Otro\ContribuidorController@store')->name('otro.contribuidor_store');
+    Route::get('otro/tablacontrcnum/{idnumero}', 'Otro\ContribuidorController@showconnum')->name('otro.tablacontrcnum');
+    Route::get('/otro/contribuidor/createconnum/{idnumero}','Otro\ContribuidorController@createconnumero')->name('otro.contribuidor_createconnum');
+    Route::post('/otro/contribuidor/storeconnum/{idnumero}','Otro\ContribuidorController@storeconnum')->name('otro.contribuidor_storeconnum');
 
+    Route::get('/otor_menuseleccontrnum/{idnumero}', 'Otro\MenuSeleccionController@menuseleccontrnum')->name('otro.menuseleccontrnum');
 });
 

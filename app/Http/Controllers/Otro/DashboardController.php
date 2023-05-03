@@ -20,16 +20,24 @@ class DashboardController extends Controller
     public function index() {
         return view('otro.dashboard');
     }
+
     public function solicitar()
     {
         return view('otro.solicitar');
     }
+
     public function tsolicitudes()
     {
         return view('otro.tsolicitudes');
     }
+
     public function userdoi()
     {
         return view('otro.userdoi');
+    }
+
+    public function registros()
+    {
+        return view('otro.registros');
     }
 }

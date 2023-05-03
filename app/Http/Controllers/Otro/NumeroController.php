@@ -51,7 +51,7 @@ class NumeroController extends Controller
         }else{
 
             $numero = new Numero();
-            $numero->numero = $request->numero;
+            $numero->numero = $request->input('numero');
             $numero->titulo = $request->titulo;
             $numero->doi = $request->doi;
             $numero->url = $request->url;
@@ -101,6 +101,20 @@ class NumeroController extends Controller
         }
         return view('otro.tablanumeroall',['numeros'=>$todoslosnum]);
 
+    }
+
+    public function showregistro()
+    {
+        $idusuario = Auth::user();
+        $revistas = Revista::where('idusuario', $idusuario->id)->get();
+
+        $todoslosnum = collect();
+        foreach($revistas as $revista)
+        {
+            $numeros = Numero::where('idrevista',$revista->id)->get();
+            $todoslosnum = $todoslosnum->concat($numeros);
+        }
+        return view('otro.tnumerosedit',['numeros'=>$todoslosnum]);
     }
 
     /**

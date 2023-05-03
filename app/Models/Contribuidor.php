@@ -39,7 +39,7 @@ class contribuidor extends Model
             'afiliacion'    =>  ['nullable','string','min:2','max:255'],
             'orcid'         =>  ['nullable','regex:/^orcid.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$/i'],
             'nomalternativo'=>  ['nullable','string','min:2','max:80'],
-            'rol'           =>  ['nullable','string','min:6','max:25'],
+            'rol'           =>  ['nullable','string','min:5','max:25'],
 
         ],[
             'apellido'      =>  'El apellido se encuentra vacío.',

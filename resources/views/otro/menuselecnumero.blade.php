@@ -32,23 +32,23 @@
                     </div>
                 </div>
         @endif
-        <div class="d-flex justify-content-center p2">
-            <div class="btn-group btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
-                <br>
+        <div class="d-flex justify-content-center p-2">
+            <div class="btn-group btn-group-vertical p-3 d-grid gap-3 col-6 mx-auto" role="group" aria-label="Basic radio toggle button group">
+
                 <a href="{{ route('otro.tablaarticuloconnum', ['idnumero'=> $idnumero]) }}">
                     <button type="button" class="btn btn-outline-primary"> Articulo </button>
                 </a>
-                <br>
-                <a href="{{-- {{ route('otro.tablaarticulo',['idnumero'=> $idnumero]) }} --}}">
+
+                <a href="{{ route('otro.tablacontrcnum',['idnumero'=> $idnumero]) }}">
                     <button type="button" class="btn btn-outline-primary"> Contribuidor </button>
                 </a>
             </div>
         </div>
-        <div class="d-flex justify-content-end" aria-label="Basic radio toggle button group">
+       {{--  <div class="d-flex justify-content-end" aria-label="Basic radio toggle button group">
             <div class="p-2">
                 <a href="{{ route('otro.solicitar') }}" class="btn btn-dark"> Terminar Registro </a>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 

@@ -15,15 +15,7 @@ class RevistaController extends Controller
     public function __construct() {
         $this->middleware('role:otro');
     }
-    /* public function __construct() {
-        $this->middleware(function ($request, $next) {
-            $user = auth()->user();
-            if ($user->hasRole('administrador') || $user->hasRole('otro') || $user->hasRole('revisor')) {
-                return $next($request);
-            }
-            abort(403, 'No tiene permiso para acceder a esta página.');
-        });
-    } */
+
     /**
      * Display a listing of the resource.
      *
@@ -109,6 +101,15 @@ class RevistaController extends Controller
         return view('otro.tablarevista',['revistas'=>$revistas,'url'=>$url]);
     }
 
+    public function showregistro()
+    {
+        $useract = Auth::user();
+
+        $revistas = Revista::where('idusuario',$useract->id)->get();
+
+        return view('otro.trevistasedit',['revistas'=>$revistas]);
+
+    }
 
     /**
      * Show the form for editing the specified resource.

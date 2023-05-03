@@ -44,18 +44,19 @@
     </div>
 </div>
 
-    <script>
-        @if(Session::has('msg'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "timeOut": "3000",
-                "extendedTimeOut": "1000"
-            }
-            toastr.success("{{ Session::get('msg') }}");
-        @endif
-    </script>
+
+<script>
+    @if(Session::has('msg'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000"
+        }
+        toastr.success("{{ Session::get('msg') }}");
+    @endif
+</script>
 
 
 @endsection

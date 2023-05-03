@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Revista;
 use App\Models\Articulo;
 use App\Models\Numero;
+use Illuminate\Support\Facades\Auth;
 
 class ArticuloController extends Controller
 {
@@ -45,6 +46,7 @@ class ArticuloController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //GUARDA EL REGISTRO DEL ARTICULO ASOCIADO A UNA REVISTA
     public function store(Request $request,$idrevista)
     {
         $validator = Articulo::validator($request->all());
@@ -53,8 +55,6 @@ class ArticuloController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }else{
 
-            $revista = Revista::findOrFail($idrevista);
-            // guardar el artículo falta pasar el id de la revista
             $articulo = new Articulo();
             $articulo->titulo = $request->input('titulo');
             $articulo->doi = $request->input('doi');
@@ -79,6 +79,7 @@ class ArticuloController extends Controller
 
     }
 
+    //GUARDA EL REGISTRO DEL ARTICULO ASOCIADO A UN NUMERO
     public function storeconnumero(Request $request,$idnumero)
     {
         $validator = Articulo::validator($request->all());
@@ -87,7 +88,7 @@ class ArticuloController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }else{
 
-            // guardar el artículo falta pasar el id de la revista
+
             $articulo = new Articulo();
             $articulo->titulo = $request->input('titulo');
             $articulo->doi = $request->input('doi');
@@ -107,7 +108,8 @@ class ArticuloController extends Controller
             session()->flash('msg', $msg);
             session()->flash('alert-type', $alertType);
 
-            return redirect()->route('otro.contribuidorform');
+            return redirect()->route('otro.menuseleccontrnum',['idnumero'=> $idnumero]);
+            //falta crear este menu
         }
 
     }
@@ -120,16 +122,36 @@ class ArticuloController extends Controller
      */
     public function show($idrevista)
     {
-        //
+        //CON EL ID DE LA REVISTA MOSTRAMOS LOS ARTICULOS DE LA REVISTA
         $articulos = Articulo::where('idrevista',$idrevista)->get();
         return view('otro.tablaarticulo',['articulos'=> $articulos,'idrevista'=>$idrevista]);
     }
 
     public function showconnumero($idnumero)
     {
-
+        //CON EL ID DEL NUMERO ACTUAL MOSTRAMOS LOS ARTICULOS DEL NUMERO
         $articulos = Articulo::where('idnumero',$idnumero)->get();
         return view('otro.tablaarticuloconnum',['articulos'=>$articulos, 'idnumero'=>$idnumero]);
+    }
+
+    public function showregistro()
+    {
+        //SE OBTIENE EL USUARIO ACTUAL
+        $idusuario = Auth::user();
+        //SE OBTIENEN LAS REVISTAS DEL USUARIO
+        $revistas = Revista::where('idusuario', $idusuario->id)->get();
+        //SE OBTIENEN TODOS LOS NUMEROS DE TODAS LAS REVISTAS DEL USUARIO
+        $numeros = Numero::whereIn('idrevista', $revistas->pluck('id'))->get();
+
+        //SE OBTIENEN LOS ARTICULOS DE LAS REVISTAS Y LOS NUMEROS
+        $articulosRevistas = Articulo::whereIn('idrevista', $revistas->pluck('id'))->get();
+        $articulosNumeros = Articulo::whereIn('idnumero', $numeros->pluck('id'))->get();
+
+        //SE CONCATENAN TODOS LOS ARTICULOS
+        $todoslosart = $articulosRevistas->concat($articulosNumeros);
+
+        //SE ENVIA A LA VISTA TODOS LOS ARTICULOS
+        return view('otro.tarticulosedit',['articulos'=>$todoslosart]);
     }
 
     /**

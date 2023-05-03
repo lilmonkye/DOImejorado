@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Mis Registro</h5>
                     <p class="card-text">Aquí podras ver tus revistas, artículos y números registrados.Tambien podras realizar correcciones de los mismos.</p>
-                    <a href="#" class="btn btn-primary">Ver</a>
+                    <a href="{{ route('otro.registros') }}" class="btn btn-primary">Ver</a>
                 </div>
             </div>
             <div class="card" style="width: 20rem;">

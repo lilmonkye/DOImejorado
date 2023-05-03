@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<h5>con numero x</h5>
 
 <div class="container justify-content-md-center" style="background-color: rgb(215, 228, 247)">
-    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Artículos Registrados</h2>
+    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Artículos Registrados del Número</h2>
     <div style="d-flex justify-content-around; flex-direction:column; justify-content:center; align-items:center" class="col-12 p-3">
         {{-- <input type="hidden" name="idrevista" value="{{ $revista->id }}" class="form-control"> --}}
         <div class="d-flex justify-content-between table-responsive">
@@ -30,7 +29,7 @@
                             <td>{{ $articulo->url }}</td>
                             <td>{{ $articulo->fechaimpr }}</td>
                             <td>{{ $articulo->fechadig }}</td>
-                            <td>{{ $articulo->primerapag }}</td>
+                            <td>{{ $articulo->primerpag }}</td>
                             <td>{{ $articulo->ultimapag }}</td>
                             <td>{{ $articulo->abstract }}</td>
                         </tr>
@@ -44,6 +43,8 @@
     <div class="d-flex justify-content-center">
         <a href="{{ route('otro.articulo_createconnumero',['idnumero'=>$idnumero]) }} " class="btn btn-secondary" style="margin-left: 40px">Nuevo Artículo </a>
     </div>
-    <a href="{{ route('otro_dashboard') }}" class="btn btn-secondary" style="margin-left: 40px">Regresar </a>
+    <div class="d-flex justify-content-end p-3">
+        <a href="{{ route('otro.solicitar') }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
+    </div>
 </div>
 @endsection

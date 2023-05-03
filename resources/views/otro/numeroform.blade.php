@@ -44,7 +44,7 @@
 
                 <div class="mb-3 ">
                     <label for="numero" class="form-label"> + Número</label>
-                    <input type="number" value="{!! isset($numero->numero)?$articulo->numero:old('numero')!!}" class="form-control" name="numero">
+                    <input type="text" value="{!! isset($numero->numero)?$articulo->numero:old('numero')!!}" class="form-control" name="numero">
                 </div>
 
                 <div class="mb-3 ">

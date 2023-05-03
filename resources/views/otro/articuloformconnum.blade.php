@@ -80,14 +80,16 @@
                     </div>
                 </div>
 
-                <div class="mb-3 ">
-                    <label for="primerpag" class="form-label"> Primera página</label>
-                    <input type="number" value="{{ isset($articulo->primerpag)?$articulo->primerpag:old('primerpag')}}" class="form-control" name="primerpag">
-                </div>
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label for="primerpag" class="form-label"> Primera página</label>
+                        <input type="number" value="{{ isset($articulo->primerpag)?$articulo->primerpag:old('primerpag')}}" class="form-control" name="primerpag">
+                    </div>
 
-                <div class="mb-3 ">
-                    <label for="ultimapag" class="form-label"> Última página</label>
-                    <input type="number" value="{{ isset($articulo->ultimapag)?$articulo->ultimapag:old('ultimapag')}}" class="form-control" name="ultimapag">
+                    <div class="mb-3 col">
+                        <label for="ultimapag" class="form-label"> Última página</label>
+                        <input type="number" value="{{ isset($articulo->ultimapag)?$articulo->ultimapag:old('ultimapag')}}" class="form-control" name="ultimapag">
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-center p-3">

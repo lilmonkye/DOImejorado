@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
+@section('head')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@endsection
+
 @section('content')
 
-
 <div class="container justify-content-md-center" style="background-color: rgb(215, 228, 247)">
-    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Artículos Registrados</h2>
-    <div style="d-flex justify-content-around; flex-direction:column; justify-content:center; align-items:center" class="col-12 p-3">
-        {{-- <input type="hidden" name="idrevista" value="{{ $revista->id }}" class="form-control"> --}}
-        <div class="d-flex justify-content-between table-responsive">
+    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Articulos Registradas</h2>
+    <div style="d-flex justify-content-around; flex-direction:column; justify-content:center; align-items:center" class="col-12 p-5">
+        <div class=" d-flex justify-content-between table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
                     <th scope="col"></th>
@@ -33,6 +35,9 @@
                             <td>{{ $articulo->primerpag }}</td>
                             <td>{{ $articulo->ultimapag }}</td>
                             <td>{{ $articulo->abstract }}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning">Editar</button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -41,9 +46,8 @@
         </div>
 
     </div>
-    <div class="d-flex justify-content-center p-3">
-        <a href="{{ route('otro.articulo_create',['idrevista'=>$idrevista]) }} " class="btn btn-secondary" style="margin-left: 40px">Nuevo Artículo </a>
+    <div class="p-3">
+        <a href="{{ route('otro.registros') }}" class="btn btn-secondary" style="margin-left: 40px">Regresar </a>
     </div>
-
 </div>
 @endsection
