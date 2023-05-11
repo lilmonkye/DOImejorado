@@ -33,9 +33,16 @@ class MenuSeleccionController extends Controller
     }
 
     //menu contribuidor de un articulo de numero
-    public function menuseleccontrnum($idnumero)
+    /* public function menuseleccontrnum($idnumero)
     {
         $articulo = Articulo::where('idnumero',$idnumero)->orderBy('created_at', 'desc')->first();
         return view('otro.menuseleccontrnum',['idarticulo'=> $articulo->id]);
-    }
+    } */
+
+    public function menuseleccontrnum($idnumero)
+{
+    $articulo = Articulo::where('idnumero',$idnumero)->orderBy('created_at', 'desc')->first();
+    return view('otro.menuseleccontrnum', ['idarticulo' => $articulo->id]);
+}
+
 }

@@ -33,12 +33,12 @@
                 </div>
         @endif
         <div class="d-flex justify-content-center p-2">
-            <div class="btn-group btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
-                <br>
-                <a href="{{ route('otro.tablacontribuidor', ['idarticulo'=> $idarticulo]) }}">
-                    <button type="button" class="btn btn-outline-primary"> Contribuidor </button>
+            <div class="btn-group btn-group-vertical p-3" role="group" aria-label="Basic radio toggle button group">
+                {{-- <a href="{{ route('otro.tablacontrartcnum', ['idarticulo'=> $idarticulo]) }}" class="btn btn-outline-primary"> Contribuidor </a> --}}
+                <a href="{{ route('otro.tablacontrartcnum', ['idarticulo'=> $idarticulo]) }}">
+                    <button type="button" class="btn btn-outline-primary">Contribuidor</button>
                 </a>
-                <br>
+
             </div>
         </div>
     </div>

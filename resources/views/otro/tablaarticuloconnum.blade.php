@@ -43,8 +43,6 @@
     <div class="d-flex justify-content-center">
         <a href="{{ route('otro.articulo_createconnumero',['idnumero'=>$idnumero]) }} " class="btn btn-secondary" style="margin-left: 40px">Nuevo Artículo </a>
     </div>
-    <div class="d-flex justify-content-end p-3">
-        <a href="{{ route('otro.solicitar') }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
-    </div>
+
 </div>
 @endsection

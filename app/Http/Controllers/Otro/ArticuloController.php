@@ -24,6 +24,7 @@ class ArticuloController extends Controller
         //
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -163,6 +164,8 @@ class ArticuloController extends Controller
     public function edit($id)
     {
         //
+        $articulo = Articulo::find($id);
+        return view('otro.articuloformEdit', compact('articulo'));
     }
 
     /**
@@ -174,7 +177,34 @@ class ArticuloController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Obtener el artículo correspondiente al ID recibido en la ruta
+        $articulo = Articulo::findOrFail($id);
+        $validator = Articulo::validator($request->all());
+
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+            // Actualizar los atributos del modelo a partir de los valores recibidos del formulario
+            $articulo->titulo = $request->input('titulo');
+            $articulo->url = $request->input('url');
+            $articulo->fechaimpr = $request->input('fechaimpr');
+            $articulo->fechadig = $request->input('fechadig');
+            $articulo->primerpag = $request->input('primerpag');
+            $articulo->ultimapag = $request->input('ultimapag');
+
+            // Guardar en la base de datos
+            $articulo->save();
+
+            $msg = 'Articulo actualizado, en espera de revisión';
+            $alertType = 'success';
+            session()->flash('msg', $msg);
+            session()->flash('alert-type', $alertType);
+
+            // Redireccionar al usuario a la vista de detalles del artículo actualizado
+            return redirect()->route('otro.tarticulosedit');
+        }
+
     }
 
     /**

@@ -120,6 +120,8 @@ class RevistaController extends Controller
     public function edit($id)
     {
         //
+        $revista = Revista::findOrFail($id);
+        return view ('otro.revistaformEdit',compact('revista'));
     }
 
     /**
@@ -131,7 +133,33 @@ class RevistaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Obtener el artículo correspondiente al ID recibido en la ruta
+        $revista = Revista::findOrFail($id);
+        $validator = Revista::validator($request->all());
+
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+            // Actualizar los atributos del modelo a partir de los valores recibidos del formulario
+            $revista->titulo = $request->input('titulo');
+            $revista->tituloabr = $request->input('tituloabr');
+            $revista->url = $request->input('url');
+            $revista->issnimp = $request->input('issnimp');
+            $revista->issnelec = $request->input('issnelec');
+            $revista->idioma = $request->input('idioma');
+
+            // Guardar en la base de datos
+            $revista->save();
+
+            $msg = 'Articulo actualizado, en espera de revisión';
+            $alertType = 'success';
+            session()->flash('msg', $msg);
+            session()->flash('alert-type', $alertType);
+
+            // Redireccionar al usuario a la vista de detalles del artículo actualizado
+            return redirect()->route('otro.trevistasedit');
+        }
     }
 
     /**
@@ -145,23 +173,12 @@ class RevistaController extends Controller
         //
     }
 
-    /* Obtener usuario actual
-    function getUsuario(){
+    public function agregarArt()
+    {
         $useract = Auth::user();
-        return $useract;
-    } */
 
-     /* function prueba(Request $request){
-        $ticket = new Solicitud();
-        $ticket->idusuario=1;
-        $ticket->idrevista=1;
-        $ticket->estatus="inicio";
-        var_dump($ticket);
-        var_dump($ticket->status);
-        $ticket->save();
-        die();
-
-    } */
+        $revista = Revista::where('idusuario',$useract->id)->get();
+    }
 
 
 }

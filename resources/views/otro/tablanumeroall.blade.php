@@ -39,6 +39,7 @@
                     <th scope="col">DOI del Volumen</th>
                     <th scope="col">URL del Volumen</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </thead>
                 <tbody>
                     @foreach ($numeros as $numero)
@@ -54,6 +55,12 @@
                             <td>{{ $numero->volumen }}</td>
                             <td>{{ $numero->volumendoi }}</td>
                             <td>{{ $numero->volumenurl }}</td>
+                            <td>
+                                <button type="button" class="btn btn-success">Artículo</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-info">Contribuidor</button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

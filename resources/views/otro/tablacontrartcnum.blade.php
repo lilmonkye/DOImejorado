@@ -36,10 +36,17 @@
 
     </div>
     <div class="d-flex justify-content-center p-3">
-        <a href="{{ route('otro.contribuidor_create',['idarticulo'=>$idarticulo]) }} " class="btn btn-secondary" style="margin-left: 40px">Nuevo Contribuidor </a>
+
+
+        <a href="{{ route('otro.contribuidorartcnum_create',['idarticulo'=>$idarticulo]) }} " class="btn btn-secondary" style="margin-left: 40px">Nuevo Contribuidor </a>
     </div>
-    <div class="d-flex justify-content-end p-3">
-        <a href="{{ route('otro.solicitar') }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
+    <div class="row">
+        <div class="d-flex justify-content col p-3">
+            <a href="{{ route('otro.tablaarticuloconnum',['idnumero'=>$idnumero]) }} " class="btn btn-secondary" style="margin-left: 40px">Artículo del Número </a>
+        </div>
+        <div class="d-flex justify-content-end col p-3">
+            <a href="{{ route('otro.solicitar') }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
+        </div>
     </div>
 </div>
 @endsection

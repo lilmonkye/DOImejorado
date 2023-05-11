@@ -72,4 +72,8 @@ class Numero extends Model
     public function contribuidores(){
         return $this->hasMany(contribuidor::class);
     }
+
+    public function articulos(){
+        return $this->hasMany(Articulo::class);
+    }
 }

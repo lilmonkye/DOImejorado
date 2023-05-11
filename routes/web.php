@@ -43,16 +43,30 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
 
 });
 
+//REGISTROS
 Route::middleware(['auth', 'role:otro'])->group(function () {
+    //EDITAR INFORMACIÓN
+    //Tablas edit
     Route::get('/otro/trevistastodas', 'Otro\RevistaController@showregistro')->name('otro.trevistasedit');
     Route::get('/otro/tarticulostodos', 'Otro\ArticuloController@showregistro')->name('otro.tarticulosedit');
     Route::get('/otro/tnumerostodos', 'Otro\NumeroController@showregistro')->name('otro.tnumerosedit');
     Route::get('/otro/tcontribuidorstodos', 'Otro\ContribuidorController@showregistro')->name('otro.tcontribuidorsedit');
+    //Formularios edit
+    Route::get('/otro/articuloEdit/{id}', 'Otro\ArticuloController@edit')->name('otro.articuloEdit');
+    Route::get('/otro/revistaEdit/{id}', 'Otro\RevistaController@edit')->name('otro.revistaEdit');
+    Route::get('/otro/numeroEdit/{id}', 'Otro\NumeroController@edit')->name('otro.numeroEdit');
+    Route::get('/otro/contribuidorEdit/{id}', 'Otro\ContribuidorController@edit')->name('otro.contribuidorEdit');
+    //ActualizarInformación
+    Route::post('/otro/articuloUpdate/{id}', 'Otro\ArticuloController@update')->name('otro.articuloUpdate');
+    Route::post('/otro/revistaUpdate/{id}', 'Otro\RevistaController@update')->name('otro.revistaUpdate');
+    Route::post('/otro/numeroUpdate/{id}', 'Otro\NumeroController@update')->name('otro.numeroUpdate');
+    Route::post('/otro/contribuidorUpdate/{id}', 'Otro\ContribuidorController@update')->name('otro.contribuidorUpdate');
 
 });
 
 Route::middleware(['auth', 'role:otro'])->group(function () {
     // Rutas protegidas para el rol 'otro'
+    // REGISTAR DE INFORMACIÓN
 
     Route::get('/otro/numeroform', 'Otro\SolicitarController@numeroform')->name('otro.numeroform');
     Route::get('/otro_revistaform', 'Otro\RevistaController@index')->name('otro.revistaform');
@@ -83,7 +97,18 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
     Route::get('otro/tablacontrcnum/{idnumero}', 'Otro\ContribuidorController@showconnum')->name('otro.tablacontrcnum');
     Route::get('/otro/contribuidor/createconnum/{idnumero}','Otro\ContribuidorController@createconnumero')->name('otro.contribuidor_createconnum');
     Route::post('/otro/contribuidor/storeconnum/{idnumero}','Otro\ContribuidorController@storeconnum')->name('otro.contribuidor_storeconnum');
+    Route::get('/otro/contribuidorartcnum/create/{idarticulo}','Otro\ContribuidorController@createartcnum')->name('otro.contribuidorartcnum_create');
+    Route::post('/otro/contribuidorartcnum/store/{idarticulo}','Otro\ContribuidorController@storeartcnum')->name('otro.contribuidorartcnum_store');
 
-    Route::get('/otor_menuseleccontrnum/{idnumero}', 'Otro\MenuSeleccionController@menuseleccontrnum')->name('otro.menuseleccontrnum');
+    Route::get('otro/tablacontrartcnum/{idarticulo}', 'Otro\ContribuidorController@showcontrnumart')->name('otro.tablacontrartcnum');
+
+
+    Route::get('/otro_menuseleccontrnum/{idnumero}', 'Otro\MenuSeleccionController@menuseleccontrnum')->name('otro.menuseleccontrnum');
 });
 
+Route::middleware(['auth','role:otro'])->group(function(){
+    //CREAR SOLICITUDES
+
+    Route::get('otro/solicitudRevista/{idrevista}','Otro\SolicitarController@solicitarRevista')->name('otro.solicitarRevista');
+
+});

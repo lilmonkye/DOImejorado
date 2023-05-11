@@ -34,7 +34,7 @@
                             <td>{{ $revista->issnelec }}</td>
                             <td>{{ $revista->idioma }}</td>
                             <td>
-                                <button type="button" class="btn btn-warning">Editar</button>
+                                <a href="{{ route('otro.revistaEdit',$revista->id) }}" type="button" class="btn btn-warning">Editar</a>
                             </td>
                         </tr>
                     @endforeach

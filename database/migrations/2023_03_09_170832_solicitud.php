@@ -19,11 +19,17 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('idusuario')->nullable();
             $table->unsignedBigInteger('idrevista')->nullable();
+            $table->unsignedBigInteger('idnumero')->nullable();
+            $table->unsignedBigInteger('idarticulo')->nullable();
+
             $table->string('estatus');
             $table->string('doicreado')->nullable();
             //relaciones
             $table->foreign('idusuario')->references('id')->on('users')->onDelete("cascade");
             $table->foreign('idrevista')->references('id')->on('revistas')->onDelete("cascade");
+            $table->foreign('idnumero')->references('id')->on('numeros')->onDelete("cascade");
+            $table->foreign('idarticulo')->references('id')->on('articulos')->onDelete("cascade");
+
 
 
         });

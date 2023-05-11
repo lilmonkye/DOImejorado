@@ -46,7 +46,7 @@
         </div>
         <div class="d-flex justify-content-end" aria-label="Basic radio toggle button group">
             <div class="p-2">
-                <a href="{{ route('otro.solicitar') }}" class="btn btn-dark"> Terminar Registro </a>
+                <a href="{{ route('otro.solicitarRevista',['idrevista'=>$idrevista]) }}" class="btn btn-dark"> Terminar Registro </a>
             </div>
         </div>
     </div>

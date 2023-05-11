@@ -9,6 +9,8 @@ use App\Models\Contribuidor;
 use App\Models\Numero;
 use Illuminate\Http\Request;
 use App\Models\Revista;
+use Dotenv\Validator;
+use PhpParser\Node\Stmt\Return_;
 
 class ContribuidorController extends Controller
 {
@@ -32,6 +34,13 @@ class ContribuidorController extends Controller
         //contribuidor de articulo
         $articulo = Articulo::findOrFail($idarticulo);
         return view('otro.contribuidorform', compact('articulo','idarticulo'));
+    }
+
+    public function createartcnum($idarticulo)
+    {
+        //contribuidor de articulo
+        $articulo = Articulo::findOrFail($idarticulo);
+        return view('otro.contribuidorartcnumform', compact('articulo','idarticulo'));
     }
 
     public function createconnumero($idnumero)
@@ -74,6 +83,37 @@ class ContribuidorController extends Controller
 
 
             return redirect()->route('otro.tablacontribuidor', ['idarticulo'=> $idarticulo]);
+        }
+
+    }
+
+    public function storeartcnum(Request $request,$idarticulo)
+    {
+        //contribuidor de articulo
+        $validator = Contribuidor::validator($request->all());
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+            $contribuidor = new Contribuidor();
+            $contribuidor->idarticulo = $idarticulo;
+            $contribuidor->nombre = $request->input('nombre');
+            $contribuidor->apellido = $request->input('apellido');
+            $contribuidor->afiliacion = $request->input('afiliacion');
+            $contribuidor->orcidid = $request->input('orcidid');
+            $contribuidor->nomalternativo = $request->input('nomalternativo');
+            $contribuidor->rol = $request->rol;
+
+            $contribuidor->save();
+
+            $msg = 'Contribuidor guardado correctamente';
+            $alertType = 'success';
+            session()->flash('msg',$msg);
+            session()->flash('alert-type',$alertType);
+
+
+
+            return redirect()->route('otro.tablacontrartcnum', ['idarticulo'=> $idarticulo]);
         }
 
     }
@@ -130,6 +170,18 @@ class ContribuidorController extends Controller
         return view('otro.tablacontrcnum',['contribuidors'=>$contribuidors,'idnumero'=>$idnumero]);
     }
 
+    public function showcontrnumart($idarticulo)
+    {
+        //contribuidor del articulo del numero
+        $contribuidors = contribuidor::where('idarticulo',$idarticulo)->get();
+        //numero en el que se encuentra el articulo que contiene al contribuidor
+        $idnumero = Articulo::where('id',$idarticulo)->value('idnumero');
+
+        /* dd($idarticulo); */
+
+        return view('otro.tablacontrartcnum',['contribuidors'=>$contribuidors,'idnumero'=>$idnumero,'idarticulo'=>$idarticulo]);
+    }
+
     public function showregistro()
     {
         //SE OBTIENE EL USUARIO ACTUAL
@@ -163,6 +215,8 @@ class ContribuidorController extends Controller
     public function edit($id)
     {
         //
+        $contribuidor = Contribuidor::find($id);
+        return view('otro.contribuidorformEdit', compact('contribuidor'));
     }
 
     /**
@@ -175,6 +229,29 @@ class ContribuidorController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $contribuidor = Contribuidor::find($id);
+        $validator = Contribuidor::validator($request->all());
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+            $contribuidor->nombre = $request->input('nombre');
+            $contribuidor->apellido = $request->input('apellido');
+            $contribuidor->afiliacion = $request->input('afiliacion');
+            $contribuidor->orcidid = $request->input('orcidid');
+            $contribuidor->nomalternativo = $request->input('nomalternativo');
+            $contribuidor->rol = $request->input('rol');
+
+            $contribuidor->save();
+
+            $msg = 'Contribuidor actualizado en espera de revisión';
+            $alertType = 'success';
+            session()->flash('msg',$msg);
+            session()->flash('alertType',$alertType);
+
+            return redirect()->route('otro.tcontribuidorsedit');
+        }
+
+
     }
 
     /**

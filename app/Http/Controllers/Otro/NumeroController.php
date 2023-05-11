@@ -125,7 +125,8 @@ class NumeroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $numero = Numero::findOrFail($id);
+        return view('otro.numeroformEdit',compact('numero'));
     }
 
     /**
@@ -138,6 +139,34 @@ class NumeroController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $numero = Numero::findOrFail($id);
+        $validator = Numero::validator($request->all());
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+             // Actualizar los atributos del modelo a partir de los valores recibidos del formulario
+             $numero->numero = $request->input('numero');
+             $numero->titulo = $request->input('titulo');
+             $numero->url = $request->input('url');
+             $numero->fechaimpr = $request->input('fechaimpr');
+             $numero->fechadig = $request->input('fechadig');
+             $numero->numespecial = $request->input('numespecial');
+             $numero->volumen = $request->input('volumen');
+             $numero->volumenurl = $request->input('volumenurl');
+
+
+             // Guardar en la base de datos
+             $numero->save();
+
+             $msg = 'Articulo actualizado, en espera de revisión';
+             $alertType = 'success';
+             session()->flash('msg', $msg);
+             session()->flash('alert-type', $alertType);
+
+             // Redireccionar al usuario a la vista de detalles del artículo actualizado
+             return redirect()->route('otro.tnumerosedit');
+        }
     }
 
     /**

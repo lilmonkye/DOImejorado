@@ -80,6 +80,11 @@ class Articulo extends Model
         return $this->belongsTo(Revista::class);
     }
 
+    public function numero()
+    {
+        return $this->belongsTo(Numero::class);
+    }
+
     public function contribuidores(){
         return $this->hasMany(contribuidor::class);
     }

@@ -32,7 +32,7 @@
                             <td>{{ $contribuidor->nomalternatico }}</td>
                             <td>{{ $contribuidor->rol }}</td>
                             <td>
-                                <button type="button" class="btn btn-warning">Editar</button>
+                                <a href="{{ route('otro.contribuidorEdit',$contribuidor->id) }}" type="button" class="btn btn-warning">Editar</a>
                             </td>
                         </tr>
                     @endforeach
