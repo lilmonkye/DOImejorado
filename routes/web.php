@@ -110,5 +110,7 @@ Route::middleware(['auth','role:otro'])->group(function(){
     //CREAR SOLICITUDES
 
     Route::get('otro/solicitudRevista/{idrevista}','Otro\SolicitarController@solicitarRevista')->name('otro.solicitarRevista');
+    Route::get('otro/solicitudArticuloR/{idarticulo}','Otro\SolicitarController@solicitarArticulodR')->name('otro.solicitarArticulodR');
+    Route::get('otro/solicitarNumerodR/{idnumero}','Otro\SolicitarController@solicitarNumerodR')->name('otro.solicitarNumerodR');
 
 });

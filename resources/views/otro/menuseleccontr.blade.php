@@ -34,10 +34,12 @@
         @endif
         <div class="d-flex justify-content-center p-2">
             <div class="btn-group btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
+                {{ $idarticulo }}
                 <br>
                 <a href="{{ route('otro.tablacontribuidor', ['idarticulo'=> $idarticulo]) }}">
                     <button type="button" class="btn btn-outline-primary"> Contribuidor </button>
                 </a>
+                {{ $idarticulo }}
                 <br>
             </div>
         </div>

@@ -38,29 +38,45 @@ class SolicitarController extends Controller
 
     }
 
-    //solicitar articulo de numero
-    protected function solicitarArticulodN($idarticulo)
+    //solicitar articulo de revista
+    protected function solicitarArticulodR($idarticulo)
     {
         $useract = auth()->user()->id;
 
-        $idnumero = Articulo::where('idarticulo',$idarticulo)->value('idnumero');
+        $idrevista = Articulo::where('id',$idarticulo)->value('idrevista');
 
-        $idrevista = Numero::where('idnumero',$idnumero)->value('idrevista');
 
         $solicitud = new Solicitud();
         $solicitud->idusuario = $useract;
         $solicitud->idrevista = $idrevista;
-        $solicitud->idnumero = $idnumero;
         $solicitud->idarticulo = $idarticulo;
-        $solicitud->estatus="inicio";
+        $solicitud->estatus="pendiente";
         $solicitud->save();
-        return redirect()->back()->with('success', 'Solicitud creada correctamente');
+        return redirect()->route('otro.solicitar');
 
 
     }
 
-    //solicitar numero y revista
-    protected function solicitarNumerodR($idrevista)
+    //solicitar numero
+    protected function solicitarNumerodR($idnumero)
+    {
+        $useract = Auth::user();
+
+        $idrevista = Numero::where('id',$idnumero)->value('idrevista');
+
+        $solicitud = new Solicitud();
+        $solicitud->idusuario = $useract;
+        $solicitud->idrevista = $idrevista;
+        $solicitud->idnumero  = $idnumero;
+        $solicitud->estatus="inicio";
+        $solicitud->save();
+        return redirect()->route('otro.solicitar');
+
+
+    }
+
+    //solicitar numero
+    protected function solicitarArticulodN($idrevista)
     {
         $useract = Auth::user();
 
@@ -73,11 +89,10 @@ class SolicitarController extends Controller
         $solicitud->idrevista = $revista->id;
         $solicitud->estatus="inicio";
         $solicitud->save();
-        return redirect()->back()->with('success', 'Solicitud creada correctamente');
+        return redirect()->route('otro.solicitar');
 
 
     }
-
 
 
 

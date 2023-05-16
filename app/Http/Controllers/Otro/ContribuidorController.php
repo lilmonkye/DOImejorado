@@ -89,7 +89,7 @@ class ContribuidorController extends Controller
 
     public function storeartcnum(Request $request,$idarticulo)
     {
-        //contribuidor de articulo
+        //contribuidor de articulo denumero
         $validator = Contribuidor::validator($request->all());
         if ($validator->fails())
         {
@@ -103,6 +103,7 @@ class ContribuidorController extends Controller
             $contribuidor->orcidid = $request->input('orcidid');
             $contribuidor->nomalternativo = $request->input('nomalternativo');
             $contribuidor->rol = $request->rol;
+           // $idnumero = Articulo::where('id',$idarticulo)->value('idnumero');
 
             $contribuidor->save();
 
@@ -120,7 +121,7 @@ class ContribuidorController extends Controller
 
     public function storeconnum(Request $request,$idnumero)
     {
-        //contribuidor de articulo
+        //contribuidor de numero
         $validator = Contribuidor::validator($request->all());
         if ($validator->fails())
         {
@@ -145,7 +146,7 @@ class ContribuidorController extends Controller
             $numero = Numero::find($idnumero);
             $idrevista = $numero->idrevista;
 
-            return redirect()->route('otro.tablaarticuloconnum', ['idnumero'=> $idnumero]);
+            return redirect()->route('otro.tablacontrcnum', ['idnumero'=> $idnumero]);
         }
 
     }
@@ -159,8 +160,9 @@ class ContribuidorController extends Controller
     public function show($idarticulo)
     {
         //contribuidor de articulo
+        $idrevista = Articulo::where('id',$idarticulo)->value('idrevista');
         $contribuidors = contribuidor::where('idarticulo',$idarticulo)->get();
-        return view('otro.tablacontribuidor',['contribuidors'=>$contribuidors,'idarticulo'=>$idarticulo]);
+        return view('otro.tablacontribuidor',['contribuidors'=>$contribuidors,'idarticulo'=>$idarticulo,'idrevista'=>$idrevista]);
     }
 
     public function showconnum($idnumero)

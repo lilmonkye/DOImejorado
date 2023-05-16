@@ -39,7 +39,7 @@
         <a href="{{ route('otro.contribuidor_create',['idarticulo'=>$idarticulo]) }} " class="btn btn-secondary" style="margin-left: 40px">Nuevo Contribuidor </a>
     </div>
     <div class="d-flex justify-content-end p-3">
-        <a href="{{ route('otro.solicitar') }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
+        <a href="{{ route('otro.solicitarArticulodR',['idarticulo'=>$idarticulo]) }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
     </div>
 </div>
 @endsection

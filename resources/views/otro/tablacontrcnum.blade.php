@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container justify-content-md-center" style="background-color: rgb(215, 228, 247)">
-    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Contribuidores del Artículo</h2>
+    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Contribuidores del Número</h2>
     <div style="d-flex justify-content-around; flex-direction:column; justify-content:center; align-items:center" class="col-12 p-5">
         <div class=" d-flex justify-content-between table-responsive">
             <table class="table table-hover table-light">
@@ -39,7 +39,7 @@
         <a href="{{ route('otro.contribuidor_createconnum',['idnumero'=>$idnumero]) }} " class="btn btn-secondary" style="margin-left: 40px">Nuevo Contribuidor </a>
     </div>
     <div class="d-flex justify-content-end p-3">
-        <a href="{{ route('otro.solicitar') }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
+        <a href="{{ route('otro.solicitarNumerodR',['idnumero'=>$idnumero]) }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
     </div>
 </div>
 @endsection
