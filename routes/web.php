@@ -64,6 +64,13 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
 
 });
 
+//AGREGAR ARTICULO, NUMERO, CONTRIBUIDOR (MIS REVISTAS Y MIS NUMEROS)
+Route::middleware(['auth','role:otro'])->group(function(){
+    //AÑADIR ARTICULO A UNA REVISTA EXISTENTE
+    Route::get('/otro/aniadirArticulo/{idrevista}', 'Otro\RevistaController@aniadirArticulo')->name('otro.aniadirArticulo');
+    Route::get('/otro/aniadirNumero/{idrevista}', 'Otro\RevistaController@aniadirNumero')->name('otro.aniadirNumero');
+});
+
 Route::middleware(['auth', 'role:otro'])->group(function () {
     // Rutas protegidas para el rol 'otro'
     // REGISTAR DE INFORMACIÓN

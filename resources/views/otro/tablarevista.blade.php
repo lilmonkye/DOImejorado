@@ -31,10 +31,11 @@
                             <td>{{ $revista->issnelec }}</td>
                             <td>{{ $revista->idioma }}</td>
                             <td>
-                                <button type="button" class="btn btn-success">Artículo</button>
+                                <a href="{{ route('otro.aniadirArticulo',$revista->id) }}" class="btn btn-success" type="button" class="btn btn-warning">Articulo</a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-info">Número</button>
+                                <a href="{{ route('otro.aniadirNumero',$revista->id) }}" class="btn btn-info" type="button" class="btn btn-warning">Numero</a>
+
                             </td>
                         </tr>
                     @endforeach

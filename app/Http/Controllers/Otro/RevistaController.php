@@ -162,6 +162,20 @@ class RevistaController extends Controller
         }
     }
 
+    public function aniadirArticulo($id)
+    {
+        //
+        $idrevista = Revista::findOrFail($id);
+        return redirect()->route('otro.articulo_create',['idrevista'=>$idrevista]);
+    }
+
+    public function aniadirNumero($id)
+    {
+        //
+        $idrevista = Revista::findOrFail($id);
+        return redirect()->route('otro.numero_create',['idrevista'=>$idrevista]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
