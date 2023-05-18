@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Casts\CleanHtml;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,9 +29,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'=>'otro',
+        'role'=>'espera',
         'aval',
         'dependencia',
+        'correoaval'
+
     ];
 
     /**
@@ -49,6 +53,10 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'aval'          =>  CleanHtml::class,
+        'dependencia'   =>  CleanHtml::class,
+        'password'      =>  CleanHtml::class,
+        'correoaval'    =>  CleanHtml::class,
     ];
 
     public function solicitudes(){

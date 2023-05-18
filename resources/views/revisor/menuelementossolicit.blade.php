@@ -35,12 +35,21 @@
         <div class="d-flex justify-content-center p-2">
             <div class="btn-group btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
 
-                <br>
-                <a href="{{ route('otro.tablacontribuidor', ['idarticulo'=> $idarticulo]) }}">
-                    <button type="button" class="btn btn-outline-primary"> Contribuidor </button>
+                <a href="#">
+                    <button type="button" class="btn btn-outline-primary"> Revista </button>
                 </a>
 
-                <br>
+                <a href="#">
+                    <button type="button" class="btn btn-outline-primary"> Número </button>
+                </a>
+                <a href="#">
+                    <button type="button" class="btn btn-outline-primary"> Artículo </button>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end" aria-label="Basic radio toggle button group">
+            <div class="p-2">
+                <a href="#" class="btn btn-dark"> Terminar Registro </a>
             </div>
         </div>
     </div>

@@ -27,7 +27,7 @@
         <div class=" d-flex justify-content-between table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
-                    <th scope="col">#</th>
+
                     <th scope="col">Número</th>
                     <th scope="col">Título</th>
                     <th scope="col">DOI</th>
@@ -44,7 +44,7 @@
                 <tbody>
                     @foreach ($numeros as $numero)
                         <tr>
-                            <td>{{ $numero->id }}</td>
+
                             <td>{{ $numero->numero }}</td>
                             <td>{{ $numero->titulo }}</td>
                             <td>{{ $numero->doi }}</td>
@@ -56,10 +56,10 @@
                             <td>{{ $numero->volumendoi }}</td>
                             <td>{{ $numero->volumenurl }}</td>
                             <td>
-                                <button type="button" class="btn btn-success">Artículo</button>
+                                <a href="{{ route('otro.aniadirArticulonum',$numero->id) }}" class="btn btn-success" type="button" class="btn btn-warning">Articulo</a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-info">Contribuidor</button>
+                                <a href="{{ route('otro.aniadirContribuidor',$numero->id) }}" class="btn btn-info" type="button" class="btn btn-warning">Contribuidor</a>
                             </td>
                         </tr>
                     @endforeach

@@ -4,7 +4,7 @@
 
 <div class="container" style="background-color: rgba(215, 228, 247, 0.918)">
 
-    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Solicitud de DOI </h2>
+    <h2 class="text-center p-3 text-secondary text-white" style="background-color: rgb(58, 80, 133)">Tablero </h2>
     <br>
     <div class="row justify-content-center">
         <div class="col-md-8">

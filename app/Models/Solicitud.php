@@ -15,6 +15,7 @@ class Solicitud extends Model
         return Validator::make($data, [
             'idusuario' => ['nullable', 'unsignedBigInteger',],
             'idrevista' => ['nullable', 'unsignedBigInteger'],
+            'idrevisor' =>  ['nullable', 'unsignedBuigInteger'],
             'estatus' => ['string', 'min:3', 'max:255'],
             'doicreado' => ['nullable','string','max:255',],
 

@@ -44,6 +44,12 @@ class LoginController extends Controller
             case 'otro':
                 return '/otro_dashboard';
             break;
+            case 'revisor':
+                return '/revisor_dashboard';
+            break;
+            case 'asignador':
+                return '/aasignador_dashboard';
+            break;
 
             default:
                 return 'login';

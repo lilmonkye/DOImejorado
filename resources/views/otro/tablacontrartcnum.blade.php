@@ -45,7 +45,7 @@
             <a href="{{ route('otro.tablaarticuloconnum',['idnumero'=>$idnumero]) }} " class="btn btn-secondary" style="margin-left: 40px">Artículo del Número </a>
         </div>
         <div class="d-flex justify-content-end col p-3">
-            <a href="{{ route('otro.solicitar') }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
+            <a href="{{ route('otro.solicitarArticulodN',['idarticulo'=>$idarticulo]) }}" class="btn btn-dark" style="margin-left: 40px">Terminar Registro </a>
         </div>
     </div>
 </div>

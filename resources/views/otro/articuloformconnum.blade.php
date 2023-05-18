@@ -90,6 +90,11 @@
                         <label for="ultimapag" class="form-label"> Última página</label>
                         <input type="number" value="{{ isset($articulo->ultimapag)?$articulo->ultimapag:old('ultimapag')}}" class="form-control" name="ultimapag">
                     </div>
+
+                    <div class="mb-3">
+                        <label for="abstract" class="form-label"> Abstract</label>
+                        <textarea class="form-control" name="abstract" value="{!! isset($articulo->abstract)?$articulo->abstract:old('abstract') !!}" rows="8"></textarea>
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-center p-3">

@@ -33,11 +33,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dois', 'Admin\DashboardController@dois')->name('admin.dois');
 });
 
+Route::middleware(['auth','role:revisor'])->group(function(){
+    //Rutas protegidas para el rol 'revisor'
+    Route::get('/revisor_dashboard', 'Revisor\DashboardController@index')->name('revisor_dashboard');
+    Route::get('/revisor/tsolicitudes/','Revisor\RevisionController@show')->name('revisor.tsolicitudes');
+    Route::get('/revisor/menuelementossolicit/{id}','RevisionController@menu')->name('revisor.menuelementossolicit');
+});
+
 Route::middleware(['auth', 'role:otro'])->group(function () {
     // Rutas protegidas para el rol 'otro' SOLO DASHBOARD
     Route::get('/otro_dashboard', 'Otro\DashboardController@index')->name('otro_dashboard');
     Route::get('/otro/solicitar', 'Otro\DashboardController@solicitar')->name('otro.solicitar');
-    Route::get('/otro/tsolicitudes', 'Otro\DashboardController@tsolicitudes')->name('otro.tsolicitudes');
+    Route::get('/otro/tsolicitudes', 'Otro\SolicitarController@show')->name('otro.tsolicitudes');
     Route::get('/otro/userdoi', 'Otro\DashboardController@userdoi')->name('otro.userdoi');
     Route::get('/otro/registros', 'Otro\DashboardController@registros')->name('otro.registros');
 
@@ -66,9 +73,12 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
 
 //AGREGAR ARTICULO, NUMERO, CONTRIBUIDOR (MIS REVISTAS Y MIS NUMEROS)
 Route::middleware(['auth','role:otro'])->group(function(){
-    //AÑADIR ARTICULO A UNA REVISTA EXISTENTE
+    //AÑADIR ARTICULO O NUMERO A UNA REVISTA EXISTENTE
     Route::get('/otro/aniadirArticulo/{idrevista}', 'Otro\RevistaController@aniadirArticulo')->name('otro.aniadirArticulo');
     Route::get('/otro/aniadirNumero/{idrevista}', 'Otro\RevistaController@aniadirNumero')->name('otro.aniadirNumero');
+    //AÑADIR ARTICULO O CONTRIBUIDOR A UN NUMERO EXISTENTE
+    Route::get('/otro/aniadirArticulonum/{idnumero}', 'Otro\NumeroController@aniadirArticulo')->name('otro.aniadirArticulonum');
+    Route::get('/otro/aniadirContribuidor/{idnumero}', 'Otro\NumeroController@aniadirContribuidor')->name('otro.aniadirContribuidor');
 });
 
 Route::middleware(['auth', 'role:otro'])->group(function () {
@@ -119,5 +129,7 @@ Route::middleware(['auth','role:otro'])->group(function(){
     Route::get('otro/solicitudRevista/{idrevista}','Otro\SolicitarController@solicitarRevista')->name('otro.solicitarRevista');
     Route::get('otro/solicitudArticuloR/{idarticulo}','Otro\SolicitarController@solicitarArticulodR')->name('otro.solicitarArticulodR');
     Route::get('otro/solicitarNumerodR/{idnumero}','Otro\SolicitarController@solicitarNumerodR')->name('otro.solicitarNumerodR');
+    Route::get('otro/solicitarArticulodN/{idarticulo}','Otro\SolicitarController@solicitarArticulodN')->name('otro.solicitarArticulodN');
+
 
 });

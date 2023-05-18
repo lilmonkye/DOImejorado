@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'role' => ['nullable','string','max:255'],
             'aval' => ['required','string','max:255'],
             'dependencia' => ['required','string','max:255'],
+            'correoaval' => ['string','email','required'],
         ]);
     }
 
@@ -73,6 +74,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'aval' => $data['aval'],
             'dependencia' => $data['dependencia'],
+            'correoaval'=>$data['correoaval'],
         ];
 
         if (isset($data['role'])) {
@@ -85,8 +87,10 @@ class RegisterController extends Controller
             $user->assignRole('admin');
         } elseif ($user->role == 'otro') {
             $user->assignRole('otro');
-        }elseif ($user->role == 'revisor'){
+        } elseif ($user->role == 'revisor'){
             $user->assignRole('revisor');
+        } elseif ($user->role == 'asignador'){
+            $user->assignRole('asignador');
         }
 
         return $user;

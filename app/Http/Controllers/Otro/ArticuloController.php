@@ -64,7 +64,7 @@ class ArticuloController extends Controller
             $articulo->fechadig = $request->input('fechadig');
             $articulo->primerpag = $request->primerpag;
             $articulo->ultimapag = $request->ultimapag;
-            $articulo->abstract = $request->abstract;
+            $articulo->abstract = $request->input('abstract');
             $articulo->idrevista = $idrevista;
             $datosArticulo = request()->except('_token','bandoi');
             $datosArticulo['idrevista'] ;
@@ -98,7 +98,7 @@ class ArticuloController extends Controller
             $articulo->fechadig = $request->fechadig;
             $articulo->primerpag = $request->primerpag;
             $articulo->ultimapag = $request->ultimapag;
-            $articulo->abstract = $request->abstract;
+            $articulo->abstract = $request->input('abstract');
             $articulo->idnumero = $idnumero;
             $datosArticulo = request()->except('_token','bandoi');
             $datosArticulo['idnumero'] ;
@@ -192,6 +192,7 @@ class ArticuloController extends Controller
             $articulo->fechadig = $request->input('fechadig');
             $articulo->primerpag = $request->input('primerpag');
             $articulo->ultimapag = $request->input('ultimapag');
+            $articulo->abstract = $request->input('abstract');
 
             // Guardar en la base de datos
             $articulo->save();

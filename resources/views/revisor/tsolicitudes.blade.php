@@ -15,21 +15,22 @@
                     <th scope="col">Observaciones</th>
                 </thead>
                 <tbody>
-                    @foreach ($solicituds as $solicitud)
+                    @foreach ($revisions as $revision)
                         <tr>
                             <th scope="row"></th>
-                            <td>{{ $solicitud->id }}</td>
-                            <td>{{ $solicitud->estatus }}</td>
-                            <td></td>
-
+                            <td>{{ $revision->id }}</td>
+                            <td>{{ $revision->estatus }}</td>
+                            <td>
+                                <a href="{{-- {{ route('otro.numeroEdit',$numero->id) }} --}}#" type="button" class="btn btn-warning">Comentario</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
-
             </table>
         </div>
-        <a href="{{ route('otro_dashboard') }}" class="btn btn-secondary">Regresar </a>
     </div>
-    {{-- <td>{{ $solicitud->observaciones }}</td> --}}
+    <div class="p-3">
+        <a href="{{ route('revisor_dashboard') }}" class="btn btn-secondary">Regresar </a>
+    </div>
 </div>
 @endsection

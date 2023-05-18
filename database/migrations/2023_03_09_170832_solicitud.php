@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idrevista')->nullable();
             $table->unsignedBigInteger('idnumero')->nullable();
             $table->unsignedBigInteger('idarticulo')->nullable();
+            $table->unsignedBigInteger('idrevisor')->nullable();
 
             $table->string('estatus');
             $table->string('doicreado')->nullable();
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->foreign('idrevista')->references('id')->on('revistas')->onDelete("cascade");
             $table->foreign('idnumero')->references('id')->on('numeros')->onDelete("cascade");
             $table->foreign('idarticulo')->references('id')->on('articulos')->onDelete("cascade");
+            $table->foreign('idrevisor')->references('id')->on('users')->onDelete("cascade");
 
 
 

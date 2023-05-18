@@ -56,7 +56,7 @@ class Articulo extends Model
             'fechadig' => ['required_without:fechaimpr'],
             'primerpag' => ['nullable','integer'],
             'ultimapag' => ['nullable','integer'],
-            'abstract'=>['nullable','text'],
+            'abstract'=>['nullable'],
         ],[
             'titulo.required'=>'El título se encuentra vacío',
             'url.required'=>'El url se encuentra vacío.',

@@ -129,6 +129,20 @@ class NumeroController extends Controller
         return view('otro.numeroformEdit',compact('numero'));
     }
 
+    public function aniadirArticulo($id)
+    {
+        //AÑADIR
+        $idnumero = Numero::findOrFail($id);
+        return redirect()->route('otro.articulo_createconnumero',['idnumero'=>$idnumero]);
+    }
+
+    public function aniadirContribuidor($id)
+    {
+        //
+        $idnumero = Numero::findOrFail($id);
+        return redirect()->route('otro.contribuidor_createconnum',['idnumero'=>$idnumero]);
+    }
+
     /**
      * Update the specified resource in storage.
      *

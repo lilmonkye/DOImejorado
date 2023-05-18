@@ -82,6 +82,11 @@
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <label for="abstract" class="form-label"> Abstract</label>
+                    <textarea class="form-control" name="abstract" value="{!! isset($articulo->abstract)?$articulo->abstract:old('abstract') !!}" rows="8"></textarea>
+                </div>
+
                 <div class="d-flex justify-content-center mb-3 p-3">
                     <input type="submit" value="Actualizar" id="registro" class="btn btn-secondary btn-submit">
                 </div>

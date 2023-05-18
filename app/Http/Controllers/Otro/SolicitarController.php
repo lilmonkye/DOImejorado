@@ -21,7 +21,7 @@ class SolicitarController extends Controller
     protected $primaryKey = 'id';
 
 
-
+    //solicitar solo revista
     protected function solicitarRevista($idrevista)
     {
         $useract = auth()->user()->id;
@@ -45,10 +45,108 @@ class SolicitarController extends Controller
 
         $idrevista = Articulo::where('id',$idarticulo)->value('idrevista');
 
+        $existe = Solicitud::where('idrevista',$idrevista)->exists();
 
+        if($existe){
+            $solicitud = new Solicitud();
+
+            $solicitud->idusuario = $useract;
+            $solicitud->idarticulo = $idarticulo;
+            $solicitud->estatus="pendiente";
+            $solicitud->save();
+
+            return redirect()->route('otro.solicitar');
+        }else{
+            for($i=0;$i<2;$i++){
+                $solicitud = new Solicitud();
+
+                if($i == 1){
+                    $solicitud->idusuario = $useract;
+                    $solicitud->idarticulo = $idarticulo;
+                    $solicitud->estatus="pendiente";
+                    $solicitud->save();
+                }else{
+                    $solicitud->idusuario = $useract;
+                    $solicitud->idrevista = $idrevista;
+                    $solicitud->estatus="pendiente";
+                    $solicitud->save();
+                }
+            }
+            return redirect()->route('otro.solicitar');
+        }
+
+    }
+
+    //solicitar numero
+    protected function solicitarNumerodR($idnumero)
+    {
+        $useract = auth()->user()->id;
+
+        $idrevista = Numero::where('id',$idnumero)->value('idrevista');
+
+        $existe = Solicitud::where('idrevista',$idrevista)->exists();
+
+        if($existe){
+            $solicitud = new Solicitud();
+            $solicitud->idusuario = $useract;
+            $solicitud->idnumero = $idnumero;
+            $solicitud->estatus = "pendiente";
+            $solicitud->save();
+            return redirect()->route('otro.solicitar');
+        }else{
+            for($i = 0; $i < 2; $i++){
+                $solicitud = new Solicitud();
+                if($i == 1){
+                    $solicitud->idusuario = $useract;
+                    $solicitud->idnumero = $idnumero;
+                    $solicitud->estatus = "pendiente";
+                    $solicitud->save();
+                }else{
+                    $solicitud->idusuario = $useract;
+                    $solicitud->idrevista = $idrevista;
+                    $solicitud->estatus = "pendiente";
+                    $solicitud->save();
+                }
+            }
+            return redirect()->route('otro.solicitar');
+        }
+
+
+    }
+
+    //solicitar articulo de numero
+    protected function solicitarArticulodN($idarticulo)
+    {
+        //$idArticulosArray = explode(',',$idarticulos);
+
+        $useract = auth()->user()->id;
+
+        $idnumero = Articulo::where('id',$idarticulo)->value('idnumero');
+
+        $idrevista = Numero::where('id',$idnumero)->value('idrevista');
+
+        $existerevista = Solicitud::where('idrevista',$idrevista)->exists();
+        $existenumero = Solicitud::where('idnumero',$idnumero)->exists();
+
+        if($existerevista and $existenumero){
+            $solicitud = new Solicitud();
+            $solicitud->idusuario = $useract;
+            $solicitud->idarticulo = $idarticulo;
+            $solicitud->estatus="pendiente";
+            $solicitud->save();
+            return redirect()->route('otro.solicitar');
+        }elseif($existerevista){
+            for($i = 0; $i < 2; $i++){
+                if($i == 1){
+
+                }
+            }
+
+        }
         $solicitud = new Solicitud();
         $solicitud->idusuario = $useract;
         $solicitud->idrevista = $idrevista;
+        $solicitud->idnumero  = $idnumero;
         $solicitud->idarticulo = $idarticulo;
         $solicitud->estatus="pendiente";
         $solicitud->save();
@@ -57,41 +155,11 @@ class SolicitarController extends Controller
 
     }
 
-    //solicitar numero
-    protected function solicitarNumerodR($idnumero)
-    {
+
+    public function show(){
         $useract = Auth::user();
-
-        $idrevista = Numero::where('id',$idnumero)->value('idrevista');
-
-        $solicitud = new Solicitud();
-        $solicitud->idusuario = $useract;
-        $solicitud->idrevista = $idrevista;
-        $solicitud->idnumero  = $idnumero;
-        $solicitud->estatus="inicio";
-        $solicitud->save();
-        return redirect()->route('otro.solicitar');
-
-
-    }
-
-    //solicitar numero
-    protected function solicitarArticulodN($idrevista)
-    {
-        $useract = Auth::user();
-
-
-
-        $revista = Revista::findOrFail($idrevista);
-
-        $solicitud = new Solicitud();
-        $solicitud->idusuario = $useract;
-        $solicitud->idrevista = $revista->id;
-        $solicitud->estatus="inicio";
-        $solicitud->save();
-        return redirect()->route('otro.solicitar');
-
-
+        $solicituds = Solicitud::where('idusuario',$useract->id)->get();
+        return view('otro.tsolicitudes',['solicituds'=>$solicituds]);
     }
 
 
