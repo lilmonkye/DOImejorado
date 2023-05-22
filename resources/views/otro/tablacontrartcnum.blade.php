@@ -33,7 +33,15 @@
 
             </table>
         </div>
-
+        {{--Par ver que articulos se estan guardando en el arreglo de articulos
+            @if(session('idarticulos'))
+                <h3>Arreglo de idarticulos:</h3>
+                <ul>
+                    @foreach(session('idarticulos') as $idarticulo)
+                        <li>{{ $idarticulo }}</li>
+                    @endforeach
+                </ul>
+            @endif --}}
     </div>
     <div class="d-flex justify-content-center p-3">
 

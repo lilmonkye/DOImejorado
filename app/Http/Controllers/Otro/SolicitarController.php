@@ -117,7 +117,7 @@ class SolicitarController extends Controller
     //solicitar articulo de numero
     protected function solicitarArticulodN($idarticulo)
     {
-        //$idArticulosArray = explode(',',$idarticulos);
+        $idarticulos = session('idarticulos');
 
         $useract = auth()->user()->id;
 
@@ -129,28 +129,39 @@ class SolicitarController extends Controller
         $existenumero = Solicitud::where('idnumero',$idnumero)->exists();
 
         if($existerevista and $existenumero){
-            $solicitud = new Solicitud();
-            $solicitud->idusuario = $useract;
-            $solicitud->idarticulo = $idarticulo;
-            $solicitud->estatus="pendiente";
-            $solicitud->save();
+            foreach ($idarticulos as $idarticulo) {
+                $solicitud = new Solicitud();
+                $solicitud->idusuario = $useract;
+                $solicitud->idrevista = $idrevista;
+                $solicitud->idarticulo = $idarticulo;
+                $solicitud->estatus = "pendiente";
+                $solicitud->save();
+            }
+            session()->forget('idarticulos');
             return redirect()->route('otro.solicitar');
         }elseif($existerevista){
             for($i = 0; $i < 2; $i++){
                 if($i == 1){
-
+                    foreach ($idarticulos as $idarticulo) {
+                        $solicitud = new Solicitud();
+                        $solicitud->idusuario = $useract;
+                        $solicitud->idrevista = $idrevista;
+                        $solicitud->idarticulo = $idarticulo;
+                        $solicitud->estatus = "pendiente";
+                        $solicitud->save();
+                    }
+                    session()->forget('idarticulos');
+                }else{
+                    $solicitud = new Solicitud();
+                    $solicitud->idusuario = $useract;
+                    $solicitud->idrevista = $idrevista;
+                    $solicitud->idnumero = $idnumero;
+                    $solicitud->estatus = "pendiente";
+                    $solicitud->save();
                 }
             }
-
+            return redirect()->route('otro.solicitar');
         }
-        $solicitud = new Solicitud();
-        $solicitud->idusuario = $useract;
-        $solicitud->idrevista = $idrevista;
-        $solicitud->idnumero  = $idnumero;
-        $solicitud->idarticulo = $idarticulo;
-        $solicitud->estatus="pendiente";
-        $solicitud->save();
-        return redirect()->route('otro.solicitar');
 
 
     }

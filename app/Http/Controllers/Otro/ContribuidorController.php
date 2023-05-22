@@ -174,6 +174,17 @@ class ContribuidorController extends Controller
 
     public function showcontrnumart($idarticulo)
     {
+        // Recuperar el arreglo de idarticulos de la sesión
+        $idarticulos = session('idarticulos', []);
+
+        // Verificar si el idarticulo ya existe en el arreglo
+        if (!in_array($idarticulo, $idarticulos)) {
+            // Agregar el idarticulo al arreglo solo si no existe
+            $idarticulos[] = $idarticulo;
+
+            // Actualizar el arreglo de idarticulos en la sesión
+            session()->put('idarticulos', $idarticulos);
+        }
         //contribuidor del articulo del numero
         $contribuidors = contribuidor::where('idarticulo',$idarticulo)->get();
         //numero en el que se encuentra el articulo que contiene al contribuidor
