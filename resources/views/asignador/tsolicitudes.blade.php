@@ -9,11 +9,11 @@
         <div class="table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
-                    <th scope="col">#</th>
+                    <th scope="col">No Solicitud</th>
                     <th scope="col">Titulo</th>
+                    <th scope="col">Usuario</th>
                     <th scope="col">Estatus</th>
-                    <th scope="col">Observaciones</th>
-                    <th scope="col">DOI</th>
+                    <th scope="col"></th>
                 </thead>
                 <tbody>
                     @foreach ($solicituds as $solicitud)
@@ -21,9 +21,11 @@
 
                             <td>{{ $solicitud->id }}</td>
                             <td>{{ $solicitud->nombre_solicitud }}</td>
+                            <td>{{ $solicitud->name}}</td>
                             <td>{{ $solicitud->estatus }}</td>
-                            <td>{{ $solicitud->observaciones }}</td>
-                            <td>{{ $solicitud->doicreado }}</td>
+                            <td>
+                                <a href="{{ route('asignador.trevisores',$solicitud->id) }}" type="button" class="btn btn-warning">Revisores</a>
+                            </td>
 
                         </tr>
                     @endforeach
@@ -31,7 +33,7 @@
 
             </table>
         </div>
-        <a href="{{ route('otro_dashboard') }}" class="btn btn-secondary">Regresar </a>
+        <a href="{{ route('asignador_dashboard') }}" class="btn btn-secondary">Regresar </a>
     </div>
     {{-- <td>{{ $solicitud->observaciones }}</td> --}}
 </div>

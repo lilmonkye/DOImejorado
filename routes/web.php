@@ -40,6 +40,14 @@ Route::middleware(['auth','role:revisor'])->group(function(){
     Route::get('/revisor/menuelementossolicit/{id}','RevisionController@menu')->name('revisor.menuelementossolicit');
 });
 
+Route::middleware(['auth','role:asignador'])->group(function(){
+    //RUTAS PROTEGIDAS PARA EL ROL 'asignador'
+    Route::get('/asignador_dashboard','Asignador\DashboardController@index')->name('asignador_dashboard');
+    Route::get('/asignador/tsolicitudes','Asignador\AsignarController@showSolicitudes')->name('asignador.tsolicitudes');
+    Route::get('/asignador/trevisores/{id}','Asignador\AsignarController@showRevisores')->name('asignador.trevisores');
+    Route::get('/asignador/asignar/{idrevisor}/{idsolicitud}','Asignador\AsignarController@asignar')->name('asignador.asignar');
+});
+
 Route::middleware(['auth', 'role:otro'])->group(function () {
     // Rutas protegidas para el rol 'otro' SOLO DASHBOARD
     Route::get('/otro_dashboard', 'Otro\DashboardController@index')->name('otro_dashboard');

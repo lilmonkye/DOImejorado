@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idrevisor')->nullable();
 
             $table->string('estatus');
+            $table->text('observaciones')->nullable();
             $table->string('doicreado')->nullable();
             //relaciones
             $table->foreign('idusuario')->references('id')->on('users')->onDelete("cascade");

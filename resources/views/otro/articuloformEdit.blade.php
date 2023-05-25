@@ -84,7 +84,7 @@
 
                 <div class="mb-3">
                     <label for="abstract" class="form-label"> Abstract</label>
-                    <textarea class="form-control" name="abstract" value="{!! isset($articulo->abstract)?$articulo->abstract:old('abstract') !!}" rows="8"></textarea>
+                    <textarea class="form-control" name="abstract" rows="8">{!! isset($articulo->abstract) ? $articulo->abstract : old('abstract') !!}></textarea>
                 </div>
 
                 <div class="d-flex justify-content-center mb-3 p-3">

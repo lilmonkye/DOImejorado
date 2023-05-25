@@ -17,6 +17,7 @@ class Solicitud extends Model
             'idrevista' => ['nullable', 'unsignedBigInteger'],
             'idrevisor' =>  ['nullable', 'unsignedBuigInteger'],
             'estatus' => ['string', 'min:3', 'max:255'],
+            'observaciones' => ['nullable', 'min:3','max:255'],
             'doicreado' => ['nullable','string','max:255',],
 
         ]);

@@ -48,7 +48,7 @@ class LoginController extends Controller
                 return '/revisor_dashboard';
             break;
             case 'asignador':
-                return '/aasignador_dashboard';
+                return '/asignador_dashboard';
             break;
 
             default:

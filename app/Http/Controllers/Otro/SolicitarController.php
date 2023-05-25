@@ -11,6 +11,7 @@ use App\Models\Revista;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SolicitarController extends Controller
 {
@@ -168,8 +169,25 @@ class SolicitarController extends Controller
 
 
     public function show(){
-        $useract = Auth::user();
-        $solicituds = Solicitud::where('idusuario',$useract->id)->get();
+        $useract = auth()->user()->id;
+        $solicituds = Solicitud::where('solicituds.idusuario',$useract)->
+        leftJoin('articulos', 'solicituds.idarticulo','=','articulos.id')->
+        leftJoin('numeros','solicituds.idnumero','=','numeros.id')->
+        leftJoin('revistas','solicituds.idrevista','=','revistas.id')->
+        select('solicituds.id',
+            DB::raw('CASE
+                    WHEN solicituds.idnumero IS NOT NULL THEN numeros.titulo
+                    WHEN solicituds.idarticulo IS NOT NULL THEN articulos.titulo
+                    ELSE revistas.titulo
+                    END AS nombre_solicitud'),
+                    'solicituds.estatus',
+                    'solicituds.observaciones',
+                    'solicituds.doicreado'
+        )
+        ->get();
+
+
+
         return view('otro.tsolicitudes',['solicituds'=>$solicituds]);
     }
 
