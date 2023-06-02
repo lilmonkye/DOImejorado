@@ -9,19 +9,22 @@
         <div class="table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
-                    <th scope="col"></th>
-                    <th scope="col">#</th>
+                    <th scope="col">No Solicitud</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Usuario</th>
                     <th scope="col">Estatus</th>
-                    <th scope="col">Observaciones</th>
+                    <th scope="col"></th>
                 </thead>
                 <tbody>
-                    @foreach ($revisions as $revision)
+                    @foreach ($solicituds as $solicitud)
                         <tr>
-                            <th scope="row"></th>
-                            <td>{{ $revision->id }}</td>
-                            <td>{{ $revision->estatus }}</td>
+
+                            <td>{{ $solicitud->id }}</td>
+                            <td>{{ $solicitud->nombre_solicitud }}</td>
+                            <td>{{ $solicitud->name}}</td>
+                            <td>{{ $solicitud->estatus }}</td>
                             <td>
-                                <a href="{{-- {{ route('otro.numeroEdit',$numero->id) }} --}}#" type="button" class="btn btn-warning">Comentario</a>
+                                <a href="{{ route('revisor.showsolicitud',$solicitud->id) }}" type="button" class="btn btn-warning">Ver</a>
                             </td>
                         </tr>
                     @endforeach

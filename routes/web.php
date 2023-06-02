@@ -37,7 +37,11 @@ Route::middleware(['auth','role:revisor'])->group(function(){
     //Rutas protegidas para el rol 'revisor'
     Route::get('/revisor_dashboard', 'Revisor\DashboardController@index')->name('revisor_dashboard');
     Route::get('/revisor/tsolicitudes/','Revisor\RevisionController@show')->name('revisor.tsolicitudes');
-    Route::get('/revisor/menuelementossolicit/{id}','RevisionController@menu')->name('revisor.menuelementossolicit');
+    Route::get('/revisor/showsolicitud/{id}','Revisor\RevisionController@showsolicitud')->name('revisor.showsolicitud');
+    Route::post('revisor/guardar-observacion/{idarticulo}', 'Revisor\RevisionController@guardar')->name('revisor.guardar-observacion');
+    Route::post('revisor/guardar-observacionrev/{idrevista}', 'Revisor\RevisionController@guardarRevista')->name('revisor.guardar-revista');
+    Route::post('revisor/guardar-observacionnum/{idnumero}', 'Revisor\RevisionController@guardarNumero')->name('revisor.guardar-numero');
+    Route::get('/revisor/aprobadoRev/{idrevista}','Revisor\RevisionController@aprobarRevista')->name('revisor.aprobarRevista');
 });
 
 Route::middleware(['auth','role:asignador'])->group(function(){
@@ -71,7 +75,7 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
     Route::get('/otro/revistaEdit/{id}', 'Otro\RevistaController@edit')->name('otro.revistaEdit');
     Route::get('/otro/numeroEdit/{id}', 'Otro\NumeroController@edit')->name('otro.numeroEdit');
     Route::get('/otro/contribuidorEdit/{id}', 'Otro\ContribuidorController@edit')->name('otro.contribuidorEdit');
-    //ActualizarInformación
+    //ActualizarInformación(botones)
     Route::post('/otro/articuloUpdate/{id}', 'Otro\ArticuloController@update')->name('otro.articuloUpdate');
     Route::post('/otro/revistaUpdate/{id}', 'Otro\RevistaController@update')->name('otro.revistaUpdate');
     Route::post('/otro/numeroUpdate/{id}', 'Otro\NumeroController@update')->name('otro.numeroUpdate');
@@ -132,7 +136,7 @@ Route::middleware(['auth', 'role:otro'])->group(function () {
 });
 
 Route::middleware(['auth','role:otro'])->group(function(){
-    //CREAR SOLICITUDES
+    //CREAR SOLICITUDES (boton terminar registro)
 
     Route::get('otro/solicitudRevista/{idrevista}','Otro\SolicitarController@solicitarRevista')->name('otro.solicitarRevista');
     Route::get('otro/solicitudArticuloR/{idarticulo}','Otro\SolicitarController@solicitarArticulodR')->name('otro.solicitarArticulodR');

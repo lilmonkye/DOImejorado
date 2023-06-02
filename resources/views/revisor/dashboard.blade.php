@@ -29,7 +29,7 @@
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">Solicitudes</h5>
-                    <p class="card-text">Aquí podras revisar las solicitudes que te han sido asignadas y realizar comentarios.</p>
+                    <p class="card-text">Aquí podras revisar las solicitudes que te han sido asignadas, realizar comentarios y aprobarlas.</p>
                     <a href="{{ route('revisor.tsolicitudes') }}" class="btn btn-primary">Ver</a>
                 </div>
             </div>
