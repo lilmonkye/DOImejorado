@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Revista;
 use App\Models\Articulo;
 use App\Models\Numero;
+use App\Models\Solicitud;
 use Illuminate\Support\Facades\Auth;
 
 class ArticuloController extends Controller
@@ -179,6 +180,11 @@ class ArticuloController extends Controller
     {
         // Obtener el artículo correspondiente al ID recibido en la ruta
         $articulo = Articulo::findOrFail($id);
+        // Se verifica si existe una solicitud con el id del articulo
+        $existeSolicitud = Solicitud::where('idarticulo',$id)->exists();
+        // Se obtiene el id del usario actual
+        $useract = auth()->user()->id;
+
         $validator = Articulo::validator($request->all());
 
 
@@ -193,8 +199,23 @@ class ArticuloController extends Controller
             $articulo->primerpag = $request->input('primerpag');
             $articulo->ultimapag = $request->input('ultimapag');
             $articulo->abstract = $request->input('abstract');
+            //Si existe la solicitud con el id del articulo cambia el estatus a pendiente
+            if($existeSolicitud){
+                $idsolicitud = Solicitud::where('idarticulo',$id)->value('id');
+                $solicitud = Solicitud::find($idsolicitud);
+                $solicitud->estatus="pendiente";
+                $solicitud->save();
 
-            // Guardar en la base de datos
+            }else{//Si no existe crea una solicitud nueva
+                $solicitud = new Solicitud();
+
+                $solicitud->idusuario = $useract;
+                $solicitud->idarticulo = $id;
+                $solicitud->estatus="pendiente";
+                $solicitud->save();
+            }
+
+            // Guardar en la base de datos la informacion del articulo
             $articulo->save();
 
             $msg = 'Articulo actualizado, en espera de revisión';

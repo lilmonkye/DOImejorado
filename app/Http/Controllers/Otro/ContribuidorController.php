@@ -9,6 +9,7 @@ use App\Models\Contribuidor;
 use App\Models\Numero;
 use Illuminate\Http\Request;
 use App\Models\Revista;
+use App\Models\Solicitud;
 use Dotenv\Validator;
 use PhpParser\Node\Stmt\Return_;
 
@@ -243,6 +244,17 @@ class ContribuidorController extends Controller
     {
         //
         $contribuidor = Contribuidor::find($id);
+
+        $idarticulo = Contribuidor::where('id',$id)->value('idnumero');
+
+        $idnumero = Contribuidor::where('id',$id)->value('idnumero');
+
+        $existeSolicitudNum = Solicitud::where('idnumero',$idnumero)->exists();
+
+        $existeSolicitudArt = Solicitud::where('idarticulo',$idarticulo)->exists();
+        // Se obtiene el id del usario actual
+        $useract = auth()->user()->id;
+
         $validator = Contribuidor::validator($request->all());
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -254,6 +266,19 @@ class ContribuidorController extends Controller
             $contribuidor->nomalternativo = $request->input('nomalternativo');
             $contribuidor->rol = $request->input('rol');
 
+            if($existeSolicitudNum){
+
+                $idsolicitud = Solicitud::where('idnumero',$idnumero)->value('id');
+                $solicitud = Solicitud::find($idsolicitud);
+                $solicitud->estatus="pendiente";
+                $solicitud->save();
+
+            }elseif($existeSolicitudArt){
+                $idsolicitud = Solicitud::where('idarticulo',$idarticulo)->value('id');
+                $solicitud = Solicitud::find($idsolicitud);
+                $solicitud->estatus="pendiente";
+                $solicitud->save();
+            }
             $contribuidor->save();
 
             $msg = 'Contribuidor actualizado en espera de revisión';

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Otro;
 use App\Http\Controllers\Controller;
 use App\Models\Revista;
 use App\Models\Numero;
+use App\Models\Solicitud;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -154,6 +155,11 @@ class NumeroController extends Controller
     {
         //
         $numero = Numero::findOrFail($id);
+
+        $existeSolicitud = Solicitud::where('idnumero',$id)->exists();
+        // Se obtiene el id del usario actual
+        $useract = auth()->user()->id;
+
         $validator = Numero::validator($request->all());
 
         if($validator->fails()){
@@ -168,6 +174,23 @@ class NumeroController extends Controller
              $numero->numespecial = $request->input('numespecial');
              $numero->volumen = $request->input('volumen');
              $numero->volumenurl = $request->input('volumenurl');
+
+             //Si existe la solicitud con el id del articulo cambia el estatus a pendiente
+            if($existeSolicitud){
+
+                $idsolicitud = Solicitud::where('idnumero',$id)->value('id');
+                $solicitud = Solicitud::where('id',$idsolicitud)->first();
+                $solicitud->estatus="pendiente";
+                $solicitud->save();
+
+            }else{//Si no existe crea una solicitud nueva
+                $solicitud = new Solicitud();
+
+                $solicitud->idusuario = $useract;
+                $solicitud->idarticulo = $id;
+                $solicitud->estatus="pendiente";
+                $solicitud->save();
+            }
 
 
              // Guardar en la base de datos

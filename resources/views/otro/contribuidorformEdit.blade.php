@@ -89,7 +89,9 @@
             </div>
         </form>
 
-
+        <div class="p-2">
+            <a href="{{ route('otro.tcontribuidorsedit') }}" class="btn btn-secondary">Regresar </a>
+        </div>
 
     </div>
 @endsection

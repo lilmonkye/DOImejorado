@@ -94,7 +94,7 @@
         </form>
         <div class="d-flex justify-content">
             <div class="p-2">
-                <a href="{{ route('otro.trevistasedit') }}" class="btn btn-secondary">Regresar </a>
+                <a href="{{ route('otro.tarticulosedit') }}" class="btn btn-secondary">Regresar </a>
             </div>
         </div>
     </div>

@@ -135,6 +135,11 @@ class RevistaController extends Controller
     {
         // Obtener el artículo correspondiente al ID recibido en la ruta
         $revista = Revista::findOrFail($id);
+
+        $existeSolicitud = Solicitud::where('idrevista',$id)->exists();
+
+        $useract = auth()->user()->id;
+
         $validator = Revista::validator($request->all());
 
 
@@ -148,6 +153,22 @@ class RevistaController extends Controller
             $revista->issnimp = $request->input('issnimp');
             $revista->issnelec = $request->input('issnelec');
             $revista->idioma = $request->input('idioma');
+
+            if($existeSolicitud){
+                $idsolicitud = Solicitud::where('idrevista',$id)->value('id');
+                $solicitud = Solicitud::find($idsolicitud);
+                $solicitud->estatus="pendiente";
+                $solicitud->save();
+
+            }else{//Si no existe crea una solicitud nueva
+                $solicitud = new Solicitud();
+
+                $solicitud->idusuario = $useract;
+                $solicitud->idarticulo = $id;
+                $solicitud->estatus="pendiente";
+                $solicitud->save();
+            }
+
 
             // Guardar en la base de datos
             $revista->save();
