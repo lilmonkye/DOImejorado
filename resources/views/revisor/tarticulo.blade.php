@@ -103,7 +103,7 @@
 
         <div class="d-flex justify-content-center p-3 ">
 
-            <a href="#" class="btn btn-success btnAbrirModal">Aprobar</a>
+            <a href="{{ route('revisor.aprobarArticulo',$articulo->id) }}" class="btn btn-success btnAbrirModal">Aprobar</a>
 
         </div>
     </div>

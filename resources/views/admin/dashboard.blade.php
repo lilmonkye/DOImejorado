@@ -48,7 +48,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Usuarios</h5>
                     <p class="card-text">Aquí podrás ver los usuarios que desean tener acceso a la web.</p>
-                    <a href="{{ route('admin.solicituregist') }}" class="btn btn-primary">Ver</a>
+                    <a href="{{ route('admin.userst') }}" class="btn btn-primary">Ver</a>
                 </div>
             </div>
             <div class="card" style="width: 20rem;">

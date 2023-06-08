@@ -29,8 +29,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Rutas protegidas para el rol 'admin'
     Route::get('/admin_dashboard', 'Admin\DashboardController@index')->name('admin_dashboard');
     Route::get('/admin/solicituregist', 'Admin\DashboardController@solicituregist')->name('admin.solicituregist');
-    Route::get('/admin/solicitudoi', 'Admin\DashboardController@solicitudoi')->name('admin.solicitudoi');
+    Route::get('/admin/solicitudoi', 'Admin\SolicitudController@index')->name('admin.solicitudoi');
     Route::get('/admin/dois', 'Admin\DashboardController@dois')->name('admin.dois');
+    Route::get('/admin/userst','Admin\UserController@index')->name('admin.userst');
+    Route::post('/admin/update/{id}','Admin\UserController@cambiarRol')->name('admin.cambiarRol');
 });
 
 Route::middleware(['auth','role:revisor'])->group(function(){
@@ -42,6 +44,8 @@ Route::middleware(['auth','role:revisor'])->group(function(){
     Route::post('revisor/guardar-observacionrev/{idrevista}', 'Revisor\RevisionController@guardarRevista')->name('revisor.guardar-revista');
     Route::post('revisor/guardar-observacionnum/{idnumero}', 'Revisor\RevisionController@guardarNumero')->name('revisor.guardar-numero');
     Route::get('/revisor/aprobadoRev/{idrevista}','Revisor\RevisionController@aprobarRevista')->name('revisor.aprobarRevista');
+    Route::get('/revisor/aprobadoArt/{idarticulo}','Revisor\RevisionController@aprobarArticulo')->name('revisor.aprobarArticulo');
+    Route::get('/revisor/aprobadoNum/{idnumero}','Revisor\RevisionController@aprobarNumero')->name('revisor.aprobarNumero');
 });
 
 Route::middleware(['auth','role:asignador'])->group(function(){

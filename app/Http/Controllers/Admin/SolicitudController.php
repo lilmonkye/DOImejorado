@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SolicitudController extends Controller
 {
@@ -14,7 +16,27 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        //
+
+        $estatus = 'aprobado';
+        // where estatus asignada y este asignada al usuario actual
+        $solicituds = Solicitud::where([
+        ['solicituds.estatus', '=', $estatus],
+        ])
+        ->leftJoin('articulos', 'solicituds.idarticulo','=','articulos.id')
+        ->leftJoin('numeros','solicituds.idnumero','=','numeros.id')
+        ->leftJoin('revistas','solicituds.idrevista','=','revistas.id')
+        ->leftJoin('users','solicituds.idusuario','=','users.id')
+        ->select('solicituds.id',
+            DB::raw('CASE
+                    WHEN solicituds.idnumero IS NOT NULL THEN numeros.titulo
+                    WHEN solicituds.idarticulo IS NOT NULL THEN articulos.titulo
+                    ELSE revistas.titulo
+                    END AS nombre_solicitud'),
+                    'users.name',
+        )
+        ->get();
+
+        return view('admin.solicitudoi',['solicituds'=>$solicituds]);
     }
 
     /**
