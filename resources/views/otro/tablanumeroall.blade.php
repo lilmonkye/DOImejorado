@@ -27,7 +27,7 @@
         <div class=" d-flex justify-content-between table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
-
+                    <th scope="col" style="display:none"></th>
                     <th scope="col">Número</th>
                     <th scope="col">Título</th>
                     <th scope="col">DOI</th>
@@ -44,7 +44,7 @@
                 <tbody>
                     @foreach ($numeros as $numero)
                         <tr>
-
+                            <td style="display:none">{{ $numero->id }}</td>
                             <td>{{ $numero->numero }}</td>
                             <td>{{ $numero->titulo }}</td>
                             <td>{{ $numero->doi }}</td>

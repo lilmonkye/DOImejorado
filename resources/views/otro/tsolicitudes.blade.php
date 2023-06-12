@@ -9,7 +9,7 @@
         <div class="table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
-                    <th scope="col">#</th>
+                    <th scope="col" style="display:none"></th>
                     <th scope="col">Titulo</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Observaciones</th>
@@ -19,7 +19,7 @@
                     @foreach ($solicituds as $solicitud)
                         <tr>
 
-                            <td>{{ $solicitud->id }}</td>
+                            <td style="display:none">{{ $solicitud->id }}</td>
                             <td>{{ $solicitud->nombre_solicitud }}</td>
                             <td>{{ $solicitud->estatus }}</td>
                             <td>{{ $solicitud->observaciones }}</td>

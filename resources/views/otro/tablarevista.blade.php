@@ -8,7 +8,7 @@
         <div class=" d-flex justify-content-between table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
-                    <th scope="col"></th>
+                    <th scope="col" style="display:none"></th>
                     <th scope="col">Título</th>
                     <th scope="col">Título Abreviado</th>
                     <th scope="col">DOI</th>
@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach ($revistas as $revista)
                         <tr>
-                            <td>{{ $revista->id }}</td>
+                            <td style="display:none">{{ $revista->id }}</td>
                             <td>{{ $revista->titulo }}</td>
                             <td>{{ $revista->tituloabr }}</td>
                             <td>{{ $revista->doi }}</td>

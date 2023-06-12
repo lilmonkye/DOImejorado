@@ -50,7 +50,7 @@
                             </td>
 
                             <td>
-                                <a href="{{ route('otro.numeroEdit',$user->id) }}" type="button" class="btn btn-info">Editar</a>
+                                <a href="{{ route('admin.userEdit',$user->id) }}" type="button" class="btn btn-info">Editar</a>
                             </td>
                         </tr>
                     @endforeach

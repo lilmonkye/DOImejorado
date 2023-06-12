@@ -10,7 +10,7 @@
         <div class="d-flex justify-content-between table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
-                    <th scope="col"></th>
+                    <th scope="col" style="display:none"></th>
                     <th scope="col">Título</th>
                     <th scope="col">DOI</th>
                     <th scope="col">URL</th>
@@ -24,7 +24,7 @@
                 <tbody>
                     @foreach ($articulos as $articulo)
                         <tr>
-                            <td>{{ $articulo->id }}</td>
+                            <td style="display:none">{{ $articulo->id }}</td>
                             <td>{{ $articulo->titulo }}</td>
                             <td>{{ $articulo->doi }}</td>
                             <td>{{ $articulo->url }}</td>

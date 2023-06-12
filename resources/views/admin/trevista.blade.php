@@ -15,15 +15,19 @@
     </svg>
     <div class="alert alert-primary d-flex align-items-center" role="alert">
         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
-        <div class="col p-3">
-            <div class="row">
-                Asegurese de que las observaciones se encuentren completas al dar "Guardar" se enviara el comentario.
-            </div>
-            <div class="row">
-                Presionar "Aprobar" únicamente si la información proporcionada es correcta y no necesita correcciones.
-            </div>
+        <div>
+            Asegurese de que el DOI se encuentre sin errores al dar "Guardar" se finalizara la solicitud.
         </div>
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+     @endif
     <div style="d-flex justify-content-around; flex-direction:column; justify-content:center; align-items:center" class="col-12 p-5">
         <div class=" d-flex justify-content-between table-responsive">
             <table class="table table-hover table-light">
@@ -57,46 +61,25 @@
             </table>
         </div>
 
-        <div class="table-responsive">
-            <table class="table table-hover table-light">
-                <thead class="table-active">
-                    <th scope="col">Observaciones</th>
-                </thead>
-                <tbody>
-                    @foreach ($solicituds as $solicitud)
-                        <tr>
-
-                            <td>{{ $solicitud->observaciones }}</td>
-
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <div class="d-flex justify-content-center p-3 ">
-
-            <a href="{{ route('revisor.aprobarRevista',$revista->id) }}" class="btn btn-success btnAbrirModal">Aprobar</a>
-
-        </div>
     </div>
 
-    <form action="{{ route('revisor.guardar-revista',$revista->id) }}" id="formulario" method="POST">
+    <form action="{{ route('admin.guardarDoirev',$revista->id) }}" id="formulario" method="POST">
         @csrf
         <div style="d-flex justify-content-around; justify-content:center; align-items:center" >
-            <div class="mb-3">
-                <label for="observaciones" class="form-label"> Observaciones</label>
-                <textarea class="form-control" name="observaciones" rows="8">{!! isset($solicitud->observaciones) ? $solicitud->observaciones : old('observaciones') !!}</textarea>
+            <div class="mb-3 form-group">
+                <label for="doi">DOI:</label>
+                <input type="text" value="{!! isset($solicitud->doi)?$solicitud->doi:old('doi') !!}" class="form-control" name="doi" id="doi">
             </div>
+
             <div class="d-flex justify-content-center mb-3 p-3">
-                <input type="submit" value="Guardar Observación" id="registro" class="btn btn-warning btn-submit">
+                <input type="submit" value="Guardar" id="guardar" class="btn btn-warning btn-submit">
             </div>
         </div>
 
     </form>
 
     <div class="p-3">
-        <a href="{{ route('revisor.tsolicitudes') }}" class="btn btn-secondary" style="margin-left: 40px">Regresar </a>
+        <a href="{{ route('admin.solicitudoi') }}" class="btn btn-secondary" style="margin-left: 40px">Regresar </a>
     </div>
 </div>
 @endsection

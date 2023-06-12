@@ -12,7 +12,7 @@
         <div class=" d-flex justify-content-between table-responsive">
             <table class="table table-hover table-light">
                 <thead class="table-active">
-                    <th scope="col"></th>
+                    <th scope="col" style="display:none"></th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Afiliación</th>
@@ -24,7 +24,7 @@
                 <tbody>
                     @foreach ($contribuidors as $contribuidor)
                         <tr>
-                            <td>{{ $contribuidor->id }}</td>
+                            <td style="display:none">{{ $contribuidor->id }}</td>
                             <td>{{ $contribuidor->nombre }}</td>
                             <td>{{ $contribuidor->apellido }}</td>
                             <td>{{ $contribuidor->afiliacion }}</td>

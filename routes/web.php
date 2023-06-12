@@ -32,7 +32,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/solicitudoi', 'Admin\SolicitudController@index')->name('admin.solicitudoi');
     Route::get('/admin/dois', 'Admin\DashboardController@dois')->name('admin.dois');
     Route::get('/admin/userst','Admin\UserController@index')->name('admin.userst');
-    Route::post('/admin/update/{id}','Admin\UserController@cambiarRol')->name('admin.cambiarRol');
+    Route::post('/admin/acces/{id}','Admin\UserController@cambiarRol')->name('admin.cambiarRol');
+    Route::get('/admin/showsolicitud/{id}','Admin\SolicitudController@show')->name('admin.showsolicitud');
+    Route::post('/admin/guardar-doirev/{idrevista}','Admin\SolicitudController@guardarDoirev')->name('admin.guardarDoirev');
+    Route::post('/admin/guardar-doiart/{idarticulo}','Admin\SolicitudController@guardarDoiart')->name('admin.guardarDoiart');
+    Route::post('/admin/guardar-doinum/{idnumero}','Admin\SolicitudController@guardarDoinum')->name('admin.guardarDoinum');
+    Route::get('/admin/userform/{id}', 'Admin\UserController@edit')->name('admin.userEdit');
+    Route::post('/admin/update/{id}','Admin\UserController@update')->name('admin.updateUser');
 });
 
 Route::middleware(['auth','role:revisor'])->group(function(){

@@ -35,30 +35,13 @@
             </div>
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
-                    <h5 class="card-title">DOI</h5>
-                    <p class="card-text">Aquí podras colocar los dois que ya esten listos.</p>
-                    <a href="{{ route('admin.dois') }}" class="btn btn-primary">Ver</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="d-flex justify-content-around m-4">
-
-            <div class="card" style="width: 20rem;">
-                <div class="card-body">
                     <h5 class="card-title">Usuarios</h5>
                     <p class="card-text">Aquí podrás ver los usuarios que desean tener acceso a la web.</p>
                     <a href="{{ route('admin.userst') }}" class="btn btn-primary">Ver</a>
                 </div>
             </div>
-            <div class="card" style="width: 20rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Catalogo de Avales</h5>
-                    <p class="card-text">Aquí podras revisar los avales aceptados y sus contactos.</p>
-                    <a href="#" class="btn btn-primary">Ver</a>
-                </div>
-            </div>
         </div>
+
     </div>
 </div>
 <script>
