@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Revista;
 use App\Models\Articulo;
 use App\Models\Numero;
+use App\Models\User;
 use App\Models\Solicitud;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\StatusChanged;
+use Illuminate\Support\Facades\Notification;
 
 class ArticuloController extends Controller
 {
@@ -205,6 +208,11 @@ class ArticuloController extends Controller
                 $solicitud = Solicitud::find($idsolicitud);
                 $solicitud->estatus="pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
             }else{//Si no existe crea una solicitud nueva
                 $solicitud = new Solicitud();
@@ -213,6 +221,11 @@ class ArticuloController extends Controller
                 $solicitud->idarticulo = $id;
                 $solicitud->estatus="pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
             }
 
             // Guardar en la base de datos la informacion del articulo

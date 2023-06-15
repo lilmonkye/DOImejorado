@@ -13,6 +13,9 @@ use App\Models\Articulo;
 use App\Models\Contribuidor;
 use App\Models\Numero;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Notifications\StatusChanged;
+use Illuminate\Support\Facades\Notification;
 
 class RevisionController extends Controller
 {
@@ -95,26 +98,42 @@ class RevisionController extends Controller
          $solicitud->observaciones = $request->input('observaciones');
          $solicitud->estatus = "corregir";
          $solicitud->save();
+//obtiene el id del usuario Otro y su correo
+         $idotro = $solicitud->idusuario;
+         $user = User::find($idotro);
+         $email = $user->email;
+         Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
          return redirect()->route('revisor.tsolicitudes');
     }
 
     //GUARDA LA OBSERVACION DE UNA REVISTA
     public function guardarRevista(Request $request, $idrevista){
-         $solicitud = Solicitud::where('idrevista',$idrevista)->first();
-         $solicitud->observaciones = $request->input('observaciones');
-         $solicitud->estatus = "corregir";
-         $solicitud->save();
+        $solicitud = Solicitud::where('idrevista',$idrevista)->first();
+        $solicitud->observaciones = $request->input('observaciones');
+        $solicitud->estatus = "corregir";
+        $solicitud->save();
+//obtiene el id del usuario Otro y su correo
+        $idotro = $solicitud->idusuario;
+        $user = User::find($idotro);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+
 
          return redirect()->route('revisor.tsolicitudes');
     }
 
     //GUARDA LA OBSERVACION DE UN NUMERO
     public function guardarNumero(Request $request, $idnumero){
-         $solicitud = Solicitud::where('idnumero',$idnumero)->first();
-         $solicitud->observaciones = $request->input('observaciones');
-         $solicitud->estatus = "corregir";
-         $solicitud->save();
+        $solicitud = Solicitud::where('idnumero',$idnumero)->first();
+        $solicitud->observaciones = $request->input('observaciones');
+        $solicitud->estatus = "corregir";
+        $solicitud->save();
+        //obtiene el id del usuario Otro y su correo
+        $idotro = $solicitud->idusuario;
+        $user = User::find($idotro);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
          return redirect()->route('revisor.tsolicitudes');
     }
@@ -124,6 +143,13 @@ class RevisionController extends Controller
         $solicitud = Solicitud::where('idrevista',$idrevista)->first();
         $solicitud->estatus = "aprobado";
         $solicitud->save();
+        //obtiene el id del usuario Otro y su correo
+        $role = 'admin';
+        $idadmin = User::where('role',$role)->inRandomOrder()->first();;
+        $user = User::find($idadmin);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+
         return redirect()->route('revisor.tsolicitudes');
     }
 
@@ -131,6 +157,12 @@ class RevisionController extends Controller
         $solicitud = Solicitud::where('idarticulo',$idarticulo)->first();
         $solicitud->estatus = "aprobado";
         $solicitud->save();
+        //obtiene el id del usuario Otro y su correo
+        $role = 'admin';
+        $idadmin = User::where('role',$role)->inRandomOrder()->first();;
+        $user = User::find($idadmin);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
         return redirect()->route('revisor.tsolicitudes');
     }
 
@@ -138,6 +170,12 @@ class RevisionController extends Controller
         $solicitud = Solicitud::where('idnumero',$idnumero)->first();
         $solicitud->estatus = "aprobado";
         $solicitud->save();
+        //obtiene el id del usuario Otro y su correo
+        $role = 'admin';
+        $idadmin = User::where('role',$role)->inRandomOrder()->first();;
+        $user = User::find($idadmin);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
         return redirect()->route('revisor.tsolicitudes');
     }
 

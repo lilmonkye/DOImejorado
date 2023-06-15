@@ -59,6 +59,11 @@ class User extends Authenticatable
         'correoaval'    =>  CleanHtml::class,
     ];
 
+    public function routeNotificationForMail()
+    {
+        return $this->email;
+    }
+
     public function solicitudes(){
         return $this->hasMany(Solicitud::class);
     }

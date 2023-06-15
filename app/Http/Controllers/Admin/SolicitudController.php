@@ -7,9 +7,12 @@ use App\Models\Solicitud;
 use App\Models\Revista;
 use App\Models\Articulo;
 use App\Models\Numero;
+use App\Models\User;
 use App\Models\Contribuidor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\StatusChanged;
+use Illuminate\Support\Facades\Notification;
 
 class SolicitudController extends Controller
 {
@@ -124,6 +127,11 @@ class SolicitudController extends Controller
         $solicitud->doicreado = $request->input('doi');
         $solicitud->estatus = "finalizada";
         $solicitud->save();
+//Encuentra el id del usuario que realiza la solicitud de doi (usuario Otro)
+        $idusuario = $solicitud->idusuario;
+        $user = User::find($idusuario);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
         return redirect()->route('admin.solicitudoi');
     }
@@ -136,6 +144,12 @@ class SolicitudController extends Controller
         $solicitud->estatus = "finalizada";
         $solicitud->save();
 
+
+        $idusuario = $solicitud->idusuario;
+        $user = User::find($idusuario);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+
         return redirect()->route('admin.solicitudoi');
     }
 
@@ -146,6 +160,11 @@ class SolicitudController extends Controller
         $solicitud->doicreado = $request->input('doi');
         $solicitud->estatus = "finalizada";
         $solicitud->save();
+
+        $idusuario = $solicitud->idusuario;
+        $user = User::find($idusuario);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
         return redirect()->route('admin.solicitudoi');
     }

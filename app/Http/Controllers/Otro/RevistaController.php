@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Otro;
 use App\Http\Controllers\Controller;
 use App\Models\Revista;
 use App\Models\Solicitud;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\StatusChanged;
+use Illuminate\Support\Facades\Notification;
 
 
 
@@ -57,7 +59,7 @@ class RevistaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }else{
 
-            $useract = Auth::user();
+            $useract = auth()->user()->id;
             $revista = new Revista();
             $revista->titulo = $request->input('titulo');
             $revista->tituloabr = $request->input('tituloabr');
@@ -66,10 +68,10 @@ class RevistaController extends Controller
             $revista->issnimp = $request->issnimp;
             $revista->issnelec = $request->issnelec;
             $revista->idioma = $request->idioma;
-            $revista['idusuario'] = $useract->id;
-            $datosRevista = request()->except('_token','bandoi');
+            $revista->idusuario = $useract;
 
             $revista->save();
+
 
             $msg = 'Revista guardada, en espera de revisión';
             $alertType = 'success';
@@ -153,12 +155,18 @@ class RevistaController extends Controller
             $revista->issnimp = $request->input('issnimp');
             $revista->issnelec = $request->input('issnelec');
             $revista->idioma = $request->input('idioma');
+            $revista->save();
 
             if($existeSolicitud){
                 $idsolicitud = Solicitud::where('idrevista',$id)->value('id');
                 $solicitud = Solicitud::find($idsolicitud);
                 $solicitud->estatus="pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
             }else{//Si no existe crea una solicitud nueva
                 $solicitud = new Solicitud();
@@ -167,11 +175,13 @@ class RevistaController extends Controller
                 $solicitud->idarticulo = $id;
                 $solicitud->estatus="pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
             }
 
-
-            // Guardar en la base de datos
-            $revista->save();
 
             $msg = 'Articulo actualizado, en espera de revisión';
             $alertType = 'success';

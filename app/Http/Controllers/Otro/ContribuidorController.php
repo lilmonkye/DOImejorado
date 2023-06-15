@@ -10,8 +10,9 @@ use App\Models\Numero;
 use Illuminate\Http\Request;
 use App\Models\Revista;
 use App\Models\Solicitud;
-use Dotenv\Validator;
-use PhpParser\Node\Stmt\Return_;
+use App\Models\User;
+use App\Notifications\StatusChanged;
+use Illuminate\Support\Facades\Notification;
 
 class ContribuidorController extends Controller
 {
@@ -272,12 +273,22 @@ class ContribuidorController extends Controller
                 $solicitud = Solicitud::find($idsolicitud);
                 $solicitud->estatus="pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
             }elseif($existeSolicitudArt){
                 $idsolicitud = Solicitud::where('idarticulo',$idarticulo)->value('id');
                 $solicitud = Solicitud::find($idsolicitud);
                 $solicitud->estatus="pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
             }
             $contribuidor->save();
 

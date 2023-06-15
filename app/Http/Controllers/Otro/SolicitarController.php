@@ -7,7 +7,9 @@ use App\Models\Articulo;
 use App\Models\Numero;
 use App\Models\Solicitud;
 use App\Models\User;
-use App\Models\Revista;
+use App\Notifications\StatusChanged;
+use Illuminate\Support\Facades\Notification;
+
 
 
 use Illuminate\Http\Request;
@@ -34,6 +36,12 @@ class SolicitarController extends Controller
         $solicitud->idrevista = $idrevista;
         $solicitud->estatus='pendiente';
         $solicitud->save();
+         //obtiene el id del usuario Asignador y su correo
+        $role = 'asignador';
+        $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+        $email = $idasignador->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+
         return redirect()->route('otro.solicitar');
 
 
@@ -55,6 +63,11 @@ class SolicitarController extends Controller
             $solicitud->idarticulo = $idarticulo;
             $solicitud->estatus="pendiente";
             $solicitud->save();
+            //obtiene el id del usuario Asignador y su correo
+            $role = 'asignador';
+            $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+            $email = $idasignador->email;
+            Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
             return redirect()->route('otro.solicitar');
         }else{
@@ -66,11 +79,21 @@ class SolicitarController extends Controller
                     $solicitud->idarticulo = $idarticulo;
                     $solicitud->estatus="pendiente";
                     $solicitud->save();
+                   //obtiene el id del usuario Asignador y su correo
+                    $role = 'asignador';
+                    $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                    $email = $idasignador->email;
+                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
                 }else{
                     $solicitud->idusuario = $useract;
                     $solicitud->idrevista = $idrevista;
                     $solicitud->estatus="pendiente";
                     $solicitud->save();
+                   //obtiene el id del usuario Asignador y su correo
+                   $role = 'asignador';
+                   $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                   $email = $idasignador->email;
+                   Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
                 }
             }
             return redirect()->route('otro.solicitar');
@@ -93,6 +116,11 @@ class SolicitarController extends Controller
             $solicitud->idnumero = $idnumero;
             $solicitud->estatus = "pendiente";
             $solicitud->save();
+           //obtiene el id del usuario Asignador y su correo
+           $role = 'asignador';
+           $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+           $email = $idasignador->email;
+           Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
             return redirect()->route('otro.solicitar');
         }else{
             for($i = 0; $i < 2; $i++){
@@ -102,11 +130,21 @@ class SolicitarController extends Controller
                     $solicitud->idnumero = $idnumero;
                     $solicitud->estatus = "pendiente";
                     $solicitud->save();
+                    //obtiene el id del usuario Asignador y su correo
+                    $role = 'asignador';
+                    $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                    $email = $idasignador->email;
+                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
                 }else{
                     $solicitud->idusuario = $useract;
                     $solicitud->idrevista = $idrevista;
                     $solicitud->estatus = "pendiente";
                     $solicitud->save();
+                    //obtiene el id del usuario Asignador y su correo
+                    $role = 'asignador';
+                    $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                    $email = $idasignador->email;
+                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
                 }
             }
             return redirect()->route('otro.solicitar');
@@ -137,6 +175,11 @@ class SolicitarController extends Controller
                 $solicitud->idarticulo = $idarticulo;
                 $solicitud->estatus = "pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
             }
             session()->forget('idarticulos');
             return redirect()->route('otro.solicitar');
@@ -150,6 +193,11 @@ class SolicitarController extends Controller
                         $solicitud->idarticulo = $idarticulo;
                         $solicitud->estatus = "pendiente";
                         $solicitud->save();
+                        //obtiene el id del usuario Asignador y su correo
+                        $role = 'asignador';
+                        $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                        $email = $idasignador->email;
+                        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
                     }
                     session()->forget('idarticulos');
                 }else{
@@ -159,6 +207,11 @@ class SolicitarController extends Controller
                     $solicitud->idnumero = $idnumero;
                     $solicitud->estatus = "pendiente";
                     $solicitud->save();
+                    //obtiene el id del usuario Asignador y su correo
+                    $role = 'asignador';
+                    $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                    $email = $idasignador->email;
+                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
                 }
             }
             return redirect()->route('otro.solicitar');

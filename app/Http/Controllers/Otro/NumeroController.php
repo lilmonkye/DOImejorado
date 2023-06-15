@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Revista;
 use App\Models\Numero;
 use App\Models\Solicitud;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\StatusChanged;
+use Illuminate\Support\Facades\Notification;
 
 
 use Illuminate\Http\Request;
@@ -51,6 +54,7 @@ class NumeroController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }else{
 
+            $useract = auth()->user()->id;
             $numero = new Numero();
             $numero->numero = $request->input('numero');
             $numero->titulo = $request->titulo;
@@ -174,6 +178,8 @@ class NumeroController extends Controller
              $numero->numespecial = $request->input('numespecial');
              $numero->volumen = $request->input('volumen');
              $numero->volumenurl = $request->input('volumenurl');
+             // Guardar en la base de datos
+             $numero->save();
 
              //Si existe la solicitud con el id del articulo cambia el estatus a pendiente
             if($existeSolicitud){
@@ -182,6 +188,11 @@ class NumeroController extends Controller
                 $solicitud = Solicitud::where('id',$idsolicitud)->first();
                 $solicitud->estatus="pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
             }else{//Si no existe crea una solicitud nueva
                 $solicitud = new Solicitud();
@@ -190,11 +201,15 @@ class NumeroController extends Controller
                 $solicitud->idarticulo = $id;
                 $solicitud->estatus="pendiente";
                 $solicitud->save();
+                //obtiene el id del usuario Asignador y su correo
+                $role = 'asignador';
+                $idasignador = User::where('role',$role)->inRandomOrder()->first();;
+                $email = $idasignador->email;
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
             }
 
 
-             // Guardar en la base de datos
-             $numero->save();
+
 
              $msg = 'Articulo actualizado, en espera de revisión';
              $alertType = 'success';

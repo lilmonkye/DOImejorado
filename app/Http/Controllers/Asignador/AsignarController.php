@@ -6,9 +6,8 @@ namespace App\Http\Controllers\Asignador;
 use App\Http\Controllers\Controller;
 use App\Models\Solicitud;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use App\Notifications\StatusChanged;
+use Illuminate\Support\Facades\Notification;
 
 use Illuminate\Support\Facades\DB;
 
@@ -60,6 +59,11 @@ class AsignarController extends Controller
         $solicitud->idrevisor=$idrevisor;
 
         $solicitud->save();
+        //encuentra el id del revisor
+        $idrevisor = $solicitud->idrevisor;
+        $user = User::find($idrevisor);
+        $email = $user->email;
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
 
         return redirect()->route('asignador.tsolicitudes');
     }
