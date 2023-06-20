@@ -202,6 +202,8 @@ class ArticuloController extends Controller
             $articulo->primerpag = $request->input('primerpag');
             $articulo->ultimapag = $request->input('ultimapag');
             $articulo->abstract = $request->input('abstract');
+
+            $articulo->save();
             //Si existe la solicitud con el id del articulo cambia el estatus a pendiente
             if($existeSolicitud){
                 $idsolicitud = Solicitud::where('idarticulo',$id)->value('id');
@@ -229,7 +231,7 @@ class ArticuloController extends Controller
             }
 
             // Guardar en la base de datos la informacion del articulo
-            $articulo->save();
+
 
             $msg = 'Articulo actualizado, en espera de revisión';
             $alertType = 'success';

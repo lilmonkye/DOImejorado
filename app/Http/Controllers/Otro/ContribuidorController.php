@@ -267,6 +267,8 @@ class ContribuidorController extends Controller
             $contribuidor->nomalternativo = $request->input('nomalternativo');
             $contribuidor->rol = $request->input('rol');
 
+            $contribuidor->save();
+
             if($existeSolicitudNum){
 
                 $idsolicitud = Solicitud::where('idnumero',$idnumero)->value('id');
@@ -290,7 +292,7 @@ class ContribuidorController extends Controller
                 $email = $idasignador->email;
                 Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
             }
-            $contribuidor->save();
+
 
             $msg = 'Contribuidor actualizado en espera de revisión';
             $alertType = 'success';
