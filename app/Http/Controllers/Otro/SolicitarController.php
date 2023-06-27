@@ -40,7 +40,7 @@ class SolicitarController extends Controller
         $role = 'asignador';
         $idasignador = User::where('role',$role)->inRandomOrder()->first();;
         $email = $idasignador->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
         return redirect()->route('otro.solicitar');
 
@@ -67,7 +67,7 @@ class SolicitarController extends Controller
             $role = 'asignador';
             $idasignador = User::where('role',$role)->inRandomOrder()->first();;
             $email = $idasignador->email;
-            Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+            Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
             return redirect()->route('otro.solicitar');
         }else{
@@ -83,7 +83,7 @@ class SolicitarController extends Controller
                     $role = 'asignador';
                     $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                     $email = $idasignador->email;
-                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
                 }else{
                     $solicitud->idusuario = $useract;
                     $solicitud->idrevista = $idrevista;
@@ -93,7 +93,7 @@ class SolicitarController extends Controller
                    $role = 'asignador';
                    $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                    $email = $idasignador->email;
-                   Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                   Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
                 }
             }
             return redirect()->route('otro.solicitar');
@@ -120,7 +120,7 @@ class SolicitarController extends Controller
            $role = 'asignador';
            $idasignador = User::where('role',$role)->inRandomOrder()->first();;
            $email = $idasignador->email;
-           Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+           Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
             return redirect()->route('otro.solicitar');
         }else{
             for($i = 0; $i < 2; $i++){
@@ -134,7 +134,7 @@ class SolicitarController extends Controller
                     $role = 'asignador';
                     $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                     $email = $idasignador->email;
-                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
                 }else{
                     $solicitud->idusuario = $useract;
                     $solicitud->idrevista = $idrevista;
@@ -144,7 +144,7 @@ class SolicitarController extends Controller
                     $role = 'asignador';
                     $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                     $email = $idasignador->email;
-                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
                 }
             }
             return redirect()->route('otro.solicitar');
@@ -179,7 +179,7 @@ class SolicitarController extends Controller
                 $role = 'asignador';
                 $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                 $email = $idasignador->email;
-                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
             }
             session()->forget('idarticulos');
             return redirect()->route('otro.solicitar');
@@ -197,7 +197,7 @@ class SolicitarController extends Controller
                         $role = 'asignador';
                         $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                         $email = $idasignador->email;
-                        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
                     }
                     session()->forget('idarticulos');
                 }else{
@@ -211,7 +211,7 @@ class SolicitarController extends Controller
                     $role = 'asignador';
                     $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                     $email = $idasignador->email;
-                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                    Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
                 }
             }
             return redirect()->route('otro.solicitar');

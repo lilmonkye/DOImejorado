@@ -11,17 +11,20 @@ class StatusChanged extends Notification
 {
     use Queueable;
     public $estatus;
-    public $role;
+    public $email;
+    public $idsolicitud;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($estatus)
+    public function __construct($estatus,$email,$idsolicitud)
     {
         //
         $this->estatus = $estatus;
+        $this->email = $email;
+        $this->idsolicitud = $idsolicitud;
     }
 
     /**
@@ -44,11 +47,13 @@ class StatusChanged extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+        ->from(config('mail.from.address'), config('mail.from.name'))
         ->subject('Cambio de estatus de solicitud')
         ->greeting('Buen día')
-        ->line('El estatus de tu solicitud ha cambiado.')
+        ->line('El estatus de la solicitud No: ' .$this->idsolicitud. ' ha cambiado.')
         ->line('Nuevo estatus: '.$this->estatus)
-        ->line('Gracias por utilizar nuestra plataforma.');
+        ->line('Gracias por utilizar nuestra plataforma.')
+        ->salutation('Saludos');
     }
 
     /**

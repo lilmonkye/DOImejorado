@@ -102,7 +102,7 @@ class RevisionController extends Controller
          $idotro = $solicitud->idusuario;
          $user = User::find($idotro);
          $email = $user->email;
-         Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+         Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
          return redirect()->route('revisor.tsolicitudes');
     }
@@ -117,7 +117,7 @@ class RevisionController extends Controller
         $idotro = $solicitud->idusuario;
         $user = User::find($idotro);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
 
          return redirect()->route('revisor.tsolicitudes');
@@ -133,7 +133,7 @@ class RevisionController extends Controller
         $idotro = $solicitud->idusuario;
         $user = User::find($idotro);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
          return redirect()->route('revisor.tsolicitudes');
     }
@@ -148,7 +148,7 @@ class RevisionController extends Controller
         $idadmin = User::where('role',$role)->inRandomOrder()->first();;
         $user = User::find($idadmin);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
         return redirect()->route('revisor.tsolicitudes');
     }
@@ -162,7 +162,7 @@ class RevisionController extends Controller
         $idadmin = User::where('role',$role)->inRandomOrder()->first();;
         $user = User::find($idadmin);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
         return redirect()->route('revisor.tsolicitudes');
     }
 
@@ -175,7 +175,7 @@ class RevisionController extends Controller
         $idadmin = User::where('role',$role)->inRandomOrder()->first();;
         $user = User::find($idadmin);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
         return redirect()->route('revisor.tsolicitudes');
     }
 

@@ -214,7 +214,7 @@ class ArticuloController extends Controller
                 $role = 'asignador';
                 $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                 $email = $idasignador->email;
-                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus,$email, $idsolicitud));
 
             }else{//Si no existe crea una solicitud nueva
                 $solicitud = new Solicitud();
@@ -227,7 +227,7 @@ class ArticuloController extends Controller
                 $role = 'asignador';
                 $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                 $email = $idasignador->email;
-                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus,$email, $solicitud->id));
             }
 
             // Guardar en la base de datos la informacion del articulo

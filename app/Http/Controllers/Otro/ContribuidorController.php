@@ -279,7 +279,7 @@ class ContribuidorController extends Controller
                 $role = 'asignador';
                 $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                 $email = $idasignador->email;
-                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $idsolicitud));
 
             }elseif($existeSolicitudArt){
                 $idsolicitud = Solicitud::where('idarticulo',$idarticulo)->value('id');
@@ -290,7 +290,7 @@ class ContribuidorController extends Controller
                 $role = 'asignador';
                 $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                 $email = $idasignador->email;
-                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
             }
 
 

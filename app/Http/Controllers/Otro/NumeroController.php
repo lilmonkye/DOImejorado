@@ -192,7 +192,7 @@ class NumeroController extends Controller
                 $role = 'asignador';
                 $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                 $email = $idasignador->email;
-                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $idsolicitud));
 
             }else{//Si no existe crea una solicitud nueva
                 $solicitud = new Solicitud();
@@ -205,7 +205,7 @@ class NumeroController extends Controller
                 $role = 'asignador';
                 $idasignador = User::where('role',$role)->inRandomOrder()->first();;
                 $email = $idasignador->email;
-                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+                Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
             }
 
 

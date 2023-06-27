@@ -63,7 +63,7 @@ class AsignarController extends Controller
         $idrevisor = $solicitud->idrevisor;
         $user = User::find($idrevisor);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $idsolicitud));
 
         return redirect()->route('asignador.tsolicitudes');
     }

@@ -131,7 +131,7 @@ class SolicitudController extends Controller
         $idusuario = $solicitud->idusuario;
         $user = User::find($idusuario);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
         return redirect()->route('admin.solicitudoi');
     }
@@ -148,7 +148,7 @@ class SolicitudController extends Controller
         $idusuario = $solicitud->idusuario;
         $user = User::find($idusuario);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
         return redirect()->route('admin.solicitudoi');
     }
@@ -164,7 +164,7 @@ class SolicitudController extends Controller
         $idusuario = $solicitud->idusuario;
         $user = User::find($idusuario);
         $email = $user->email;
-        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email));
+        Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
         return redirect()->route('admin.solicitudoi');
     }
