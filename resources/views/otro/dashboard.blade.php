@@ -40,11 +40,19 @@
                     <a href="{{ route('otro.solicitar') }}" class="btn btn-primary">Ver</a>
                 </div>
             </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Mis Solicitudes</h5>
+                    <p class="card-text">Aquí podrás ver el estatus de tus solicitudes y correcciones que debas realizar.</p>
+                    <a href="{{ route('otro.tsolicitudes') }}" class="btn btn-primary">Ver</a>
+                </div>
+            </div>
+
         </div>
 
-        <div class="d-flex justify-content-around m-4">
+        {{-- <div class="d-flex justify-content-around m-4">
 
-            <div class="card" style="width: 20rem;">
+           <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">Mis Solicitudes</h5>
                     <p class="card-text">Aquí podrás ver el estatus de tus solicitudes y correcciones que debas realizar.</p>
@@ -58,7 +66,7 @@
                     <a href="{{ route('otro.userdoi') }}" class="btn btn-primary">Ver</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <script>

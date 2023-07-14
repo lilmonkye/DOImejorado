@@ -144,10 +144,10 @@ class RevisionController extends Controller
         $solicitud->estatus = "aprobado";
         $solicitud->save();
         //obtiene el id del usuario Otro y su correo
+
         $role = 'admin';
         $idadmin = User::where('role',$role)->inRandomOrder()->first();;
-        $user = User::find($idadmin);
-        $email = $user->email;
+        $email = $idadmin->email;
         Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
 
         return redirect()->route('revisor.tsolicitudes');
@@ -159,9 +159,8 @@ class RevisionController extends Controller
         $solicitud->save();
         //obtiene el id del usuario Otro y su correo
         $role = 'admin';
-        $idadmin = User::where('role',$role)->inRandomOrder()->first();;
-        $user = User::find($idadmin);
-        $email = $user->email;
+        $idadmin = User::where('role',$role)->inRandomOrder()->first();
+        $email = $idadmin->email;
         Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
         return redirect()->route('revisor.tsolicitudes');
     }
@@ -173,8 +172,7 @@ class RevisionController extends Controller
         //obtiene el id del usuario Otro y su correo
         $role = 'admin';
         $idadmin = User::where('role',$role)->inRandomOrder()->first();;
-        $user = User::find($idadmin);
-        $email = $user->email;
+        $email = $idadmin->email;
         Notification::route('mail', $email)->notify(new StatusChanged($solicitud->estatus, $email, $solicitud->id));
         return redirect()->route('revisor.tsolicitudes');
     }

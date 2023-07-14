@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-
-
 class Revista extends Model
 {
     use HasFactory;
@@ -58,8 +56,9 @@ class Revista extends Model
             'idioma'=>['nullable','string','max:255',],
         ],[
             'titulo.required'=>'El título se encuentra vacío.',
+            'titulo.min'=>'El título debe contener al menos 4 carácteres.',
             'url.required'=>'El url se encuentra vacío.',
-            'url.active_url'=>'El dado url no es válido.',
+            'url.active_url'=>'El url dado no es válido.',
             'issnimp.regex'=>'Formato de Issn impreso no válido.',
             'issnelec.regex'=>'Formato de Issn electrónico no válido.',
             'issnimp.required_without_all' => 'Por favor, ingrese al menos un ISSN.',

@@ -26,7 +26,7 @@
 
             </table>
         </div>
-        <a href="{{ route('asignador_dashboard') }}" class="btn btn-secondary">Regresar </a>
+        <a href="{{ route('asignador.tsolicitudes') }}" class="btn btn-secondary">Regresar </a>
     </div>
     {{-- <td>{{ $solicitud->observaciones }}</td> --}}
 </div>
